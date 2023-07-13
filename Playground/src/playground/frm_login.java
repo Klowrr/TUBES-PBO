@@ -43,7 +43,7 @@ public class frm_login extends javax.swing.JFrame {
         btn_login = new javax.swing.JToggleButton();
         btn_exit = new javax.swing.JToggleButton();
         txt_id = new javax.swing.JTextField();
-        txt_password = new javax.swing.JTextField();
+        txt_password = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -143,12 +143,12 @@ public class frm_login extends javax.swing.JFrame {
             String password = txt_password.getText();
             String username;
             
-            String SQL = "SELECT * FROM t_user WHERE user_id = '"+userid+"' AND password = '"+password+"'";
+            String SQL = "SELECT * FROM users WHERE USERNAME = '"+userid+"' AND PASSWORD = '"+password+"'";
             ResultSet rs = stt.executeQuery(SQL);
             if (rs.next()){
                 dispose(); // close
                 frm_utama utama = new frm_utama();
-                username = rs.getString("user_name");
+                username = rs.getString("NAMA");
                 utama.name = username;
                 utama.setVisible(true);
                 rs.close();
@@ -208,6 +208,6 @@ public class frm_login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField txt_id;
-    private javax.swing.JTextField txt_password;
+    private javax.swing.JPasswordField txt_password;
     // End of variables declaration//GEN-END:variables
 }

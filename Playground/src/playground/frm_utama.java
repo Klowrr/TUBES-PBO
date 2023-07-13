@@ -48,9 +48,9 @@ public class frm_utama extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        cbx_spidol = new javax.swing.JCheckBox();
+        cbx_olimesin = new javax.swing.JCheckBox();
         cbx_pulpen = new javax.swing.JCheckBox();
-        cbx_penghapus = new javax.swing.JCheckBox();
+        cbx_fanbelt = new javax.swing.JCheckBox();
         btn_tambah = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
@@ -179,17 +179,22 @@ public class frm_utama extends javax.swing.JFrame {
         jLabel2.setText("Tambah");
         jPanel7.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, -1));
 
-        cbx_spidol.setBackground(new java.awt.Color(204, 204, 255));
-        cbx_spidol.setText("Spidol");
-        jPanel7.add(cbx_spidol, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 90, -1));
+        cbx_olimesin.setBackground(new java.awt.Color(204, 204, 255));
+        cbx_olimesin.setText("Oli Mesin");
+        cbx_olimesin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_olimesinActionPerformed(evt);
+            }
+        });
+        jPanel7.add(cbx_olimesin, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 90, -1));
 
         cbx_pulpen.setBackground(new java.awt.Color(204, 204, 255));
         cbx_pulpen.setText("Pulpen");
         jPanel7.add(cbx_pulpen, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 90, -1));
 
-        cbx_penghapus.setBackground(new java.awt.Color(204, 204, 255));
-        cbx_penghapus.setText("Penghapus");
-        jPanel7.add(cbx_penghapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 90, -1));
+        cbx_fanbelt.setBackground(new java.awt.Color(204, 204, 255));
+        cbx_fanbelt.setText("Penghapus");
+        jPanel7.add(cbx_fanbelt, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 90, -1));
 
         btn_tambah.setText("Tambah");
         btn_tambah.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -297,19 +302,19 @@ public class frm_utama extends javax.swing.JFrame {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database,user,pass);
             Statement stt = kon.createStatement();
-            if (cbx_spidol.isSelected()) {
+            if (cbx_olimesin.isSelected()) {
                 String angka = jTextField1.getText();
                 int angka_real = Integer.valueOf(angka);
-                String SQL = "SELECT jumlah from t_barang WHERE barang_id='BR001'";
+                String SQL = "SELECT JUMLAH from barang WHERE id='1'";
                 ResultSet rs = stt.executeQuery(SQL);
                 while(rs.next()){
                     int jml = rs.getInt("jumlah");
                     angka_real = jml + angka_real;
                 }
-                String SQL1 = "UPDATE `t_barang` SET `jumlah` = '"+angka_real+"' WHERE `t_barang`.`barang_id` = 'BR001';";
+                String SQL1 = "UPDATE `barang` SET `JUMLAH` = '"+angka_real+"' WHERE `barang`.`id` = '1';";
                 stt.executeUpdate(SQL1);
             }
-            if (cbx_penghapus.isSelected()) {
+            if (cbx_fanbelt.isSelected()) {
                 String angka = jTextField1.getText();
                 int angka_real = Integer.valueOf(angka);
                 String SQL = "SELECT jumlah from t_barang WHERE barang_id='BR003'";
@@ -336,6 +341,10 @@ public class frm_utama extends javax.swing.JFrame {
         // TODO add your handling code here:
         jLabel8.setText(name);
     }//GEN-LAST:event_formWindowOpened
+
+    private void cbx_olimesinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_olimesinActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbx_olimesinActionPerformed
 
     /**
      * @param args the command line arguments
@@ -374,9 +383,9 @@ public class frm_utama extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_tambah;
-    private javax.swing.JCheckBox cbx_penghapus;
+    private javax.swing.JCheckBox cbx_fanbelt;
+    private javax.swing.JCheckBox cbx_olimesin;
     private javax.swing.JCheckBox cbx_pulpen;
-    private javax.swing.JCheckBox cbx_spidol;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
