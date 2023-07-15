@@ -130,6 +130,7 @@ public class frm_login extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_loginMouseClicked
@@ -139,23 +140,31 @@ public class frm_login extends javax.swing.JFrame {
             Connection kon = DriverManager.getConnection(database,user,pass);
             Statement stt = kon.createStatement();
             
-            String userid = txt_id.getText();
+            String username = txt_id.getText();
             String password = txt_password.getText();
-            String username;
+            String nama,alamat,notelp;
+            Integer umur;
             
-            String SQL = "SELECT * FROM users WHERE USERNAME = '"+userid+"' AND PASSWORD = '"+password+"'";
+            String SQL = "SELECT * FROM users WHERE USERNAME = '"+username+"' AND PASSWORD = '"+password+"'";
             ResultSet rs = stt.executeQuery(SQL);
             if (rs.next()){
                 dispose(); // close
                 frm_utama utama = new frm_utama();
-                username = rs.getString("NAMA");
-                utama.name = username;
+                nama = rs.getString("NAMA");
+                umur = rs.getInt("UMUR");
+                alamat = rs.getString("ALAMAT");
+                notelp = rs.getString("NO_TELP");
+
+                utama.nama = nama;
+                utama.umur = umur;
+                utama.alamat = alamat;
+                utama.notelp = notelp;
                 utama.setVisible(true);
                 rs.close();
                 stt.close();
                 kon.close();
             } else {
-                JOptionPane.showMessageDialog(this, "UserID and Password Wrong");
+                JOptionPane.showMessageDialog(this, "Username or Password Wrong");
                 txt_id.setText("");
                 txt_password.setText("");
             }

@@ -455,7 +455,7 @@ public class frm_mhs extends javax.swing.JFrame {
         String tempat_lahir = txt_tempat_lahir.getText();
         String tanggal_lahir = txt_tanggal_lahir.getText();
         String alamat = txt_alamat.getText();
-        if ((nim.isBlank()) || (alamat.isEmpty())){
+        if ((nim.isEmpty()) || (alamat.isEmpty())){
             JOptionPane.showMessageDialog(null, "Data Tidak Boleh Kosong, Silakan Dilengkapi");
             txt_nim.requestFocus();
         } else {

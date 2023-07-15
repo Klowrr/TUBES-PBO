@@ -38,7 +38,7 @@ public class frm_utama extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
 
-        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\zabdu\\Documents\\MataKuliah\\Semester_2\\Pemrograman Berorientasi Objek\\Program\\Latihan_MySQL\\lib\\Gambar\\Gambar\\mahasiswa.png")); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon("E:\\COLLEGE\\Materi\\Pemrograman Berorientasi Objek\\Gambar\\mahasiswa.png")); // NOI18N
         jButton1.setText("Form Mahasiswa");
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -81,7 +81,7 @@ public class frm_utama extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 52, Short.MAX_VALUE))
+                .addGap(0, 17, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(btn_logout)
