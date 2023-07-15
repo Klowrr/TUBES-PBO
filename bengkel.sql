@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2023 at 05:05 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: Jul 15, 2023 at 08:13 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `bengkel`
 --
+CREATE DATABASE IF NOT EXISTS `bengkel` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `bengkel`;
 
 -- --------------------------------------------------------
 
@@ -185,7 +187,7 @@ CREATE TABLE `users` (
   `NO_TELP` varchar(12) DEFAULT NULL,
   `USERNAME` text DEFAULT NULL,
   `PASSWORD` text DEFAULT NULL,
-  `ROLE` varchar(3) DEFAULT NULL,
+  `ROLE` varchar(5) DEFAULT 'USER',
   `STATUS` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -194,8 +196,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`ID`, `NAMA`, `ALAMAT`, `UMUR`, `NO_TELP`, `USERNAME`, `PASSWORD`, `ROLE`, `STATUS`) VALUES
-(1, 'ADMIN', 'JALAN-JALAN', 99, '080006942000', 'ADMIN', '4DM1N', 'ADM', 1),
-(2, 'USER1', 'JALAN KEHIDUPAN', 66, '080010122114', 'USER1', 'US3R1', 'USR', 1);
+(1, 'ADMIN', 'JALAN-JALAN', 99, '080006942000', 'admin', 'admin', 'ADMIN', 1),
+(2, 'USER', 'JALAN KEHIDUPAN', 66, '080010122114', 'user', 'user', 'USER', 1);
 
 --
 -- Indexes for dumped tables
@@ -292,7 +294,7 @@ ALTER TABLE `transaksi`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables
