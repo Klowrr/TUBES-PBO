@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 12, 2023 at 06:18 PM
+-- Generation Time: Jul 14, 2023 at 05:05 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -31,26 +31,27 @@ CREATE TABLE `barang` (
   `ID` int(11) NOT NULL,
   `NAMA` text DEFAULT NULL,
   `JUMLAH` int(11) DEFAULT NULL,
-  `HARGA` double DEFAULT NULL
+  `HARGA` double DEFAULT NULL,
+  `STATUS` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `barang`
 --
 
-INSERT INTO `barang` (`ID`, `NAMA`, `JUMLAH`, `HARGA`) VALUES
-(1, 'OLI MESIN', 0, 450000),
-(2, 'FAN BELT', 0, 200000),
-(3, 'LAGER', 0, 125000),
-(4, 'KAMPAS REM', 0, 350000),
-(5, 'SHOCKBREAKER', 0, 1500000),
-(6, 'PLATINA CONDESOR', 0, 120000),
-(7, 'BUSI', 0, 50000),
-(8, 'PLAT KOPLING', 0, 500000),
-(9, 'ENGINE MOUNTING', 0, 450000),
-(10, 'RADIATOR', 0, 1250000),
-(11, 'OLI REM', 0, 100000),
-(12, 'AIR RADIATOR COOLANT', 0, 125000);
+INSERT INTO `barang` (`ID`, `NAMA`, `JUMLAH`, `HARGA`, `STATUS`) VALUES
+(1, 'OLI MESIN', 0, 450000, 1),
+(2, 'FAN BELT', 0, 200000, 1),
+(3, 'LAGER', 0, 125000, 1),
+(4, 'KAMPAS REM', 0, 350000, 1),
+(5, 'SHOCKBREAKER', 0, 1500000, 1),
+(6, 'PLATINA CONDESOR', 0, 120000, 1),
+(7, 'BUSI', 0, 50000, 1),
+(8, 'PLAT KOPLING', 0, 500000, 1),
+(9, 'ENGINE MOUNTING', 0, 450000, 1),
+(10, 'RADIATOR', 0, 1250000, 1),
+(11, 'OLI REM', 0, 100000, 1),
+(12, 'AIR RADIATOR COOLANT', 0, 125000, 1);
 
 -- --------------------------------------------------------
 
@@ -63,19 +64,20 @@ CREATE TABLE `client` (
   `NAMA` text DEFAULT NULL,
   `ID_KENDARAAN` int(11) DEFAULT NULL,
   `NO_TELP` varchar(12) DEFAULT NULL,
-  `ALAMAT` text DEFAULT NULL
+  `ALAMAT` text DEFAULT NULL,
+  `STATUS` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `client`
 --
 
-INSERT INTO `client` (`ID`, `NAMA`, `ID_KENDARAAN`, `NO_TELP`, `ALAMAT`) VALUES
-(2, 'SUPRI', 4, '080000000001', 'JALAN GATAU'),
-(3, 'JUNED', 2, '080000000002', 'JALAN UDAH'),
-(4, 'AGUS', 1, '080000000003', 'JALAN GA'),
-(5, 'BUDI', 3, '080000000004', 'JALAN ADA'),
-(6, 'ILHAM', 1, '080000000005', 'JALAN IDE');
+INSERT INTO `client` (`ID`, `NAMA`, `ID_KENDARAAN`, `NO_TELP`, `ALAMAT`, `STATUS`) VALUES
+(1, 'SUPRI', 4, '080000000001', 'JALAN GATAU', 1),
+(2, 'JUNED', 2, '080000000002', 'JALAN UDAH', 1),
+(3, 'AGUS', 1, '080000000003', 'JALAN GA', 1),
+(4, 'BUDI', 3, '080000000004', 'JALAN ADA', 1),
+(5, 'ILHAM', 1, '080000000005', 'JALAN IDE', 1);
 
 -- --------------------------------------------------------
 
@@ -86,19 +88,20 @@ INSERT INTO `client` (`ID`, `NAMA`, `ID_KENDARAAN`, `NO_TELP`, `ALAMAT`) VALUES
 CREATE TABLE `kendaraan` (
   `ID` int(11) NOT NULL,
   `MEREK` text DEFAULT NULL,
-  `MODEL` text DEFAULT NULL
+  `MODEL` text DEFAULT NULL,
+  `STATUS` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `kendaraan`
 --
 
-INSERT INTO `kendaraan` (`ID`, `MEREK`, `MODEL`) VALUES
-(1, 'HONDA', 'CRV'),
-(2, 'TOYOTA', 'RAIZE'),
-(3, 'HONDA', 'BRV'),
-(4, 'HONDA', 'BRIO'),
-(5, 'TOYOTA', 'INNOVA');
+INSERT INTO `kendaraan` (`ID`, `MEREK`, `MODEL`, `STATUS`) VALUES
+(1, 'HONDA', 'CRV', 1),
+(2, 'TOYOTA', 'RAIZE', 1),
+(3, 'HONDA', 'BRV', 1),
+(4, 'HONDA', 'BRIO', 1),
+(5, 'TOYOTA', 'INNOVA', 1);
 
 -- --------------------------------------------------------
 
@@ -110,18 +113,19 @@ CREATE TABLE `mekanik` (
   `ID` int(11) NOT NULL,
   `NAMA` text DEFAULT NULL,
   `NO_TELP` varchar(12) DEFAULT NULL,
-  `ALAMAT` text DEFAULT NULL
+  `ALAMAT` text DEFAULT NULL,
+  `STATUS` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `mekanik`
 --
 
-INSERT INTO `mekanik` (`ID`, `NAMA`, `NO_TELP`, `ALAMAT`) VALUES
-(1, 'ASEP', '080010122104', 'JALAN ANGGREK'),
-(2, 'BAMBANG', '080010122106', 'JALAN BAKUNG'),
-(3, 'CECEP', '080010122110', 'JALAN CEMPAKA'),
-(4, 'DODI', '080010122114', 'JALAN DAHLIA');
+INSERT INTO `mekanik` (`ID`, `NAMA`, `NO_TELP`, `ALAMAT`, `STATUS`) VALUES
+(1, 'ASEP', '080010122104', 'JALAN ANGGREK', 1),
+(2, 'BAMBANG', '080010122106', 'JALAN BAKUNG', 1),
+(3, 'CECEP', '080010122110', 'JALAN CEMPAKA', 1),
+(4, 'DODI', '080010122114', 'JALAN DAHLIA', 1);
 
 -- --------------------------------------------------------
 
@@ -132,21 +136,22 @@ INSERT INTO `mekanik` (`ID`, `NAMA`, `NO_TELP`, `ALAMAT`) VALUES
 CREATE TABLE `service` (
   `ID` int(11) NOT NULL,
   `NAME` text DEFAULT NULL,
-  `HARGA` double DEFAULT NULL
+  `HARGA` double DEFAULT NULL,
+  `STATUS` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `service`
 --
 
-INSERT INTO `service` (`ID`, `NAME`, `HARGA`) VALUES
-(1, 'TUNE UP MESIN', 350000),
-(2, 'REVISI REM', 250000),
-(3, 'PERBAIKAN KAKI KAKI', 350000),
-(4, 'OVERHAUL MESIN', 1500000),
-(5, 'PERBAIKAN KELISTRIKAN', 150000),
-(6, 'OVERHAUL GEARBOX', 1000000),
-(7, 'SERVICE DAN GANTI OLI', 75000);
+INSERT INTO `service` (`ID`, `NAME`, `HARGA`, `STATUS`) VALUES
+(1, 'TUNE UP MESIN', 350000, 1),
+(2, 'REVISI REM', 250000, 1),
+(3, 'PERBAIKAN KAKI KAKI', 350000, 1),
+(4, 'OVERHAUL MESIN', 1500000, 1),
+(5, 'PERBAIKAN KELISTRIKAN', 150000, 1),
+(6, 'OVERHAUL GEARBOX', 1000000, 1),
+(7, 'SERVICE DAN GANTI OLI', 75000, 1);
 
 -- --------------------------------------------------------
 
@@ -161,7 +166,9 @@ CREATE TABLE `transaksi` (
   `SERVICE_ID` int(11) DEFAULT NULL,
   `BARANG_ID` int(11) DEFAULT NULL,
   `TOTAL_HARGA` double DEFAULT NULL,
-  `TANGGAL` date DEFAULT NULL
+  `TANGGAL` date DEFAULT NULL,
+  `TIPE` varchar(1) DEFAULT NULL,
+  `STATUS` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -178,16 +185,17 @@ CREATE TABLE `users` (
   `NO_TELP` varchar(12) DEFAULT NULL,
   `USERNAME` text DEFAULT NULL,
   `PASSWORD` text DEFAULT NULL,
-  `ROLE` varchar(3) DEFAULT NULL
+  `ROLE` varchar(3) DEFAULT NULL,
+  `STATUS` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`ID`, `NAMA`, `ALAMAT`, `UMUR`, `NO_TELP`, `USERNAME`, `PASSWORD`, `ROLE`) VALUES
-(1, 'ADMIN', 'JALAN-JALAN', 99, '080006942000', 'ADMIN', '4DM1N', 'ADM'),
-(2, 'USER1', 'JALAN KEHIDUPAN', 66, '080010122114', 'USER1', 'US3R1', 'USR');
+INSERT INTO `users` (`ID`, `NAMA`, `ALAMAT`, `UMUR`, `NO_TELP`, `USERNAME`, `PASSWORD`, `ROLE`, `STATUS`) VALUES
+(1, 'ADMIN', 'JALAN-JALAN', 99, '080006942000', 'ADMIN', '4DM1N', 'ADM', 1),
+(2, 'USER1', 'JALAN KEHIDUPAN', 66, '080010122114', 'USER1', 'US3R1', 'USR', 1);
 
 --
 -- Indexes for dumped tables
@@ -230,9 +238,9 @@ ALTER TABLE `service`
 ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `transaksi_ibfk_1` (`CLIENT_ID`),
-  ADD KEY `transaksi_ibfk_2` (`SERVICE_ID`),
-  ADD KEY `transaksi_ibfk_3` (`BARANG_ID`),
-  ADD KEY `transaksi_ibfk_4` (`MEKANIK_ID`);
+  ADD KEY `transaksi_ibfk_2` (`MEKANIK_ID`),
+  ADD KEY `transaksi_ibfk_3` (`SERVICE_ID`),
+  ADD KEY `transaksi_ibfk_4` (`BARANG_ID`);
 
 --
 -- Indexes for table `users`
@@ -301,9 +309,9 @@ ALTER TABLE `client`
 --
 ALTER TABLE `transaksi`
   ADD CONSTRAINT `transaksi_ibfk_1` FOREIGN KEY (`CLIENT_ID`) REFERENCES `client` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `transaksi_ibfk_2` FOREIGN KEY (`SERVICE_ID`) REFERENCES `service` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `transaksi_ibfk_3` FOREIGN KEY (`BARANG_ID`) REFERENCES `barang` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `transaksi_ibfk_4` FOREIGN KEY (`MEKANIK_ID`) REFERENCES `mekanik` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `transaksi_ibfk_2` FOREIGN KEY (`MEKANIK_ID`) REFERENCES `mekanik` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `transaksi_ibfk_3` FOREIGN KEY (`SERVICE_ID`) REFERENCES `service` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `transaksi_ibfk_4` FOREIGN KEY (`BARANG_ID`) REFERENCES `barang` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

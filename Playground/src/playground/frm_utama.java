@@ -4,7 +4,7 @@
  */
 package playground;
 import java.sql.*;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 /**
  *
@@ -45,32 +45,39 @@ public class frm_utama extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         pn_content = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        profile = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        txt_nama_profile = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txt_alamat_profile = new javax.swing.JTextArea();
-        txt_umur_profile = new javax.swing.JTextField();
-        txt_notelp_profile = new javax.swing.JTextField();
-        btn_update_profile = new javax.swing.JButton();
-        dashbordBarang = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
+        panel_home = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        cbx_olimesin = new javax.swing.JCheckBox();
-        cbx_pulpen = new javax.swing.JCheckBox();
-        cbx_fanbelt = new javax.swing.JCheckBox();
+        panel_transaksi = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
         btn_tambah = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        btn_reset = new javax.swing.JButton();
+        cbx_olimesin = new javax.swing.JCheckBox();
+        cbx_lager = new javax.swing.JCheckBox();
+        cbx_fanbelt = new javax.swing.JCheckBox();
+        cbx_kampasrem = new javax.swing.JCheckBox();
+        spn_olimesin = new javax.swing.JSpinner();
+        spn_fanbelt = new javax.swing.JSpinner();
+        spn_lager = new javax.swing.JSpinner();
+        spn_kampasrem = new javax.swing.JSpinner();
+        cbx_shockbreaker = new javax.swing.JCheckBox();
+        cbx_busi = new javax.swing.JCheckBox();
+        cbx_platinacondesor = new javax.swing.JCheckBox();
+        cbx_platkopling = new javax.swing.JCheckBox();
+        spn_shockbreaker = new javax.swing.JSpinner();
+        spn_platinacondesor = new javax.swing.JSpinner();
+        spn_busi = new javax.swing.JSpinner();
+        spn_platkopling = new javax.swing.JSpinner();
+        cbx_enginemounting = new javax.swing.JCheckBox();
+        cbx_olirem = new javax.swing.JCheckBox();
+        cbx_radiator = new javax.swing.JCheckBox();
+        cbx_airradiatorcoolant = new javax.swing.JCheckBox();
+        spn_enginemounting = new javax.swing.JSpinner();
+        spn_radiator = new javax.swing.JSpinner();
+        spn_olirem = new javax.swing.JSpinner();
+        spn_airradiatorcoolant = new javax.swing.JSpinner();
         jLabel4 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
+        panel_histori = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -91,42 +98,52 @@ public class frm_utama extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Bengkel Cissy");
 
-        javax.swing.GroupLayout pn_navbarLayout = new javax.swing.GroupLayout(pn_navbar);
-        pn_navbar.setLayout(pn_navbarLayout);
-        pn_navbarLayout.setHorizontalGroup(
-            pn_navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_navbarLayout.createSequentialGroup()
-                .addGap(220, 220, 220)
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\zabdu\\Documents\\MataKuliah\\Semester_2\\Pemrograman Berorientasi Objek\\TugasBesar\\TUBES-PBO\\Playground\\lib\\Gambar\\Logo2.png")); // NOI18N
+        jLabel3.setText("jLabel3");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(127, 127, 127)
                 .addComponent(jLabel1)
                 .addContainerGap(363, Short.MAX_VALUE))
         );
-        pn_navbarLayout.setVerticalGroup(
-            pn_navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_navbarLayout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(jLabel1)
-                .addContainerGap(13, Short.MAX_VALUE))
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel1)))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         getContentPane().add(pn_navbar, java.awt.BorderLayout.PAGE_START);
 
         pn_sidebar.setPreferredSize(new java.awt.Dimension(150, 402));
 
-        jButton1.setText("Dashbord Barang");
+        jButton1.setText("Home");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
             }
         });
 
-        jButton2.setText("tab2");
+        jButton2.setText("Input Barang");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
             }
         });
 
-        jButton3.setText("tab3");
+        jButton3.setText("Transaksi");
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton3MouseClicked(evt);
@@ -146,24 +163,24 @@ public class frm_utama extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout pn_sidebarLayout = new javax.swing.GroupLayout(pn_sidebar);
-        pn_sidebar.setLayout(pn_sidebarLayout);
-        pn_sidebarLayout.setHorizontalGroup(
-            pn_sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_sidebarLayout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addGroup(pn_sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(pn_sidebarLayout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addGroup(pn_sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addGroup(pn_sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(11, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton3)
+                            .addComponent(jButton2)
+                            .addComponent(jButton1)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         pn_sidebarLayout.setVerticalGroup(
             pn_sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,92 +279,216 @@ public class frm_utama extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Profile", profile);
 
+        jPanel4.setBackground(new java.awt.Color(204, 255, 255));
+
+        jLabel2.setFont(new java.awt.Font("Rockwell", 1, 24)); // NOI18N
+        jLabel2.setText("Welcome Home");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(193, 193, 193)
+                .addComponent(jLabel2)
+                .addContainerGap(235, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(170, 170, 170)
+                .addComponent(jLabel2)
+                .addContainerGap(224, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout panel_homeLayout = new javax.swing.GroupLayout(panel_home);
+        panel_home.setLayout(panel_homeLayout);
+        panel_homeLayout.setHorizontalGroup(
+            panel_homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        panel_homeLayout.setVerticalGroup(
+            panel_homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("tab2", panel_home);
+
         jPanel7.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setText("Tambah");
-        jPanel7.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, -1));
-
-        cbx_olimesin.setBackground(new java.awt.Color(204, 204, 255));
-        cbx_olimesin.setText("Oli Mesin");
-        jPanel7.add(cbx_olimesin, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 90, -1));
-
-        cbx_pulpen.setBackground(new java.awt.Color(204, 204, 255));
-        cbx_pulpen.setText("Pulpen");
-        jPanel7.add(cbx_pulpen, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 90, -1));
-
-        cbx_fanbelt.setBackground(new java.awt.Color(204, 204, 255));
-        cbx_fanbelt.setText("Penghapus");
-        jPanel7.add(cbx_fanbelt, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 90, -1));
-
+        btn_tambah.setBackground(new java.awt.Color(204, 255, 204));
+        btn_tambah.setFont(new java.awt.Font("Rockwell", 1, 11)); // NOI18N
         btn_tambah.setText("Tambah");
+        btn_tambah.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
         btn_tambah.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_tambahMouseClicked(evt);
             }
         });
-        jPanel7.add(btn_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, -1, -1));
-        jPanel7.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 70, -1));
-        jPanel7.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 70, -1));
-        jPanel7.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 70, -1));
+        jPanel7.add(btn_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 80, 30));
 
-        jLabel6.setText("jLabel6");
-        jPanel7.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, 90, -1));
+        btn_reset.setBackground(new java.awt.Color(255, 204, 204));
+        btn_reset.setFont(new java.awt.Font("Rockwell", 1, 11)); // NOI18N
+        btn_reset.setText("Reset");
+        btn_reset.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
+        btn_reset.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_resetMouseClicked(evt);
+            }
+        });
+        jPanel7.add(btn_reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 240, 80, 30));
 
-        javax.swing.GroupLayout dashbordBarangLayout = new javax.swing.GroupLayout(dashbordBarang);
-        dashbordBarang.setLayout(dashbordBarangLayout);
-        dashbordBarangLayout.setHorizontalGroup(
-            dashbordBarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        cbx_olimesin.setBackground(new java.awt.Color(204, 204, 255));
+        cbx_olimesin.setFont(new java.awt.Font("Rockwell", 0, 11)); // NOI18N
+        cbx_olimesin.setText("Oli Mesin");
+        cbx_olimesin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_olimesinActionPerformed(evt);
+            }
+        });
+        jPanel7.add(cbx_olimesin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 100, -1));
+
+        cbx_lager.setBackground(new java.awt.Color(204, 204, 255));
+        cbx_lager.setFont(new java.awt.Font("Rockwell", 0, 11)); // NOI18N
+        cbx_lager.setText("Lager");
+        jPanel7.add(cbx_lager, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 100, -1));
+
+        cbx_fanbelt.setBackground(new java.awt.Color(204, 204, 255));
+        cbx_fanbelt.setFont(new java.awt.Font("Rockwell", 0, 11)); // NOI18N
+        cbx_fanbelt.setText("Fan Belt");
+        jPanel7.add(cbx_fanbelt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 100, -1));
+
+        cbx_kampasrem.setBackground(new java.awt.Color(204, 204, 255));
+        cbx_kampasrem.setFont(new java.awt.Font("Rockwell", 0, 11)); // NOI18N
+        cbx_kampasrem.setText("Kampas Rem");
+        jPanel7.add(cbx_kampasrem, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 100, -1));
+
+        spn_olimesin.setFont(new java.awt.Font("Rockwell", 0, 11)); // NOI18N
+        jPanel7.add(spn_olimesin, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 50, -1));
+
+        spn_fanbelt.setFont(new java.awt.Font("Rockwell", 0, 11)); // NOI18N
+        jPanel7.add(spn_fanbelt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 50, -1));
+
+        spn_lager.setFont(new java.awt.Font("Rockwell", 0, 11)); // NOI18N
+        jPanel7.add(spn_lager, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 50, -1));
+
+        spn_kampasrem.setFont(new java.awt.Font("Rockwell", 0, 11)); // NOI18N
+        jPanel7.add(spn_kampasrem, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 50, -1));
+
+        cbx_shockbreaker.setBackground(new java.awt.Color(204, 204, 255));
+        cbx_shockbreaker.setFont(new java.awt.Font("Rockwell", 0, 11)); // NOI18N
+        cbx_shockbreaker.setText("ShockBreaker");
+        cbx_shockbreaker.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_shockbreakerActionPerformed(evt);
+            }
+        });
+        jPanel7.add(cbx_shockbreaker, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 120, -1));
+
+        cbx_busi.setBackground(new java.awt.Color(204, 204, 255));
+        cbx_busi.setFont(new java.awt.Font("Rockwell", 0, 11)); // NOI18N
+        cbx_busi.setText("Busi");
+        jPanel7.add(cbx_busi, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 120, -1));
+
+        cbx_platinacondesor.setBackground(new java.awt.Color(204, 204, 255));
+        cbx_platinacondesor.setFont(new java.awt.Font("Rockwell", 0, 11)); // NOI18N
+        cbx_platinacondesor.setText("Platina Condesor");
+        jPanel7.add(cbx_platinacondesor, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 120, -1));
+
+        cbx_platkopling.setBackground(new java.awt.Color(204, 204, 255));
+        cbx_platkopling.setFont(new java.awt.Font("Rockwell", 0, 11)); // NOI18N
+        cbx_platkopling.setText("Plat Kopling");
+        jPanel7.add(cbx_platkopling, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 120, -1));
+
+        spn_shockbreaker.setFont(new java.awt.Font("Rockwell", 0, 11)); // NOI18N
+        jPanel7.add(spn_shockbreaker, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 50, -1));
+
+        spn_platinacondesor.setFont(new java.awt.Font("Rockwell", 0, 11)); // NOI18N
+        jPanel7.add(spn_platinacondesor, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, 50, -1));
+
+        spn_busi.setFont(new java.awt.Font("Rockwell", 0, 11)); // NOI18N
+        jPanel7.add(spn_busi, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 170, 50, -1));
+
+        spn_platkopling.setFont(new java.awt.Font("Rockwell", 0, 11)); // NOI18N
+        jPanel7.add(spn_platkopling, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 50, -1));
+
+        cbx_enginemounting.setBackground(new java.awt.Color(204, 204, 255));
+        cbx_enginemounting.setFont(new java.awt.Font("Rockwell", 0, 11)); // NOI18N
+        cbx_enginemounting.setText("Engine Mounting");
+        cbx_enginemounting.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_enginemountingActionPerformed(evt);
+            }
+        });
+        jPanel7.add(cbx_enginemounting, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 120, -1));
+
+        cbx_olirem.setBackground(new java.awt.Color(204, 204, 255));
+        cbx_olirem.setFont(new java.awt.Font("Rockwell", 0, 11)); // NOI18N
+        cbx_olirem.setText("Oli Rem");
+        jPanel7.add(cbx_olirem, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 170, 120, -1));
+
+        cbx_radiator.setBackground(new java.awt.Color(204, 204, 255));
+        cbx_radiator.setFont(new java.awt.Font("Rockwell", 0, 11)); // NOI18N
+        cbx_radiator.setText("Radiator");
+        jPanel7.add(cbx_radiator, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, 120, -1));
+
+        cbx_airradiatorcoolant.setBackground(new java.awt.Color(204, 204, 255));
+        cbx_airradiatorcoolant.setFont(new java.awt.Font("Rockwell", 0, 11)); // NOI18N
+        cbx_airradiatorcoolant.setText("AIR RADIATOR COOLANT ");
+        jPanel7.add(cbx_airradiatorcoolant, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 170, -1));
+
+        spn_enginemounting.setFont(new java.awt.Font("Rockwell", 0, 11)); // NOI18N
+        jPanel7.add(spn_enginemounting, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 110, 50, -1));
+
+        spn_radiator.setFont(new java.awt.Font("Rockwell", 0, 11)); // NOI18N
+        jPanel7.add(spn_radiator, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 140, 50, -1));
+
+        spn_olirem.setFont(new java.awt.Font("Rockwell", 0, 11)); // NOI18N
+        jPanel7.add(spn_olirem, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, 50, -1));
+
+        spn_airradiatorcoolant.setFont(new java.awt.Font("Rockwell", 0, 11)); // NOI18N
+        jPanel7.add(spn_airradiatorcoolant, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, 50, -1));
+
+        jLabel4.setFont(new java.awt.Font("Rockwell", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel4.setText("Penginputan Barang");
+        jPanel7.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, -1, -1));
+
+        javax.swing.GroupLayout panel_transaksiLayout = new javax.swing.GroupLayout(panel_transaksi);
+        panel_transaksi.setLayout(panel_transaksiLayout);
+        panel_transaksiLayout.setHorizontalGroup(
+            panel_transaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        dashbordBarangLayout.setVerticalGroup(
-            dashbordBarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panel_transaksiLayout.setVerticalGroup(
+            panel_transaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Barang", dashbordBarang);
-
-        jLabel4.setText("2");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(265, 265, 265)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(318, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(191, 191, 191)
-                .addComponent(jLabel4)
-                .addContainerGap(212, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("tab2", jPanel5);
+        jTabbedPane1.addTab("tab1", panel_transaksi);
 
         jLabel5.setText("3");
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        javax.swing.GroupLayout panel_historiLayout = new javax.swing.GroupLayout(panel_histori);
+        panel_histori.setLayout(panel_historiLayout);
+        panel_historiLayout.setHorizontalGroup(
+            panel_historiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_historiLayout.createSequentialGroup()
                 .addGap(270, 270, 270)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(313, Short.MAX_VALUE))
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        panel_historiLayout.setVerticalGroup(
+            panel_historiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_historiLayout.createSequentialGroup()
                 .addGap(193, 193, 193)
                 .addComponent(jLabel5)
                 .addContainerGap(210, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("tab3", jPanel6);
+        jTabbedPane1.addTab("tab3", panel_histori);
 
         javax.swing.GroupLayout pn_contentLayout = new javax.swing.GroupLayout(pn_content);
         pn_content.setLayout(pn_contentLayout);
@@ -409,8 +550,7 @@ public class frm_utama extends javax.swing.JFrame {
             Connection kon = DriverManager.getConnection(database,user,pass);
             Statement stt = kon.createStatement();
             if (cbx_olimesin.isSelected()) {
-                String angka = jTextField1.getText();
-                int angka_real = Integer.valueOf(angka);
+                int angka_real = (int) spn_olimesin.getValue();
                 String SQL = "SELECT JUMLAH from barang WHERE id='1'";
                 ResultSet rs = stt.executeQuery(SQL);
                 while(rs.next()){
@@ -421,15 +561,14 @@ public class frm_utama extends javax.swing.JFrame {
                 stt.executeUpdate(SQL1);
             }
             if (cbx_fanbelt.isSelected()) {
-                String angka = jTextField1.getText();
-                int angka_real = Integer.valueOf(angka);
-                String SQL = "SELECT jumlah from t_barang WHERE barang_id='BR003'";
+                int angka_real = (int) spn_fanbelt.getValue();
+                String SQL = "SELECT jumlah from barang WHERE id='2'";
                 ResultSet rs = stt.executeQuery(SQL);
                 while(rs.next()){
                     int jml = rs.getInt("jumlah");
                     angka_real = jml + angka_real;
                 }
-                String SQL1 = "UPDATE `t_barang` SET `jumlah` = '"+angka_real+"' WHERE `t_barang`.`barang_id` = 'BR003';";
+                String SQL1 = "UPDATE `barang` SET `jumlah` = '"+angka_real+"' WHERE `barang`.`id` = '2';";
                 stt.executeUpdate(SQL1);
             }
             kon.close();
@@ -453,6 +592,30 @@ public class frm_utama extends javax.swing.JFrame {
         frm_login login = new frm_login();
         login.setVisible(true);
     }//GEN-LAST:event_formWindowClosed
+
+    private void cbx_shockbreakerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_shockbreakerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbx_shockbreakerActionPerformed
+
+    private void cbx_enginemountingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_enginemountingActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbx_enginemountingActionPerformed
+
+    private void btn_resetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_resetMouseClicked
+        // TODO add your handling code here:
+        spn_olimesin.setValue(0);
+        spn_fanbelt.setValue(0);
+        spn_lager.setValue(0);
+        spn_kampasrem.setValue(0);
+        spn_shockbreaker.setValue(0);
+        spn_platinacondesor.setValue(0);
+        spn_busi.setValue(0);
+        spn_platkopling.setValue(0);
+        spn_enginemounting.setValue(0);
+        spn_radiator.setValue(0);
+        spn_olirem.setValue(0);
+        spn_airradiatorcoolant.setValue(0);
+    }//GEN-LAST:event_btn_resetMouseClicked
 
     /**
      * @param args the command line arguments
@@ -490,12 +653,20 @@ public class frm_utama extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_reset;
     private javax.swing.JButton btn_tambah;
-    private javax.swing.JButton btn_update_profile;
+    private javax.swing.JCheckBox cbx_airradiatorcoolant;
+    private javax.swing.JCheckBox cbx_busi;
+    private javax.swing.JCheckBox cbx_enginemounting;
     private javax.swing.JCheckBox cbx_fanbelt;
+    private javax.swing.JCheckBox cbx_kampasrem;
+    private javax.swing.JCheckBox cbx_lager;
     private javax.swing.JCheckBox cbx_olimesin;
-    private javax.swing.JCheckBox cbx_pulpen;
-    private javax.swing.JPanel dashbordBarang;
+    private javax.swing.JCheckBox cbx_olirem;
+    private javax.swing.JCheckBox cbx_platinacondesor;
+    private javax.swing.JCheckBox cbx_platkopling;
+    private javax.swing.JCheckBox cbx_radiator;
+    private javax.swing.JCheckBox cbx_shockbreaker;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -507,25 +678,29 @@ public class frm_utama extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JPanel pn_content;
-    private javax.swing.JPanel pn_navbar;
-    private javax.swing.JPanel pn_sidebar;
-    private javax.swing.JPanel profile;
-    private javax.swing.JTextArea txt_alamat_profile;
-    private javax.swing.JTextField txt_nama_profile;
-    private javax.swing.JTextField txt_notelp_profile;
-    private javax.swing.JTextField txt_umur_profile;
+    private javax.swing.JPanel panel_histori;
+    private javax.swing.JPanel panel_home;
+    private javax.swing.JPanel panel_transaksi;
+    private javax.swing.JSpinner spn_airradiatorcoolant;
+    private javax.swing.JSpinner spn_busi;
+    private javax.swing.JSpinner spn_enginemounting;
+    private javax.swing.JSpinner spn_fanbelt;
+    private javax.swing.JSpinner spn_kampasrem;
+    private javax.swing.JSpinner spn_lager;
+    private javax.swing.JSpinner spn_olimesin;
+    private javax.swing.JSpinner spn_olirem;
+    private javax.swing.JSpinner spn_platinacondesor;
+    private javax.swing.JSpinner spn_platkopling;
+    private javax.swing.JSpinner spn_radiator;
+    private javax.swing.JSpinner spn_shockbreaker;
     // End of variables declaration//GEN-END:variables
 }
