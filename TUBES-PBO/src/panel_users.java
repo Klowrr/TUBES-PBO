@@ -5,18 +5,20 @@
  */
 import javax.swing.*;
 import java.sql.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 /**
  *
  * @author Leily
  */
-public class frm_users extends javax.swing.JPanel {
+public class panel_users extends javax.swing.JPanel {
     koneksi dbsetting;
     String driver,database,user,pass;
     Object tabel;
     /**
      * Creates new form frm_users
      */
-    public frm_users() {
+    public panel_users() {
         initComponents();
         dbsetting = new koneksi();
         driver = dbsetting.SettingPanel("DBDriver");
@@ -64,8 +66,8 @@ public class frm_users extends javax.swing.JPanel {
         btn_tambah = new rojerusan.RSMaterialButtonRectangle();
         btn_hapus = new rojerusan.RSMaterialButtonRectangle();
         btn_edit = new rojerusan.RSMaterialButtonRectangle();
-        txt_search_users = new javax.swing.JTextField();
-        btn_cari_users = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
         addUser = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -158,12 +160,13 @@ public class frm_users extends javax.swing.JPanel {
             }
         });
 
-        btn_cari_users.setText("Cari");
-        btn_cari_users.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_cari_usersActionPerformed(evt);
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
             }
         });
+
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_search_1.png"))); // NOI18N
 
         javax.swing.GroupLayout dataUserLayout = new javax.swing.GroupLayout(dataUser);
         dataUser.setLayout(dataUserLayout);
@@ -178,16 +181,19 @@ public class frm_users extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataUserLayout.createSequentialGroup()
                         .addGroup(dataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(dataUserLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel16)
+                                .addGap(8, 8, 8))
+                            .addGroup(dataUserLayout.createSequentialGroup()
                                 .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txt_search_users, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_cari_users))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 841, Short.MAX_VALUE))
                         .addGap(38, 38, 38))))
         );
         dataUserLayout.setVerticalGroup(
@@ -195,20 +201,19 @@ public class frm_users extends javax.swing.JPanel {
             .addGroup(dataUserLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jLabel1)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addGroup(dataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(dataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataUserLayout.createSequentialGroup()
-                        .addGroup(dataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btn_cari_users)
-                            .addComponent(txt_search_users, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)))
-                .addGap(20, 20, 20)
+                        .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(28, 28, 28)
+                .addGroup(dataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         mainPanel.add(dataUser, "card2");
@@ -216,13 +221,13 @@ public class frm_users extends javax.swing.JPanel {
         addUser.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel2.setText("EDIT DATA USER");
+        jLabel2.setText("TAMBAH DATA USER");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(500, 600));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setText("Nama");
+        jLabel3.setText("Nama Lengkap");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Umur");
@@ -307,19 +312,19 @@ public class frm_users extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_umur, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel6)
                 .addGap(9, 9, 9)
                 .addComponent(txt_notelp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel7)
                 .addGap(2, 2, 2)
                 .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jLabel9))
@@ -327,7 +332,7 @@ public class frm_users extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_confpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         btn_simpan.setText("SIMPAN");
@@ -368,15 +373,15 @@ public class frm_users extends javax.swing.JPanel {
         addUserLayout.setVerticalGroup(
             addUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addUserLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel2)
                 .addGap(30, 30, 30)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
                 .addGroup(addUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         mainPanel.add(addUser, "card2");
@@ -454,19 +459,19 @@ public class frm_users extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_nama_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_umur_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel14)
                 .addGap(9, 9, 9)
                 .addComponent(txt_notelp_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel15)
                 .addGap(2, 2, 2)
                 .addComponent(txt_username_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
 
         btn_simpan_edit.setText("SIMPAN");
@@ -507,15 +512,15 @@ public class frm_users extends javax.swing.JPanel {
         editUserLayout.setVerticalGroup(
             editUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(editUserLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel10)
                 .addGap(30, 30, 30)
+                .addComponent(jLabel10)
+                .addGap(18, 18, 18)
                 .addGroup(editUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_batal_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_simpan_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         mainPanel.add(editUser, "card2");
@@ -548,9 +553,8 @@ public class frm_users extends javax.swing.JPanel {
         if((txt_username.getText().isEmpty()) || (txt_password.getText().isEmpty())){ 
             JOptionPane.showMessageDialog(null,"Data tidak boleh kosong");
             txt_username.requestFocus();
-        if (!txt_password.getText().equals(txt_confpassword.getText())){
+        }if (!txt_password.getText().equals(txt_confpassword.getText())){
             JOptionPane.showMessageDialog(null,"Password tidak sama");
-        }
         }else{
             try {
                 Class.forName(driver);
@@ -596,21 +600,27 @@ public class frm_users extends javax.swing.JPanel {
         mainPanel.revalidate();
         membersihkan_text();
     }//GEN-LAST:event_btn_batalActionPerformed
-    
     int row = 0;
     private void tabel_usersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_usersMouseClicked
         // TODO add your handling code here:
-        if(evt.getClickCount()==1){
-//            tampil_field();
+        if(evt.getClickCount()==1) {
             btn_hapus.setVisible(true);
             btn_edit.setVisible(true);
-            row = tabel_users.getSelectedRow();
+            if (tabel_users.getRowSorter() != null) {
+                row = tabel_users.convertRowIndexToModel(tabel_users.getSelectedRow());
+            } else {
+                row = tabel_users.getSelectedRow();
+            }
         }
     }//GEN-LAST:event_tabel_usersMouseClicked
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
         // TODO add your handling code here:
         txt_nama_edit.setText(tableModel.getValueAt(row, 0).toString());
+        txt_alamat_edit.setText(tableModel.getValueAt(row, 1).toString());
+        txt_umur_edit.setText(tableModel.getValueAt(row, 2).toString());
+        txt_notelp_edit.setText(tableModel.getValueAt(row, 3).toString());
+        txt_username_edit.setText(tableModel.getValueAt(row, 4).toString());
         mainPanel.removeAll();
         mainPanel.add(editUser);
         mainPanel.repaint();
@@ -625,15 +635,15 @@ public class frm_users extends javax.swing.JPanel {
         String noTelp = txt_notelp_edit.getText();
         String username = txt_username_edit.getText();
         
-        if((txt_username_edit.getText().isEmpty()) || (txt_nama.getText().isEmpty())){ 
+        if((txt_username_edit.getText().isEmpty()) || (txt_nama_edit.getText().isEmpty())){ 
             JOptionPane.showMessageDialog(null,"Data tidak boleh kosong");
-            txt_nama.requestFocus();
+            txt_nama_edit.requestFocus();
         }else{
             try {
                 Class.forName(driver);
                 Connection kon = DriverManager.getConnection(database,user,pass);
                 Statement stt = kon.createStatement();
-                String SQL = "UPDATE `t_mahasiswa` SET"
+                String SQL = "UPDATE `users` SET"
                                     +"`NAMA`='"+nama+"',"
                                     +"`ALAMAT`='"+alamat+"',"
                                     +"`UMUR`='"+umur+"',"
@@ -666,35 +676,6 @@ public class frm_users extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_batal_editActionPerformed
 
-    private void btn_cari_usersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cari_usersActionPerformed
-        // TODO add your handling code here:
-        tableModel.setRowCount(0);
-        String data[] = new String[6];
-        //Gunakan Query untuk Mencari
-        try {
-            Class.forName(driver);
-            Connection kon = DriverManager.getConnection(database,user,pass);
-            Statement stt = kon.createStatement();
-            String SQL = "SELECT * FROM users WHERE nama='"+txt_search_users.getText()+"' AND status=1";
-            ResultSet res = stt.executeQuery(SQL);
-            while(res.next()){
-                data[0] = res.getString(2);                
-                data[1] = res.getString(3);
-                data[2] = res.getString(4);              
-                data[3] = res.getString(5);
-                data[4] = res.getString(6);
-                tableModel.addRow(data);
-            }
-            res.close();
-            kon.close();
-            stt.close();
-        } catch (Exception ex){
-            System.err.println(ex.getMessage());
-            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR",JOptionPane.INFORMATION_MESSAGE);
-            System.exit(0);
-        }
-    }//GEN-LAST:event_btn_cari_usersActionPerformed
-
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
         // TODO add your handling code here:
         try {
@@ -714,12 +695,20 @@ public class frm_users extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btn_hapusActionPerformed
 
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        // TODO add your handling code here:
+        DefaultTableModel table = (DefaultTableModel)tabel_users.getModel();
+        String search = jTextField1.getText().toLowerCase();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(table);
+        tabel_users.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter("(?i)" + search));
+    }//GEN-LAST:event_jTextField1KeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addUser;
     private rojerusan.RSMaterialButtonRectangle btn_batal;
     private rojerusan.RSMaterialButtonRectangle btn_batal_edit;
-    private javax.swing.JButton btn_cari_users;
     private rojerusan.RSMaterialButtonRectangle btn_edit;
     private rojerusan.RSMaterialButtonRectangle btn_hapus;
     private rojerusan.RSMaterialButtonRectangle btn_simpan;
@@ -734,6 +723,7 @@ public class frm_users extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -747,6 +737,7 @@ public class frm_users extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTable tabel_users;
     private javax.swing.JTextArea txt_alamat;
@@ -757,7 +748,6 @@ public class frm_users extends javax.swing.JPanel {
     private javax.swing.JTextField txt_notelp;
     private javax.swing.JTextField txt_notelp_edit;
     private javax.swing.JTextField txt_password;
-    private javax.swing.JTextField txt_search_users;
     private javax.swing.JTextField txt_umur;
     private javax.swing.JTextField txt_umur_edit;
     private javax.swing.JTextField txt_username;

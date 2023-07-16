@@ -10,14 +10,14 @@ import java.util.Date;
  *
  * @author Leily
  */
-public class frm_barang extends javax.swing.JPanel {
+public class menu_barang extends javax.swing.JPanel {
     koneksi dbsetting;
     String driver,database,user,pass;
     Object tabel;
     /**
      * Creates new form frm_barang
      */
-    public frm_barang() {
+    public menu_barang() {
         initComponents();
         dbsetting = new koneksi();
         driver = dbsetting.SettingPanel("DBDriver");

@@ -197,7 +197,7 @@ public class frm_login extends javax.swing.JFrame
                 ResultSet rs = stt.executeQuery(SQL);
                 if (rs.next()){
                     dispose(); // close
-                    menu_utama utama = new menu_utama();
+                    panel_utama utama = new panel_utama();
                     nama = rs.getString("NAMA");
                     umur = rs.getInt("UMUR");
                     role = rs.getString("ROLE");

@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  *
  * @author Leily
  */
-public class menu_utama extends javax.swing.JFrame {
+public class panel_utama extends javax.swing.JFrame {
     koneksi dbsetting;
     String driver,database,user,pass;
     public String nama,alamat,notelp,role;
@@ -21,7 +21,7 @@ public class menu_utama extends javax.swing.JFrame {
     /**
      * Creates new form frm_utama
      */
-    public menu_utama() {
+    public panel_utama() {
         initComponents();
         dbsetting = new koneksi();
         driver = dbsetting.SettingPanel("DBDriver");
@@ -201,21 +201,23 @@ public class menu_utama extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(menu_utama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(panel_utama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(menu_utama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(panel_utama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(menu_utama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(panel_utama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(menu_utama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(panel_utama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new menu_utama().setVisible(true);
+                new panel_utama().setVisible(true);
             }
         });
     }
@@ -245,7 +247,7 @@ public class menu_utama extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 pn_utama.removeAll();
-                pn_utama.add(new frm_barang());
+                pn_utama.add(new menu_barang());
                 pn_utama.repaint();
                 pn_utama.revalidate();
             }
@@ -259,7 +261,7 @@ public class menu_utama extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 pn_utama.removeAll();
-                pn_utama.add(new frm_users());
+                pn_utama.add(new panel_users());
                 pn_utama.repaint();
                 pn_utama.revalidate();
             }
