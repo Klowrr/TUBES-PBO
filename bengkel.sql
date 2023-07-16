@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 15, 2023 at 08:13 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
+-- Generation Time: Jul 16, 2023 at 04:18 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -22,7 +22,6 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `bengkel` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `bengkel`;
-
 -- --------------------------------------------------------
 
 --
@@ -31,7 +30,7 @@ USE `bengkel`;
 
 CREATE TABLE `barang` (
   `ID` int(11) NOT NULL,
-  `NAMA` text DEFAULT NULL,
+  `NAMA` varchar(100) DEFAULT NULL,
   `JUMLAH` int(11) DEFAULT NULL,
   `HARGA` double DEFAULT NULL,
   `STATUS` tinyint(1) DEFAULT 1
@@ -42,18 +41,26 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`ID`, `NAMA`, `JUMLAH`, `HARGA`, `STATUS`) VALUES
-(1, 'OLI MESIN', 0, 450000, 1),
-(2, 'FAN BELT', 0, 200000, 1),
-(3, 'LAGER', 0, 125000, 1),
-(4, 'KAMPAS REM', 0, 350000, 1),
-(5, 'SHOCKBREAKER', 0, 1500000, 1),
-(6, 'PLATINA CONDESOR', 0, 120000, 1),
-(7, 'BUSI', 0, 50000, 1),
-(8, 'PLAT KOPLING', 0, 500000, 1),
-(9, 'ENGINE MOUNTING', 0, 450000, 1),
-(10, 'RADIATOR', 0, 1250000, 1),
-(11, 'OLI REM', 0, 100000, 1),
-(12, 'AIR RADIATOR COOLANT', 0, 125000, 1);
+(1, 'FAN BELT', 0, 200000, 1),
+(2, 'LAGER', 0, 125000, 1),
+(3, 'KAMPAS REM', 0, 350000, 1),
+(4, 'SHOCKBREAKER', 0, 1500000, 1),
+(5, 'PLATINA CONDESOR', 0, 120000, 1),
+(6, 'BUSI', 0, 50000, 1),
+(7, 'PLAT KOPLING', 0, 500000, 1),
+(8, 'ENGINE MOUNTING', 0, 450000, 1),
+(9, 'RADIATOR', 0, 1250000, 1),
+(10, 'OLI REM', 0, 100000, 1),
+(11, 'AIR RADIATOR COOLANT', 0, 125000, 1),
+(13, 'SHELL HELIX HX8 5 W-30 4L', 0, 675000, 1),
+(14, 'SHELL HELIX HX6 10 W 4L', 0, 330000, 1),
+(15, 'SHELL RIMULA 4L', 0, 335000, 1),
+(16, 'SHELL HELIX EXTEND 4L', 0, 780000, 1),
+(17, 'LUPROMAX ZELOS 8000 5W-30 4L', 0, 600000, 1),
+(18, 'LUPROMAX HYPERION 8000 5W-30 4L', 0, 770000, 1),
+(27, 'WIPER', 0, 32500, 1),
+(28, 'AKI MOBIL', 0, 850000, 1),
+(29, 'FILTER AC', 0, 95000, 1);
 
 -- --------------------------------------------------------
 
@@ -63,10 +70,11 @@ INSERT INTO `barang` (`ID`, `NAMA`, `JUMLAH`, `HARGA`, `STATUS`) VALUES
 
 CREATE TABLE `client` (
   `ID` int(11) NOT NULL,
-  `NAMA` text DEFAULT NULL,
-  `ID_KENDARAAN` int(11) DEFAULT NULL,
+  `NAMA` varchar(100) DEFAULT NULL,
   `NO_TELP` varchar(12) DEFAULT NULL,
-  `ALAMAT` text DEFAULT NULL,
+  `ALAMAT` varchar(100) DEFAULT NULL,
+  `MEREK_MOBIL` varchar(50) DEFAULT NULL,
+  `MODEL_MOBIL` varchar(50) DEFAULT NULL,
   `STATUS` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -74,36 +82,12 @@ CREATE TABLE `client` (
 -- Dumping data for table `client`
 --
 
-INSERT INTO `client` (`ID`, `NAMA`, `ID_KENDARAAN`, `NO_TELP`, `ALAMAT`, `STATUS`) VALUES
-(1, 'SUPRI', 4, '080000000001', 'JALAN GATAU', 1),
-(2, 'JUNED', 2, '080000000002', 'JALAN UDAH', 1),
-(3, 'AGUS', 1, '080000000003', 'JALAN GA', 1),
-(4, 'BUDI', 3, '080000000004', 'JALAN ADA', 1),
-(5, 'ILHAM', 1, '080000000005', 'JALAN IDE', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `kendaraan`
---
-
-CREATE TABLE `kendaraan` (
-  `ID` int(11) NOT NULL,
-  `MEREK` text DEFAULT NULL,
-  `MODEL` text DEFAULT NULL,
-  `STATUS` tinyint(1) DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `kendaraan`
---
-
-INSERT INTO `kendaraan` (`ID`, `MEREK`, `MODEL`, `STATUS`) VALUES
-(1, 'HONDA', 'CRV', 1),
-(2, 'TOYOTA', 'RAIZE', 1),
-(3, 'HONDA', 'BRV', 1),
-(4, 'HONDA', 'BRIO', 1),
-(5, 'TOYOTA', 'INNOVA', 1);
+INSERT INTO `client` (`ID`, `NAMA`, `NO_TELP`, `ALAMAT`, `MEREK_MOBIL`, `MODEL_MOBIL`, `STATUS`) VALUES
+(1, 'SUPRI', '080000000001', 'JALAN GATAU', 'HONDA', 'BRIO', 1),
+(2, 'JUNED', '080000000002', 'JALAN UDAH', 'TOYOTA', 'RAIZE', 1),
+(3, 'AGUS', '080000000003', 'JALAN GA', 'HONDA', 'CRV', 1),
+(4, 'BUDI', '080000000004', 'JALAN ADA', 'HONDA', 'BRV', 1),
+(5, 'ILHAM', '080000000005', 'JALAN IDE', 'HONDA', 'CRV', 1);
 
 -- --------------------------------------------------------
 
@@ -113,9 +97,9 @@ INSERT INTO `kendaraan` (`ID`, `MEREK`, `MODEL`, `STATUS`) VALUES
 
 CREATE TABLE `mekanik` (
   `ID` int(11) NOT NULL,
-  `NAMA` text DEFAULT NULL,
+  `NAMA` varchar(100) DEFAULT NULL,
   `NO_TELP` varchar(12) DEFAULT NULL,
-  `ALAMAT` text DEFAULT NULL,
+  `ALAMAT` varchar(100) DEFAULT NULL,
   `STATUS` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -137,7 +121,7 @@ INSERT INTO `mekanik` (`ID`, `NAMA`, `NO_TELP`, `ALAMAT`, `STATUS`) VALUES
 
 CREATE TABLE `service` (
   `ID` int(11) NOT NULL,
-  `NAME` text DEFAULT NULL,
+  `NAMA` varchar(100) DEFAULT NULL,
   `HARGA` double DEFAULT NULL,
   `STATUS` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -146,7 +130,7 @@ CREATE TABLE `service` (
 -- Dumping data for table `service`
 --
 
-INSERT INTO `service` (`ID`, `NAME`, `HARGA`, `STATUS`) VALUES
+INSERT INTO `service` (`ID`, `NAMA`, `HARGA`, `STATUS`) VALUES
 (1, 'TUNE UP MESIN', 350000, 1),
 (2, 'REVISI REM', 250000, 1),
 (3, 'PERBAIKAN KAKI KAKI', 350000, 1),
@@ -181,12 +165,12 @@ CREATE TABLE `transaksi` (
 
 CREATE TABLE `users` (
   `ID` int(11) NOT NULL,
-  `NAMA` text DEFAULT NULL,
-  `ALAMAT` text DEFAULT NULL,
+  `NAMA` varchar(100) DEFAULT NULL,
+  `ALAMAT` varchar(100) DEFAULT NULL,
   `UMUR` int(11) DEFAULT NULL,
   `NO_TELP` varchar(12) DEFAULT NULL,
-  `USERNAME` text DEFAULT NULL,
-  `PASSWORD` text DEFAULT NULL,
+  `USERNAME` varchar(100) DEFAULT NULL,
+  `PASSWORD` varchar(100) DEFAULT NULL,
   `ROLE` varchar(5) DEFAULT 'USER',
   `STATUS` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -207,32 +191,28 @@ INSERT INTO `users` (`ID`, `NAMA`, `ALAMAT`, `UMUR`, `NO_TELP`, `USERNAME`, `PAS
 -- Indexes for table `barang`
 --
 ALTER TABLE `barang`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `NAMA` (`NAMA`);
 
 --
 -- Indexes for table `client`
 --
 ALTER TABLE `client`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `client_ibfk_1` (`ID_KENDARAAN`);
-
---
--- Indexes for table `kendaraan`
---
-ALTER TABLE `kendaraan`
   ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `mekanik`
 --
 ALTER TABLE `mekanik`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `NAMA` (`NAMA`);
 
 --
 -- Indexes for table `service`
 --
 ALTER TABLE `service`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `NAMA` (`NAMA`);
 
 --
 -- Indexes for table `transaksi`
@@ -248,7 +228,10 @@ ALTER TABLE `transaksi`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `NAMA` (`NAMA`),
+  ADD UNIQUE KEY `USERNAME` (`USERNAME`),
+  ADD UNIQUE KEY `PASSWORD` (`PASSWORD`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -258,19 +241,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `kendaraan`
---
-ALTER TABLE `kendaraan`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `mekanik`
@@ -299,12 +276,6 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `client`
---
-ALTER TABLE `client`
-  ADD CONSTRAINT `client_ibfk_1` FOREIGN KEY (`ID_KENDARAAN`) REFERENCES `kendaraan` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `transaksi`
