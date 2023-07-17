@@ -34,7 +34,7 @@ public class home extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 153, 0));
-        jLabel2.setText("WELCOME TO BENGKEL CISSY");
+        jLabel2.setText("WELCOME TO MY BENGKEL");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
