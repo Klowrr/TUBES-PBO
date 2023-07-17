@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 16, 2023 at 04:18 PM
+-- Generation Time: Jul 17, 2023 at 10:29 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -73,8 +73,6 @@ CREATE TABLE `client` (
   `NAMA` varchar(100) DEFAULT NULL,
   `NO_TELP` varchar(12) DEFAULT NULL,
   `ALAMAT` varchar(100) DEFAULT NULL,
-  `MEREK_MOBIL` varchar(50) DEFAULT NULL,
-  `MODEL_MOBIL` varchar(50) DEFAULT NULL,
   `STATUS` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -82,12 +80,12 @@ CREATE TABLE `client` (
 -- Dumping data for table `client`
 --
 
-INSERT INTO `client` (`ID`, `NAMA`, `NO_TELP`, `ALAMAT`, `MEREK_MOBIL`, `MODEL_MOBIL`, `STATUS`) VALUES
-(1, 'SUPRI', '080000000001', 'JALAN GATAU', 'HONDA', 'BRIO', 1),
-(2, 'JUNED', '080000000002', 'JALAN UDAH', 'TOYOTA', 'RAIZE', 1),
-(3, 'AGUS', '080000000003', 'JALAN GA', 'HONDA', 'CRV', 1),
-(4, 'BUDI', '080000000004', 'JALAN ADA', 'HONDA', 'BRV', 1),
-(5, 'ILHAM', '080000000005', 'JALAN IDE', 'HONDA', 'CRV', 1);
+INSERT INTO `client` (`ID`, `NAMA`, `NO_TELP`, `ALAMAT`, `STATUS`) VALUES
+(1, 'SUPRI', '080000000001', 'JALAN GATAU', 1),
+(2, 'JUNED', '080000000002', 'JALAN UDAH', 1),
+(3, 'AGUS', '080000000003', 'JALAN GA', 1),
+(4, 'BUDI', '080000000004', 'JALAN ADA', 1),
+(5, 'ILHAM', '080000000005', 'JALAN IDE', 1);
 
 -- --------------------------------------------------------
 
@@ -229,9 +227,7 @@ ALTER TABLE `transaksi`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`ID`),
-  ADD UNIQUE KEY `NAMA` (`NAMA`),
-  ADD UNIQUE KEY `USERNAME` (`USERNAME`),
-  ADD UNIQUE KEY `PASSWORD` (`PASSWORD`);
+  ADD UNIQUE KEY `NAMA` (`NAMA`);
 
 --
 -- AUTO_INCREMENT for dumped tables
