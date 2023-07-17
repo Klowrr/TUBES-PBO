@@ -137,7 +137,7 @@ public class frm_utama extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE))
         );
 
         getContentPane().add(pn_sidebar, java.awt.BorderLayout.LINE_START);
@@ -251,7 +251,15 @@ public class frm_utama extends javax.swing.JFrame {
                 pn_utama.revalidate();
             }
         });
-        menu_item client = new menu_item(null,true,iconClient,"Client",null);
+        menu_item client = new menu_item(null,true,iconClient,"Client",new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pn_utama.removeAll();
+                pn_utama.add(new panel_client());
+                pn_utama.repaint();
+                pn_utama.revalidate();
+            }
+        });
 //        menu_item mekanik = new menu_item(null,true,iconMekanik,"Mekanik",null);
         
 //        menu_item hstransaksi = new menu_item(null,true,iconhsTransaksi,"History Transaksi1",null);
