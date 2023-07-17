@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 17, 2023 at 10:29 AM
+-- Generation Time: Jul 17, 2023 at 11:14 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -21,7 +21,7 @@ SET time_zone = "+00:00";
 -- Database: `bengkel`
 --
 CREATE DATABASE IF NOT EXISTS `bengkel` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `bengkel`;
+USE `bengkel
 -- --------------------------------------------------------
 
 --
@@ -32,6 +32,7 @@ CREATE TABLE `barang` (
   `ID` int(11) NOT NULL,
   `NAMA` varchar(100) DEFAULT NULL,
   `JUMLAH` int(11) DEFAULT NULL,
+  `LOKASI` varchar(22) DEFAULT NULL,
   `HARGA` double DEFAULT NULL,
   `STATUS` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -40,27 +41,27 @@ CREATE TABLE `barang` (
 -- Dumping data for table `barang`
 --
 
-INSERT INTO `barang` (`ID`, `NAMA`, `JUMLAH`, `HARGA`, `STATUS`) VALUES
-(1, 'FAN BELT', 0, 200000, 1),
-(2, 'LAGER', 0, 125000, 1),
-(3, 'KAMPAS REM', 0, 350000, 1),
-(4, 'SHOCKBREAKER', 0, 1500000, 1),
-(5, 'PLATINA CONDESOR', 0, 120000, 1),
-(6, 'BUSI', 0, 50000, 1),
-(7, 'PLAT KOPLING', 0, 500000, 1),
-(8, 'ENGINE MOUNTING', 0, 450000, 1),
-(9, 'RADIATOR', 0, 1250000, 1),
-(10, 'OLI REM', 0, 100000, 1),
-(11, 'AIR RADIATOR COOLANT', 0, 125000, 1),
-(13, 'SHELL HELIX HX8 5 W-30 4L', 0, 675000, 1),
-(14, 'SHELL HELIX HX6 10 W 4L', 0, 330000, 1),
-(15, 'SHELL RIMULA 4L', 0, 335000, 1),
-(16, 'SHELL HELIX EXTEND 4L', 0, 780000, 1),
-(17, 'LUPROMAX ZELOS 8000 5W-30 4L', 0, 600000, 1),
-(18, 'LUPROMAX HYPERION 8000 5W-30 4L', 0, 770000, 1),
-(27, 'WIPER', 0, 32500, 1),
-(28, 'AKI MOBIL', 0, 850000, 1),
-(29, 'FILTER AC', 0, 95000, 1);
+INSERT INTO `barang` (`ID`, `NAMA`, `JUMLAH`, `LOKASI`, `HARGA`, `STATUS`) VALUES
+(1, 'FAN BELT', 0, 'A1', 200000, 1),
+(2, 'LAGER', 0, 'A2', 125000, 1),
+(3, 'KAMPAS REM', 0, 'A3', 350000, 1),
+(4, 'SHOCKBREAKER', 0, 'A4', 1500000, 1),
+(5, 'PLATINA CONDESOR', 0, 'B1', 120000, 1),
+(6, 'BUSI', 0, 'B2', 50000, 1),
+(7, 'PLAT KOPLING', 0, 'B3', 500000, 1),
+(8, 'ENGINE MOUNTING', 0, 'B4', 450000, 1),
+(9, 'RADIATOR', 0, 'C1', 1250000, 1),
+(10, 'OLI REM', 0, 'C2', 100000, 1),
+(11, 'AIR RADIATOR COOLANT', 0, 'C3', 125000, 1),
+(12, 'SHELL HELIX HX8 5 W-30 4L', 0, 'C4', 675000, 1),
+(13, 'SHELL HELIX HX6 10 W 4L', 0, 'D1', 330000, 1),
+(14, 'SHELL RIMULA 4L', 0, 'D2', 335000, 1),
+(15, 'SHELL HELIX EXTEND 4L', 0, 'D3', 780000, 1),
+(16, 'LUPROMAX ZELOS 8000 5W-30 4L', 0, 'D4', 600000, 1),
+(17, 'LUPROMAX HYPERION 8000 5W-30 4L', 0, 'E1', 770000, 1),
+(18, 'WIPER', 0, 'E2', 32500, 1),
+(19, 'AKI MOBIL', 0, 'E3', 850000, 1),
+(20, 'FILTER AC', 0, 'E4', 95000, 1);
 
 -- --------------------------------------------------------
 
@@ -151,6 +152,7 @@ CREATE TABLE `transaksi` (
   `BARANG_ID` int(11) DEFAULT NULL,
   `TOTAL_HARGA` double DEFAULT NULL,
   `TANGGAL` date DEFAULT NULL,
+  `KENDARAAN` varchar(100) DEFAULT NULL,
   `TIPE` varchar(1) DEFAULT NULL,
   `STATUS` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -237,19 +239,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `mekanik`
 --
 ALTER TABLE `mekanik`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `service`
@@ -267,7 +269,7 @@ ALTER TABLE `transaksi`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
