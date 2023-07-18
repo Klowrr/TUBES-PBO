@@ -192,12 +192,13 @@ public class panel_client extends javax.swing.JPanel {
                 .addGap(66, 66, 66)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(dataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_cari_client, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(dataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_cari_client, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(dataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(94, Short.MAX_VALUE))
@@ -467,28 +468,37 @@ public class panel_client extends javax.swing.JPanel {
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
         // TODO add your handling code here:
         try {
+            // Custom message and button text
+            String message = "Are you sure you want to take Delete this Client?";
+            Object[] options = {"Yes, Delete it", "No, Don't Delete"};
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database,user,pass);
             Statement stt = kon.createStatement();
             String SQL = "UPDATE `client` SET `STATUS` = 0 WHERE ID = '"+tableModel.getValueAt(row, 0).toString()+"';";
-            stt.executeUpdate(SQL);
-            tableModel.removeRow(row);
-            stt.close();
-            kon.close();
-            JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus");
-            btn_hapus.setVisible(false);
-            btn_edit.setVisible(false);
+            int choice = JOptionPane.showOptionDialog(null, message, "Delete Action", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+            if (choice == JOptionPane.YES_OPTION) {
+                stt.executeUpdate(SQL);
+                tableModel.removeRow(row);
+                stt.close();
+                kon.close();
+                JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus");
+                btn_hapus.setVisible(false);
+                btn_edit.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "Canceled");
+            }
         } catch (Exception ex) {
-            
+            System.err.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btn_hapusActionPerformed
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
         // TODO add your handling code here:
-        txt_nama_client_edit.setText(tableModel.getValueAt(row, 0).toString());
-        txt_idkendaraan_client_edit.setText(tableModel.getValueAt(row, 1).toString());
-        txt_notelpon_client_edit.setText(tableModel.getValueAt(row, 2).toString());
-        txt_alamat_client_edit.setText(tableModel.getValueAt(row, 3).toString());
+        txt_nama_client_edit.setText(tableModel.getValueAt(row, 1).toString());
+        txt_idkendaraan_client_edit.setText(tableModel.getValueAt(row, 2).toString());
+        txt_notelpon_client_edit.setText(tableModel.getValueAt(row, 3).toString());
+        txt_alamat_client_edit.setText(tableModel.getValueAt(row, 4).toString());
         mainPanel.removeAll();
         mainPanel.add(editClient);
         mainPanel.repaint();
@@ -507,32 +517,38 @@ public class panel_client extends javax.swing.JPanel {
                 Connection kon = DriverManager.getConnection(database,user,pass);
                 Statement stt = kon.createStatement();
                 String SQL1 = "SELECT * FROM client WHERE NAMA = '"+txt_nama_client.getText()+"' AND STATUS = '1'";
-                ResultSet rs1 = stt.executeQuery(SQL1);
-                if (rs1.next()){
-                    JOptionPane.showConfirmDialog(null, "Nama sudah terdaftar");
-                } else {
-                    String SQL = "INSERT INTO client(NAMA,ID_KENDARAAN,NO_TELP,ALAMAT) VALUES('"
-                            +txt_nama_client.getText()+"','"
-                            +txt_idkendaraan_client.getText()+"','"
-                            +txt_notelpon_client.getText()+"','"
-                            +txt_alamat_client.getText()+"')";
-                    stt.executeUpdate(SQL);
-                    data[0] = txt_nama_client.getText();
-                    data[1] = txt_idkendaraan_client.getText();
-                    data[2] = txt_notelpon_client.getText();
-                    data[3] = txt_alamat_client.getText();
-                    tableModel.insertRow(0, data);
-                    JOptionPane.showMessageDialog(null, "Data Client Berhasil dimasukan");
-                    stt.close();
-                    kon.close();
-                    mainPanel.removeAll();
-                    mainPanel.add(dataClient);
-                    mainPanel.repaint();
-                    mainPanel.revalidate();
-                    membersihkan_teks();
-                }
+                String message = "Are you sure yo want to add Client data?";
+                Object[] options = {"Yes, add Client Data","No, don't add client data"};
+                int choice = JOptionPane.showOptionDialog(null, message, "Add Client Action", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+                if (choice == JOptionPane.YES_OPTION) {
+                    ResultSet rs1 = stt.executeQuery(SQL1);
+                    if (rs1.next()){
+                        JOptionPane.showConfirmDialog(null, "Nama sudah terdaftar");
+                    } else {
+                        String SQL = "INSERT INTO client(NAMA,ID_KENDARAAN,NO_TELP,ALAMAT) VALUES('"
+                                +txt_nama_client.getText()+"','"
+                                +txt_idkendaraan_client.getText()+"','"
+                                +txt_notelpon_client.getText()+"','"
+                                +txt_alamat_client.getText()+"')";
+                        stt.executeUpdate(SQL);
+                        data[0] = txt_nama_client.getText();
+                        data[1] = txt_idkendaraan_client.getText();
+                        data[2] = txt_notelpon_client.getText();
+                        data[3] = txt_alamat_client.getText();
+                        tableModel.insertRow(0, data);
+                        JOptionPane.showMessageDialog(null, "Data Client Berhasil dimasukan");
+                        stt.close();
+                        kon.close();
+                        mainPanel.removeAll();
+                        mainPanel.add(dataClient);
+                        mainPanel.repaint();
+                        mainPanel.revalidate();
+                        membersihkan_teks();
+                    }
+                } 
             } catch (Exception ex) {
-                
+                System.err.println(ex.getMessage());
+                JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }//GEN-LAST:event_btn_tambah_clientActionPerformed
@@ -570,6 +586,8 @@ public class panel_client extends javax.swing.JPanel {
             txt_nama_client_edit.requestFocus();
         } else {
             try {
+                String message = "Are you sure you want to change this data?";
+                Object[] options = {"Yes, change it","No, don't change"};
                 Class.forName(driver);
                 Connection kon = DriverManager.getConnection(database,user,pass);
                 Statement stt = kon.createStatement();
@@ -578,24 +596,28 @@ public class panel_client extends javax.swing.JPanel {
                         +"ID_KENDARAAN = '"+idkendaraan+"',"
                         +"NO_TELP = '"+notelp+"',"
                         +"ALAMAT = '"+alamat+"' "
-                        +"WHERE `NAMA` = '"+tableModel.getValueAt(row, 0).toString()+"'";
-                stt.executeUpdate(SQL);
-                data[0] = nama;                
-                data[1] = idkendaraan;
-                data[2] = notelp;  
-                data[3] = alamat;
-                tableModel.removeRow(row);
-                tableModel.insertRow(row, data);
-                stt.close();
-                kon.close();
-                JOptionPane.showMessageDialog(null, "Data Berhasil Di Update");
-                membersihkan_teks();
-                mainPanel.removeAll();
-                mainPanel.add(dataClient);
-                mainPanel.repaint();
-                mainPanel.revalidate();
+                        +"WHERE `ID` = '"+tableModel.getValueAt(row, 0).toString()+"'";
+                int choice = JOptionPane.showOptionDialog(null, message, "Change Data", JOptionPane.YES_NO_OPTION , JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+                if (choice == JOptionPane.YES_OPTION) {
+                    stt.executeUpdate(SQL);
+                    data[0] = nama;                
+                    data[1] = idkendaraan;
+                    data[2] = notelp;  
+                    data[3] = alamat;
+                    tableModel.removeRow(row);
+                    tableModel.insertRow(row, data);
+                    stt.close();
+                    kon.close();
+                    JOptionPane.showMessageDialog(null, "Data Berhasil Di Update");
+                    membersihkan_teks();
+                    mainPanel.removeAll();
+                    mainPanel.add(dataClient);
+                    mainPanel.repaint();
+                    mainPanel.revalidate();
+                }
             } catch (Exception ex) {
                 System.err.println(ex.getMessage());
+                JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }//GEN-LAST:event_btn_simpan_client_editActionPerformed
