@@ -29,7 +29,8 @@ public class panel_users extends javax.swing.JPanel {
         
         btn_hapus.setVisible(false);
         btn_edit.setVisible(false);
-        
+        mainPanel.repaint();
+        mainPanel.revalidate();
             
         settableload();
     }
@@ -37,7 +38,7 @@ public class panel_users extends javax.swing.JPanel {
     private javax.swing.table.DefaultTableModel getDefaultTableModel(){
         return new javax.swing.table.DefaultTableModel(
             new Object[][]{},
-            new String[]{"NAMA","ALAMAT","UMUR", "NO TELP","USERNAME"}
+            new String[]{"ID","NAMA","ALAMAT","UMUR", "NO TELP","USERNAME"}
         )
         {
             boolean[] canEdit = new boolean[]{
@@ -562,15 +563,24 @@ public class panel_users extends javax.swing.JPanel {
                 Statement stt = kon.createStatement();
                 String SQL1 = "SELECT * FROM users WHERE  USERNAME = '"+txt_username.getText()+"' AND STATUS=1";
                 ResultSet rs1 = stt.executeQuery(SQL1);
+                
+                String getLastIdQuery = "SELECT LAST_INSERT_ID()";
+                ResultSet rs = stt.executeQuery(getLastIdQuery);
+                int lastId = 0;
+                if (rs.next()) {
+                    lastId = rs.getInt(1);
+                }
+                
                 if(rs1.next()){
                     JOptionPane.showMessageDialog(this, "Username Sudah Terdaftar");
                 }else{
-                    String SQL = "INSERT INTO users(NAMA,UMUR,ALAMAT,NO_TELP,USERNAME,PASSWORD) VALUES('"+txt_nama.getText()
+                    String SQL = "INSERT INTO users(ID,NAMA,UMUR,ALAMAT,NO_TELP,USERNAME,PASSWORD) VALUES("+lastId+",'"+txt_nama.getText()
                                                                                         +"','"+txt_umur.getText()
                                                                                         +"','"+txt_alamat.getText()
                                                                                         +"','"+txt_notelp.getText()
                                                                                         +"','"+txt_username.getText()
                                                                                         +"','"+txt_password.getText()+"')";
+                    System.out.println(lastId);
                     stt.executeUpdate(SQL);
                     data[0] = txt_nama.getText();                
                     data[1] = txt_alamat.getText();
@@ -702,6 +712,10 @@ public class panel_users extends javax.swing.JPanel {
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(table);
         tabel_users.setRowSorter(tr);
         tr.setRowFilter(RowFilter.regexFilter("(?i)" + search));
+        if(search.length()>=0){
+            btn_hapus.setVisible(false);
+            btn_edit.setVisible(false);
+        }
     }//GEN-LAST:event_jTextField1KeyReleased
 
 
@@ -765,10 +779,11 @@ public class panel_users extends javax.swing.JPanel {
             String SQL = "SELECT * from users WHERE STATUS=1";
             ResultSet res = stt.executeQuery(SQL);
             while(res.next()){
-                data[0] = res.getString(2);                
-                data[1] = res.getString(3);
-                data[2] = res.getString(4);              
-                data[3] = res.getString(5);
+                data[0] = res.getString(1);                
+                data[1] = res.getString(2);
+                data[2] = res.getString(3);              
+                data[3] = res.getString(4);
+                data[4] = res.getString(5);
                 data[4] = res.getString(6);
                 tableModel.addRow(data);
             }

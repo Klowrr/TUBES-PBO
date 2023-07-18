@@ -128,7 +128,7 @@ public class frm_utama extends javax.swing.JFrame {
         pn_sidebar.setLayout(pn_sidebarLayout);
         pn_sidebarLayout.setHorizontalGroup(
             pn_sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pn_sidebarLayout.setVerticalGroup(
@@ -137,7 +137,7 @@ public class frm_utama extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE))
         );
 
         getContentPane().add(pn_sidebar, java.awt.BorderLayout.LINE_START);
@@ -237,9 +237,9 @@ public class frm_utama extends javax.swing.JFrame {
     private void execute() {
         ImageIcon iconBarang = new ImageIcon(getClass().getResource("./img/icon_product.png"));
         ImageIcon iconClient = new ImageIcon(getClass().getResource("./img/icon_client.png"));
+        ImageIcon iconMekanik = new ImageIcon(getClass().getResource("./img/icon_tools_mekanik.png"));
 
 //        ImageIcon iconhsTransaksi = new ImageIcon(getClass().getResource("./img/icon_history_transaction.png"));
-//        ImageIcon iconMekanik = new ImageIcon(getClass().getResource("./img/icon_tools_mekanik.png"));
         ImageIcon iconUsers = new ImageIcon(getClass().getResource("./img/icon_user3.png"));
             
         menu_item barang = new menu_item(null,true,iconBarang,"Barang",new ActionListener() {
@@ -252,7 +252,15 @@ public class frm_utama extends javax.swing.JFrame {
             }
         });
         menu_item client = new menu_item(null,true,iconClient,"Client",null);
-//        menu_item mekanik = new menu_item(null,true,iconMekanik,"Mekanik",null);
+        menu_item mekanik = new menu_item(null,true,iconMekanik,"Mekanik",new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pn_utama.removeAll();
+                pn_utama.add(new panel_mekanik());
+                pn_utama.repaint();
+                pn_utama.revalidate();
+            }
+        });
         
 //        menu_item hstransaksi = new menu_item(null,true,iconhsTransaksi,"History Transaksi1",null);
 
@@ -265,7 +273,7 @@ public class frm_utama extends javax.swing.JFrame {
                 pn_utama.revalidate();
             }
         });
-        menu_item menuMaster = new menu_item(iconBarang,false,null,"Master",null,barang,client);
+        menu_item menuMaster = new menu_item(iconBarang,false,null,"Master",null,barang,client,mekanik);
 //        menu_item menuTransaksi = new menu_item(iconhsTransaksi,false,null,"Transaksi",null,hstransaksi);
         
         if ("ADMIN".equals(role)){

@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 /**
  *
  * @author Leily
@@ -26,6 +28,8 @@ public class panel_barang extends javax.swing.JPanel {
         pass = dbsetting.SettingPanel("DBPassword");
         
         tabel_barang.setModel(tableModel);
+        btn_hapus.setVisible(false);
+        btn_edit.setVisible(false);
         
         settableload();
     }
@@ -44,6 +48,7 @@ public class panel_barang extends javax.swing.JPanel {
             }
         };
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,6 +63,11 @@ public class panel_barang extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabel_barang = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        btn_tambah = new rojerusan.RSMaterialButtonRectangle();
+        btn_hapus = new rojerusan.RSMaterialButtonRectangle();
+        btn_edit = new rojerusan.RSMaterialButtonRectangle();
+        txt_search_barang = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -73,33 +83,92 @@ public class panel_barang extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabel_barang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabel_barangMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabel_barang);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("DATA BARANG");
+
+        btn_tambah.setText("Tambah ");
+        btn_tambah.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        btn_tambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_tambahActionPerformed(evt);
+            }
+        });
+
+        btn_hapus.setBackground(new java.awt.Color(255, 0, 51));
+        btn_hapus.setText("HAPUS");
+        btn_hapus.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        btn_hapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_hapusActionPerformed(evt);
+            }
+        });
+
+        btn_edit.setBackground(new java.awt.Color(255, 153, 0));
+        btn_edit.setText("Edit");
+        btn_edit.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        btn_edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editActionPerformed(evt);
+            }
+        });
+
+        txt_search_barang.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_search_barangKeyReleased(evt);
+            }
+        });
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_search_1.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 949, Short.MAX_VALUE)
-                        .addGap(10, 10, 10))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txt_search_barang, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 980, Short.MAX_VALUE)))
+                        .addGap(30, 30, 30))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_search_barang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -111,17 +180,60 @@ public class panel_barang extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 51, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambahActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_tambahActionPerformed
+
+    private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_hapusActionPerformed
+
+    private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_editActionPerformed
+
+    private void txt_search_barangKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_search_barangKeyReleased
+        // TODO add your handling code here:
+        DefaultTableModel table = (DefaultTableModel)tabel_barang.getModel();
+        String search = txt_search_barang.getText().toLowerCase();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(table);
+        tabel_barang.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter("(?i)" + search));
+        if(search.length()>=0){
+            btn_hapus.setVisible(false);
+            btn_edit.setVisible(false);
+        }
+    }//GEN-LAST:event_txt_search_barangKeyReleased
+    int row = 0;
+    private void tabel_barangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_barangMouseClicked
+        // TODO add your handling code here:
+        if(evt.getClickCount()==1) {
+            btn_hapus.setVisible(true);
+            btn_edit.setVisible(true);
+            if (tabel_barang.getRowSorter() != null) {
+                row = tabel_barang.convertRowIndexToModel(tabel_barang.getSelectedRow());
+            } else {
+                row = tabel_barang.getSelectedRow();
+            }
+        }
+    }//GEN-LAST:event_tabel_barangMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private rojerusan.RSMaterialButtonRectangle btn_edit;
+    private rojerusan.RSMaterialButtonRectangle btn_hapus;
+    private rojerusan.RSMaterialButtonRectangle btn_tambah;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabel_barang;
+    private javax.swing.JTextField txt_search_barang;
     // End of variables declaration//GEN-END:variables
 
     String data[] = new String[3];
