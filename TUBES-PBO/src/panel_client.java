@@ -170,11 +170,11 @@ public class panel_client extends javax.swing.JPanel {
                             .addGroup(dataClientLayout.createSequentialGroup()
                                 .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 853, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE))
                         .addGap(30, 30, 30))
                     .addGroup(dataClientLayout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -202,7 +202,7 @@ public class panel_client extends javax.swing.JPanel {
                     .addComponent(jLabel12))
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         mainPanel.add(dataClient, "card2");
@@ -516,7 +516,9 @@ public class panel_client extends javax.swing.JPanel {
                         mainPanel.revalidate();
                         membersihkan_teks();
                     }
-                } 
+                } else {
+                    JOptionPane.showMessageDialog(null, "Canceled");
+                }
             } catch (Exception ex) {
                 System.err.println(ex.getMessage());
                 JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",JOptionPane.INFORMATION_MESSAGE);
@@ -584,6 +586,8 @@ public class panel_client extends javax.swing.JPanel {
                     mainPanel.add(dataClient);
                     mainPanel.repaint();
                     mainPanel.revalidate();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Canceled");
                 }
             } catch (Exception ex) {
                 System.err.println(ex.getMessage());

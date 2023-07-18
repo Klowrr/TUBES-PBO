@@ -163,9 +163,9 @@ public class panel_mekanik extends javax.swing.JPanel {
                     .addGroup(dataMekanikLayout.createSequentialGroup()
                         .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(dataMekanikLayout.createSequentialGroup()
                         .addGroup(dataMekanikLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -401,12 +401,20 @@ public class panel_mekanik extends javax.swing.JPanel {
             Statement stt = kon.createStatement();
             String SQL = "UPDATE `mekanik` SET"
             +"`status`= 0 WHERE ID='"+tableModel.getValueAt(row, 0).toString()+"';";
-            stt.executeUpdate(SQL);
-            tableModel.removeRow(row);
-            stt.close();
-            kon.close();
-            btn_hapus.setVisible(false);
-            btn_edit.setVisible(false);
+            String message = "Are you sure youw ant to delete this mechanic data?";
+            Object options[] = {"Yes, delete it","No, don't delete "};
+            int choice = JOptionPane.showOptionDialog(null, message, "Delete Mechanic", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+            if (choice == JOptionPane.YES_OPTION) {
+                stt.executeUpdate(SQL);
+                tableModel.removeRow(row);
+                stt.close();
+                kon.close();
+                JOptionPane.showMessageDialog(null, "Data Mechanic berhasil dihapus");
+                btn_hapus.setVisible(false);
+                btn_edit.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "Canceled");
+            }
         }catch(Exception ex){
             System.err.println(ex.getMessage());
         }
@@ -474,19 +482,27 @@ public class panel_mekanik extends javax.swing.JPanel {
                 String SQL = "INSERT INTO mekanik(ID,NAMA,NO_TELP,ALAMAT) VALUES('"+newID+"','"+txt_nama.getText()
                                                                                     +"','"+txt_notelp.getText()
                                                                                     +"','"+txt_alamat.getText()+"')";
-                stt.executeUpdate(SQL);
-                data[0] = newID;                
-                data[1] = txt_nama.getText(); 
-                data[2] = txt_notelp.getText();  
-                data[3] = txt_alamat.getText();
-                tableModel.insertRow(rowCount, data);
-                stt.close();
-                kon.close();
-                mainPanel.removeAll();
-                mainPanel.add(dataMekanik);
-                mainPanel.repaint();
-                mainPanel.revalidate();
-                membersihkan_text();
+                String message = "Are you sure you want to add this Mechanic data?";
+                Object options[] = {"Yes, add it!","No, don't add"};
+                int choice = JOptionPane.showOptionDialog(null, message, "Adding Mechanic data", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+                if (choice == JOptionPane.YES_OPTION) {
+                    stt.executeUpdate(SQL);
+                    data[0] = newID;                
+                    data[1] = txt_nama.getText(); 
+                    data[2] = txt_notelp.getText();  
+                    data[3] = txt_alamat.getText();
+                    tableModel.insertRow(rowCount, data);
+                    stt.close();
+                    kon.close();
+                    JOptionPane.showMessageDialog(null, "Data Mechanic baru berhasil ditambah");
+                    mainPanel.removeAll();
+                    mainPanel.add(dataMekanik);
+                    mainPanel.repaint();
+                    mainPanel.revalidate();
+                    membersihkan_text();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Canceled");
+                }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null,ex.getMessage() ,"ERROR",JOptionPane.INFORMATION_MESSAGE);
             }
@@ -521,21 +537,28 @@ public class panel_mekanik extends javax.swing.JPanel {
                                     +"`NO_TELP`='"+notelp+"',"
                                     +"`ALAMAT`='"+alamat+"'"
                                     +"WHERE `ID`='"+id+"';";
-            stt.executeUpdate(SQL);
-            data[0] = id;                
-            data[1] = nama;                
-            data[2] = notelp;
-            data[3] = alamat;  
-            tableModel.removeRow(row);
-            tableModel.insertRow(row, data);
-            stt.close();
-            kon.close();
-            membersihkan_text();
-            mainPanel.removeAll();
-            mainPanel.add(dataMekanik);
-            mainPanel.repaint();
-            mainPanel.revalidate();
-            
+                String message = "Are you sure you want to change this Mechanic's data?";
+                Object options[] = {"Yes, change it","No, don't change"};
+                int choice = JOptionPane.showOptionDialog(null, message, "Changing Mechanic data", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+                if (choice == JOptionPane.YES_OPTION) {
+                    stt.executeUpdate(SQL);
+                    data[0] = id;                
+                    data[1] = nama;                
+                    data[2] = notelp;
+                    data[3] = alamat;  
+                    tableModel.removeRow(row);
+                    tableModel.insertRow(row, data);
+                    stt.close();
+                    kon.close();
+                    membersihkan_text();
+                    JOptionPane.showMessageDialog(null, "Data mechanic berhasil diupdate");
+                    mainPanel.removeAll();
+                    mainPanel.add(dataMekanik);
+                    mainPanel.repaint();
+                    mainPanel.revalidate();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Canceled");
+                }
             }catch(Exception ex){
                 System.err.println(ex.getMessage());
             }

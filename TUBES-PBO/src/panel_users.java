@@ -564,40 +564,48 @@ public class panel_users extends javax.swing.JPanel {
                 Statement stt = kon.createStatement();
                 String SQL1 = "SELECT * FROM users WHERE  USERNAME = '"+txt_username.getText()+"' AND STATUS=1";
                 ResultSet rs1 = stt.executeQuery(SQL1);
-                if(rs1.next()){
-                    System.out.println(rs1.next());
-                    JOptionPane.showMessageDialog(this, "Username Sudah Terdaftar");
-                }else{
-                    String SQL2 = "SELECT COUNT(*) FROM users";
-                    ResultSet countrs = stt.executeQuery(SQL2);
-                    countrs.next();
-                    int rowCount = countrs.getInt(1);
-                    countrs.close();
-                    
-                    // Generate the ID with leading zeros
-                    DecimalFormat idFormat = new DecimalFormat("000");
-                    String newID = "US" + idFormat.format(rowCount + 1);
-                    String SQL = "INSERT INTO users(ID,NAMA,UMUR,ALAMAT,NO_TELP,USERNAME,PASSWORD) VALUES('"+newID+"','"+txt_nama.getText()
-                                                                                        +"','"+txt_umur.getText()
-                                                                                        +"','"+txt_alamat.getText()
-                                                                                        +"','"+txt_notelp.getText()
-                                                                                        +"','"+txt_username.getText()
-                                                                                        +"','"+txt_password.getText()+"')";
-                    stt.executeUpdate(SQL);
-                    data[0] = newID;
-                    data[1] = txt_nama.getText();                
-                    data[2] = txt_alamat.getText();
-                    data[3] = txt_umur.getText();
-                    data[4] = txt_notelp.getText();  
-                    data[5] = txt_username.getText();
-                    tableModel.insertRow(rowCount, data);
-                    stt.close();
-                    kon.close();
-                    mainPanel.removeAll();
-                    mainPanel.add(dataUser);
-                    mainPanel.repaint();
-                    mainPanel.revalidate();
-                    membersihkan_text();
+                String message = "Are you sure you want to add this user?";
+                Object options[] = {"Yes, add it","No, don't add"};
+                int choice = JOptionPane.showOptionDialog(null, message, "Adding user", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+                if (choice == JOptionPane.YES_OPTION) {
+                    if(rs1.next()){
+                        System.out.println(rs1.next());
+                        JOptionPane.showMessageDialog(this, "Username Sudah Terdaftar");
+                    }else{
+                        String SQL2 = "SELECT COUNT(*) FROM users";
+                        ResultSet countrs = stt.executeQuery(SQL2);
+                        countrs.next();
+                        int rowCount = countrs.getInt(1);
+                        countrs.close();
+
+                        // Generate the ID with leading zeros
+                        DecimalFormat idFormat = new DecimalFormat("000");
+                        String newID = "US" + idFormat.format(rowCount + 1);
+                        String SQL = "INSERT INTO users(ID,NAMA,UMUR,ALAMAT,NO_TELP,USERNAME,PASSWORD) VALUES('"+newID+"','"+txt_nama.getText()
+                                                                                            +"','"+txt_umur.getText()
+                                                                                            +"','"+txt_alamat.getText()
+                                                                                            +"','"+txt_notelp.getText()
+                                                                                            +"','"+txt_username.getText()
+                                                                                            +"','"+txt_password.getText()+"')";
+                        stt.executeUpdate(SQL);
+                        data[0] = newID;
+                        data[1] = txt_nama.getText();                
+                        data[2] = txt_alamat.getText();
+                        data[3] = txt_umur.getText();
+                        data[4] = txt_notelp.getText();  
+                        data[5] = txt_username.getText();
+                        tableModel.insertRow(rowCount, data);
+                        stt.close();
+                        kon.close();
+                        JOptionPane.showMessageDialog(null, "User baru berhasil ditambah");
+                        mainPanel.removeAll();
+                        mainPanel.add(dataUser);
+                        mainPanel.repaint();
+                        mainPanel.revalidate();
+                        membersihkan_text();
+                    }  
+                } else {
+                    JOptionPane.showMessageDialog(null, "Canceled");
                 }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null,ex.getMessage() ,"ERROR",JOptionPane.INFORMATION_MESSAGE);
@@ -664,23 +672,30 @@ public class panel_users extends javax.swing.JPanel {
                                     +"`NO_TELP`='"+noTelp+"',"
                                     +"`USERNAME`='"+username+"'"
                                     +"WHERE `ID`='"+tableModel.getValueAt(row, 0).toString()+"';";
-            stt.executeUpdate(SQL);
-            data[0] = id;                
-            data[1] = nama;                
-            data[2] = alamat;
-            data[3] = umur;  
-            data[4] = noTelp;
-            data[5] = username;
-            tableModel.removeRow(row);
-            tableModel.insertRow(row, data);
-            stt.close();
-            kon.close();
-            membersihkan_text();
-            mainPanel.removeAll();
-            mainPanel.add(dataUser);
-            mainPanel.repaint();
-            mainPanel.revalidate();
-            
+                String message = "Are you sure you want to change this user data?";
+                Object options[] = {"Yes, change it!","No, don't change"};
+                int choice = JOptionPane.showOptionDialog(null, message, "Change user data", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+                if (choice == JOptionPane.YES_OPTION) {
+                    stt.executeUpdate(SQL);
+                    data[0] = id;                
+                    data[1] = nama;                
+                    data[2] = alamat;
+                    data[3] = umur;  
+                    data[4] = noTelp;
+                    data[5] = username;
+                    tableModel.removeRow(row);
+                    tableModel.insertRow(row, data);
+                    stt.close();
+                    kon.close();
+                    JOptionPane.showMessageDialog(null, "Data berhasil diupdate");
+                    membersihkan_text();
+                    mainPanel.removeAll();
+                    mainPanel.add(dataUser);
+                    mainPanel.repaint();
+                    mainPanel.revalidate();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Canceled");
+                }
             }catch(Exception ex){
                 System.err.println(ex.getMessage());
             }
@@ -703,12 +718,20 @@ public class panel_users extends javax.swing.JPanel {
             Statement stt = kon.createStatement();
             String SQL = "UPDATE `users` SET"
             +"`status`= 0 WHERE ID='"+tableModel.getValueAt(row, 0).toString()+"';";
-            stt.executeUpdate(SQL);
-            tableModel.removeRow(row);
-            stt.close();
-            kon.close();
-            btn_hapus.setVisible(false);
-            btn_edit.setVisible(false);
+            String message = "Are you sure you want to delete this User?";
+            Object options[] = {"Yes, delete it!","No, don't delete"};
+            int choice = JOptionPane.showOptionDialog(null, message, "Delete User", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+            if (choice == JOptionPane.YES_OPTION) {
+                stt.executeUpdate(SQL);
+                tableModel.removeRow(row);
+                stt.close();
+                kon.close();
+                JOptionPane.showMessageDialog(null, "User berhasil dihapus");
+                btn_hapus.setVisible(false);
+                btn_edit.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "Canceled");
+            }
         }catch(Exception ex){
             System.err.println(ex.getMessage());
         }

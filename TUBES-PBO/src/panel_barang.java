@@ -383,12 +383,20 @@ public class panel_barang extends javax.swing.JPanel {
             Statement stt = kon.createStatement();
             String SQL = "UPDATE `barang` SET"
             +"`status`= 0 WHERE ID='"+tableModel.getValueAt(row, 0).toString()+"';";
-            stt.executeUpdate(SQL);
-            tableModel.removeRow(row);
-            stt.close();
-            kon.close();
-            btn_hapus.setVisible(false);
-            btn_edit.setVisible(false);
+            String message = "Are you sure you want to delete this data?";
+            Object options[] = {"Yes, delete it!","No, don't delete"};
+            int choice = JOptionPane.showOptionDialog(null, message, "Delete data", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+            if (choice == JOptionPane.YES_OPTION) {
+                stt.executeUpdate(SQL);
+                tableModel.removeRow(row);
+                stt.close();
+                kon.close();
+                JOptionPane.showMessageDialog(null, "Data berhasil di Delete!");
+                btn_hapus.setVisible(false);
+                btn_edit.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "Canceled");
+            }
         }catch(Exception ex){
             System.err.println(ex.getMessage());
         }
@@ -447,6 +455,8 @@ public class panel_barang extends javax.swing.JPanel {
                 Class.forName(driver);
                 Connection kon = DriverManager.getConnection(database,user,pass);
                 Statement stt = kon.createStatement();
+                String message = "Are you sure you want to Add this data?";
+                Object[] options = {"Yes, Add it","No, don't Add"};
                 String SQL2 = "SELECT COUNT(*) FROM barang";
                 ResultSet countrs = stt.executeQuery(SQL2);
                 countrs.next();
@@ -458,20 +468,26 @@ public class panel_barang extends javax.swing.JPanel {
                 String SQL = "INSERT INTO barang(ID,NAMA,LOKASI,HARGA) VALUES('"+newID+"','"+txt_nama.getText()
                                                                         +"','"+txt_lokasi.getText()
                                                                         +"','"+txt_harga.getText()+"')";
-                stt.executeUpdate(SQL);
-                data[0] = newID;
-                data[1] = txt_nama.getText();  
-                data[2] = String.valueOf(0); 
-                data[3] = txt_lokasi.getText();
-                data[4] = txt_harga.getText();
-                tableModel.insertRow(rowCount, data);
-                stt.close();
-                kon.close();
-                mainPanel.removeAll();
-                mainPanel.add(dataBarang);
-                mainPanel.repaint();
-                mainPanel.revalidate();
-                membersihkan_text();
+                int choice = JOptionPane.showOptionDialog(null, message, "Adding data", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+                if (choice == JOptionPane.YES_OPTION) {
+                    stt.executeUpdate(SQL);
+                    data[0] = newID;
+                    data[1] = txt_nama.getText();  
+                    data[2] = String.valueOf(0); 
+                    data[3] = txt_lokasi.getText();
+                    data[4] = txt_harga.getText();
+                    tableModel.insertRow(rowCount, data);
+                    stt.close();
+                    kon.close();
+                    JOptionPane.showMessageDialog(null, "Data berhasil ditambah");
+                    mainPanel.removeAll();
+                    mainPanel.add(dataBarang);
+                    mainPanel.repaint();
+                    mainPanel.revalidate();
+                    membersihkan_text();     
+                } else {
+                    JOptionPane.showMessageDialog(null, "Canceled");
+                }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null,ex.getMessage() ,"ERROR",JOptionPane.INFORMATION_MESSAGE);
             }
@@ -507,22 +523,29 @@ public class panel_barang extends javax.swing.JPanel {
                                     +"`LOKASI`='"+lokasi+"',"
                                     +"`HARGA`='"+harga+"'"
                                     +"WHERE `ID`='"+tableModel.getValueAt(row, 0).toString()+"';";
-            stt.executeUpdate(SQL);
-            data[0] = id;                
-            data[1] = nama;                
-            data[2] = jumlah;
-            data[3] = lokasi;  
-            data[4] = harga;
-            tableModel.removeRow(row);
-            tableModel.insertRow(row, data);
-            stt.close();
-            kon.close();
-            membersihkan_text();
-            mainPanel.removeAll();
-            mainPanel.add(dataBarang);
-            mainPanel.repaint();
-            mainPanel.revalidate();
-            
+                String message = "Are you sure you want to change this data?";
+                Object options [] = {"Yes. change it!","No, don't change"};
+                int choice = JOptionPane.showOptionDialog(null , message, "Editing data",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+                if (choice == JOptionPane.YES_OPTION) {
+                    stt.executeUpdate(SQL);
+                    data[0] = id;                
+                    data[1] = nama;                
+                    data[2] = jumlah;
+                    data[3] = lokasi;  
+                    data[4] = harga;
+                    tableModel.removeRow(row);
+                    tableModel.insertRow(row, data);
+                    stt.close();
+                    kon.close();
+                    membersihkan_text();
+                    JOptionPane.showMessageDialog(null, "Data berhasil di updtae");
+                    mainPanel.removeAll();
+                    mainPanel.add(dataBarang);
+                    mainPanel.repaint();
+                    mainPanel.revalidate();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Canceled");
+                }
             }catch(Exception ex){
                 System.err.println(ex.getMessage());
             }
