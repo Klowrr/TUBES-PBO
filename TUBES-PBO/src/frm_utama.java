@@ -291,6 +291,8 @@ public class frm_utama extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 pn_utama.removeAll();
                 pn_utama.add(new panel_mekanik());
+            }
+        });
         menu_item client = new menu_item(null,true,iconClient,"Client",new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

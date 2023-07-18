@@ -5,6 +5,7 @@
  */
 import javax.swing.*;
 import java.sql.*;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
@@ -28,13 +29,15 @@ public class panel_mekanik extends javax.swing.JPanel {
         user = dbsetting.SettingPanel("DBUsername");
         pass = dbsetting.SettingPanel("DBPassword");
         tabel_mekanik.setModel(tableModel);
+        btn_hapus.setVisible(false);
+        btn_edit.setVisible(false);
         settableload();
     }
     private javax.swing.table.DefaultTableModel tableModel = getDefaultTableModel();
     private javax.swing.table.DefaultTableModel getDefaultTableModel(){
         return new javax.swing.table.DefaultTableModel(
             new Object[][]{},
-            new String[]{"NAMA", "NO TELP", "ALAMAT"}
+            new String[]{"ID","NAMA", "NO TELP", "ALAMAT"}
         )
         {
             boolean[] canEdit = new boolean[]{
@@ -75,6 +78,17 @@ public class panel_mekanik extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jScrollPane = new javax.swing.JScrollPane();
         txt_alamat = new javax.swing.JTextArea();
+        editMekanik = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        btn_batal_edit = new rojerusan.RSMaterialButtonRectangle();
+        btn_simpan_edit = new rojerusan.RSMaterialButtonRectangle();
+        jLabel8 = new javax.swing.JLabel();
+        txt_nama_edit = new javax.swing.JTextField();
+        txt_notelp_edit = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txt_alamat_edit = new javax.swing.JTextArea();
 
         setLayout(new java.awt.CardLayout());
 
@@ -164,7 +178,7 @@ public class panel_mekanik extends javax.swing.JPanel {
                                 .addComponent(txt_search_mekanik, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel3)))
-                        .addContainerGap(30, Short.MAX_VALUE))))
+                        .addGap(30, 30, 30))))
         );
         dataMekanikLayout.setVerticalGroup(
             dataMekanikLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,11 +190,11 @@ public class panel_mekanik extends javax.swing.JPanel {
                     .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                .addGap(10, 10, 10)
                 .addGroup(dataMekanikLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txt_search_mekanik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(10, 10, 10)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -259,19 +273,105 @@ public class panel_mekanik extends javax.swing.JPanel {
                 .addGap(41, 41, 41)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_notelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_notelp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         mainPanel.add(addMekanik, "card2");
+
+        editMekanik.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel4.setText("EDIT MEKANIK");
+
+        btn_batal_edit.setBackground(new java.awt.Color(255, 153, 0));
+        btn_batal_edit.setText("Batal");
+        btn_batal_edit.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        btn_batal_edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_batal_editActionPerformed(evt);
+            }
+        });
+
+        btn_simpan_edit.setText("Simpan");
+        btn_simpan_edit.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        btn_simpan_edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_simpan_editActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setText("Nama");
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel9.setText("No Telp");
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel10.setText("Alamat");
+
+        txt_alamat_edit.setColumns(20);
+        txt_alamat_edit.setRows(5);
+        jScrollPane1.setViewportView(txt_alamat_edit);
+
+        javax.swing.GroupLayout editMekanikLayout = new javax.swing.GroupLayout(editMekanik);
+        editMekanik.setLayout(editMekanikLayout);
+        editMekanikLayout.setHorizontalGroup(
+            editMekanikLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(editMekanikLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(editMekanikLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(editMekanikLayout.createSequentialGroup()
+                        .addGroup(editMekanikLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(editMekanikLayout.createSequentialGroup()
+                                .addComponent(btn_simpan_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_batal_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel4))
+                        .addContainerGap(585, Short.MAX_VALUE))
+                    .addGroup(editMekanikLayout.createSequentialGroup()
+                        .addGroup(editMekanikLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel8)
+                            .addComponent(txt_nama_edit)
+                            .addComponent(txt_notelp_edit, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10)
+                            .addComponent(jScrollPane1))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+        );
+        editMekanikLayout.setVerticalGroup(
+            editMekanikLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(editMekanikLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addGroup(editMekanikLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_batal_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_simpan_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txt_nama_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txt_notelp_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(86, Short.MAX_VALUE))
+        );
+
+        mainPanel.add(editMekanik, "card2");
 
         add(mainPanel, "card4");
     }// </editor-fold>//GEN-END:initComponents
@@ -295,10 +395,32 @@ public class panel_mekanik extends javax.swing.JPanel {
     }
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
         // TODO add your handling code here:
+        try {
+            Class.forName(driver);
+            Connection kon = DriverManager.getConnection(database,user,pass);
+            Statement stt = kon.createStatement();
+            String SQL = "UPDATE `mekanik` SET"
+            +"`status`= 0 WHERE ID='"+tableModel.getValueAt(row, 0).toString()+"';";
+            stt.executeUpdate(SQL);
+            tableModel.removeRow(row);
+            stt.close();
+            kon.close();
+            btn_hapus.setVisible(false);
+            btn_edit.setVisible(false);
+        }catch(Exception ex){
+            System.err.println(ex.getMessage());
+        }
     }//GEN-LAST:event_btn_hapusActionPerformed
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
         // TODO add your handling code here:
+        txt_nama_edit.setText(tableModel.getValueAt(row, 1).toString());
+        txt_notelp_edit.setText(tableModel.getValueAt(row, 2).toString());
+        txt_alamat_edit.setText(tableModel.getValueAt(row, 3).toString());
+        mainPanel.removeAll();
+        mainPanel.add(editMekanik);
+        mainPanel.repaint();
+        mainPanel.revalidate();
     }//GEN-LAST:event_btn_editActionPerformed
 
     private void btn_tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambahActionPerformed
@@ -332,7 +454,7 @@ public class panel_mekanik extends javax.swing.JPanel {
 
     private void btn_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpanActionPerformed
         // TODO add your handling code here:
-        String data[]=new String[3];
+        String data[]=new String[4];
         if((txt_nama.getText().isEmpty()) || (txt_alamat.getText().isEmpty())){ 
             JOptionPane.showMessageDialog(null,"Data tidak boleh kosong");
             txt_nama.requestFocus();
@@ -341,14 +463,23 @@ public class panel_mekanik extends javax.swing.JPanel {
                 Class.forName(driver);
                 Connection kon = DriverManager.getConnection(database,user,pass);
                 Statement stt = kon.createStatement();
-                String SQL = "INSERT INTO users(NAMA,UMUR,ALAMAT,NO_TELP,USERNAME,PASSWORD) VALUES('"+txt_nama.getText()
-                                                                                    +"','"+txt_alamat.getText()
-                                                                                    +"','"+txt_notelp.getText()+"')";
+                String SQL2 = "SELECT COUNT(*) FROM mekanik";
+                ResultSet countrs = stt.executeQuery(SQL2);
+                countrs.next();
+                int rowCount = countrs.getInt(1);
+                countrs.close();
+                // Generate the ID with leading zeros
+                DecimalFormat idFormat = new DecimalFormat("000");
+                String newID = "MK" + idFormat.format(rowCount + 1);
+                String SQL = "INSERT INTO mekanik(ID,NAMA,NO_TELP,ALAMAT) VALUES('"+newID+"','"+txt_nama.getText()
+                                                                                    +"','"+txt_notelp.getText()
+                                                                                    +"','"+txt_alamat.getText()+"')";
                 stt.executeUpdate(SQL);
-                data[0] = txt_nama.getText();                
-                data[1] = txt_alamat.getText();
+                data[0] = newID;                
+                data[1] = txt_nama.getText(); 
                 data[2] = txt_notelp.getText();  
-                tableModel.insertRow(0, data);
+                data[3] = txt_alamat.getText();
+                tableModel.insertRow(rowCount, data);
                 stt.close();
                 kon.close();
                 mainPanel.removeAll();
@@ -362,43 +493,104 @@ public class panel_mekanik extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btn_simpanActionPerformed
 
+    private void btn_batal_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_batal_editActionPerformed
+        // TODO add your handling code here:
+        mainPanel.removeAll();
+        mainPanel.add(dataMekanik);
+        mainPanel.repaint();
+        mainPanel.revalidate();
+    }//GEN-LAST:event_btn_batal_editActionPerformed
+
+    private void btn_simpan_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpan_editActionPerformed
+        // TODO add your handling code here:
+        String id = tableModel.getValueAt(row, 0).toString();
+        String nama = txt_nama_edit.getText();
+        String notelp = txt_notelp_edit.getText();
+        String alamat = txt_alamat_edit.getText();
+        
+        if((nama.isEmpty()) || (alamat.isEmpty())){ 
+            JOptionPane.showMessageDialog(null,"Data tidak boleh kosong");
+            txt_nama_edit.requestFocus();
+        }else{
+            try {
+                Class.forName(driver);
+                Connection kon = DriverManager.getConnection(database,user,pass);
+                Statement stt = kon.createStatement();
+                String SQL = "UPDATE `mekanik` SET"
+                                    +"`NAMA`='"+nama+"',"
+                                    +"`NO_TELP`='"+notelp+"',"
+                                    +"`ALAMAT`='"+alamat+"'"
+                                    +"WHERE `ID`='"+id+"';";
+            stt.executeUpdate(SQL);
+            data[0] = id;                
+            data[1] = nama;                
+            data[2] = notelp;
+            data[3] = alamat;  
+            tableModel.removeRow(row);
+            tableModel.insertRow(row, data);
+            stt.close();
+            kon.close();
+            membersihkan_text();
+            mainPanel.removeAll();
+            mainPanel.add(dataMekanik);
+            mainPanel.repaint();
+            mainPanel.revalidate();
+            
+            }catch(Exception ex){
+                System.err.println(ex.getMessage());
+            }
+        }
+    }//GEN-LAST:event_btn_simpan_editActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addMekanik;
     private rojerusan.RSMaterialButtonRectangle btn_batal;
+    private rojerusan.RSMaterialButtonRectangle btn_batal_edit;
     private rojerusan.RSMaterialButtonRectangle btn_edit;
     private rojerusan.RSMaterialButtonRectangle btn_hapus;
     private rojerusan.RSMaterialButtonRectangle btn_simpan;
+    private rojerusan.RSMaterialButtonRectangle btn_simpan_edit;
     private rojerusan.RSMaterialButtonRectangle btn_tambah;
     private javax.swing.JPanel dataMekanik;
+    private javax.swing.JPanel editMekanik;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTable tabel_mekanik;
     private javax.swing.JTextArea txt_alamat;
+    private javax.swing.JTextArea txt_alamat_edit;
     private javax.swing.JTextField txt_nama;
+    private javax.swing.JTextField txt_nama_edit;
     private javax.swing.JTextField txt_notelp;
+    private javax.swing.JTextField txt_notelp_edit;
     private javax.swing.JTextField txt_search_mekanik;
     // End of variables declaration//GEN-END:variables
-    String data[] = new String[3];
+    String data[] = new String[4];
     private void settableload() {
         String stat = "";
         try {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database,user,pass);
             Statement stt = kon.createStatement();
-            String SQL = "SELECT * from mekanik";
+            String SQL = "SELECT * from mekanik WHERE STATUS=1";
             ResultSet res = stt.executeQuery(SQL);
             while(res.next()){
-                data[0] = res.getString(2);                
-                data[1] = res.getString(3);
-                data[2] = res.getString(4);
+                data[0] = res.getString(1);                
+                data[1] = res.getString(2);                
+                data[2] = res.getString(3);
+                data[3] = res.getString(4);
                 tableModel.addRow(data);
             }
             res.close();

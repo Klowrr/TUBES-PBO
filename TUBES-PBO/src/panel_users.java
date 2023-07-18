@@ -5,6 +5,7 @@
  */
 import javax.swing.*;
 import java.sql.*;
+import java.text.DecimalFormat;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 /**
@@ -184,19 +185,19 @@ public class panel_users extends javax.swing.JPanel {
                         .addGroup(dataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(dataUserLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel16)
                                 .addGap(8, 8, 8))
                             .addGroup(dataUserLayout.createSequentialGroup()
                                 .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 841, Short.MAX_VALUE))
-                        .addGap(38, 38, 38))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE))
+                        .addGap(30, 30, 30))))
         );
         dataUserLayout.setVerticalGroup(
             dataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,18 +205,17 @@ public class panel_users extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(dataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(dataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(dataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(28, 28, 28)
+                    .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
                 .addGroup(dataUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16))
-                .addGap(18, 18, 18)
+                .addGap(10, 10, 10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
 
         mainPanel.add(dataUser, "card2");
@@ -228,26 +228,26 @@ public class panel_users extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(500, 600));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Nama Lengkap");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Umur");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Alamat");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel6.setText("No telp");
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setText("No Telp");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("Username");
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Password");
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel9.setText("Conf Password");
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel9.setText("Confirm Password");
 
         txt_nama.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
 
@@ -301,12 +301,12 @@ public class panel_users extends javax.swing.JPanel {
                                 .addComponent(jLabel9)
                                 .addComponent(txt_confpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jLabel7))
-                .addContainerGap(369, Short.MAX_VALUE))
+                .addContainerGap(356, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addGap(0, 0, 0)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
@@ -334,7 +334,7 @@ public class panel_users extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_confpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         btn_simpan.setText("SIMPAN");
@@ -369,7 +369,7 @@ public class panel_users extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(addUserLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 897, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 889, Short.MAX_VALUE)
                 .addContainerGap())
         );
         addUserLayout.setVerticalGroup(
@@ -381,9 +381,9 @@ public class panel_users extends javax.swing.JPanel {
                 .addGroup(addUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
 
         mainPanel.add(addUser, "card2");
@@ -396,19 +396,19 @@ public class panel_users extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setPreferredSize(new java.awt.Dimension(500, 600));
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setText("Nama");
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setText("Umur");
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setText("Alamat");
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel14.setText("No telp");
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel15.setText("Username");
 
         txt_nama_edit.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
@@ -448,7 +448,7 @@ public class panel_users extends javax.swing.JPanel {
                                     .addComponent(jLabel12)
                                     .addGap(0, 69, Short.MAX_VALUE)))))
                     .addComponent(jLabel15))
-                .addContainerGap(369, Short.MAX_VALUE))
+                .addContainerGap(356, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -473,7 +473,7 @@ public class panel_users extends javax.swing.JPanel {
                 .addComponent(jLabel15)
                 .addGap(2, 2, 2)
                 .addComponent(txt_username_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
 
         btn_simpan_edit.setText("SIMPAN");
@@ -508,7 +508,7 @@ public class panel_users extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(editUserLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 897, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 889, Short.MAX_VALUE)
                 .addContainerGap())
         );
         editUserLayout.setVerticalGroup(
@@ -522,7 +522,7 @@ public class panel_users extends javax.swing.JPanel {
                     .addComponent(btn_simpan_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(30, 30, 30)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
 
         mainPanel.add(editUser, "card2");
@@ -564,31 +564,33 @@ public class panel_users extends javax.swing.JPanel {
                 Statement stt = kon.createStatement();
                 String SQL1 = "SELECT * FROM users WHERE  USERNAME = '"+txt_username.getText()+"' AND STATUS=1";
                 ResultSet rs1 = stt.executeQuery(SQL1);
-                
-                String getLastIdQuery = "SELECT LAST_INSERT_ID()";
-                ResultSet rs = stt.executeQuery(getLastIdQuery);
-                int lastId = 0;
-                if (rs.next()) {
-                    lastId = rs.getInt(1);
-                }
-                
                 if(rs1.next()){
+                    System.out.println(rs1.next());
                     JOptionPane.showMessageDialog(this, "Username Sudah Terdaftar");
                 }else{
-                    String SQL = "INSERT INTO users(ID,NAMA,UMUR,ALAMAT,NO_TELP,USERNAME,PASSWORD) VALUES("+lastId+",'"+txt_nama.getText()
+                    String SQL2 = "SELECT COUNT(*) FROM users";
+                    ResultSet countrs = stt.executeQuery(SQL2);
+                    countrs.next();
+                    int rowCount = countrs.getInt(1);
+                    countrs.close();
+                    
+                    // Generate the ID with leading zeros
+                    DecimalFormat idFormat = new DecimalFormat("000");
+                    String newID = "US" + idFormat.format(rowCount + 1);
+                    String SQL = "INSERT INTO users(ID,NAMA,UMUR,ALAMAT,NO_TELP,USERNAME,PASSWORD) VALUES('"+newID+"','"+txt_nama.getText()
                                                                                         +"','"+txt_umur.getText()
                                                                                         +"','"+txt_alamat.getText()
                                                                                         +"','"+txt_notelp.getText()
                                                                                         +"','"+txt_username.getText()
                                                                                         +"','"+txt_password.getText()+"')";
-                    System.out.println(lastId);
                     stt.executeUpdate(SQL);
-                    data[0] = txt_nama.getText();                
-                    data[1] = txt_alamat.getText();
-                    data[2] = txt_umur.getText();
-                    data[3] = txt_notelp.getText();  
-                    data[4] = txt_username.getText();
-                    tableModel.insertRow(0, data);
+                    data[0] = newID;
+                    data[1] = txt_nama.getText();                
+                    data[2] = txt_alamat.getText();
+                    data[3] = txt_umur.getText();
+                    data[4] = txt_notelp.getText();  
+                    data[5] = txt_username.getText();
+                    tableModel.insertRow(rowCount, data);
                     stt.close();
                     kon.close();
                     mainPanel.removeAll();
@@ -627,11 +629,11 @@ public class panel_users extends javax.swing.JPanel {
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
         // TODO add your handling code here:
-        txt_nama_edit.setText(tableModel.getValueAt(row, 0).toString());
-        txt_alamat_edit.setText(tableModel.getValueAt(row, 1).toString());
-        txt_umur_edit.setText(tableModel.getValueAt(row, 2).toString());
-        txt_notelp_edit.setText(tableModel.getValueAt(row, 3).toString());
-        txt_username_edit.setText(tableModel.getValueAt(row, 4).toString());
+        txt_nama_edit.setText(tableModel.getValueAt(row, 1).toString());
+        txt_alamat_edit.setText(tableModel.getValueAt(row, 2).toString());
+        txt_umur_edit.setText(tableModel.getValueAt(row, 3).toString());
+        txt_notelp_edit.setText(tableModel.getValueAt(row, 4).toString());
+        txt_username_edit.setText(tableModel.getValueAt(row, 5).toString());
         mainPanel.removeAll();
         mainPanel.add(editUser);
         mainPanel.repaint();
@@ -640,6 +642,7 @@ public class panel_users extends javax.swing.JPanel {
 
     private void btn_simpan_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpan_editActionPerformed
         // TODO add your handling code here:
+        String id = tableModel.getValueAt(row, 0).toString();
         String nama = txt_nama_edit.getText();
         String alamat = txt_alamat_edit.getText();
         String umur = txt_umur_edit.getText();
@@ -660,13 +663,14 @@ public class panel_users extends javax.swing.JPanel {
                                     +"`UMUR`='"+umur+"',"
                                     +"`NO_TELP`='"+noTelp+"',"
                                     +"`USERNAME`='"+username+"'"
-                                    +"WHERE `USERNAME`='"+tableModel.getValueAt(row, 4).toString()+"';";
+                                    +"WHERE `ID`='"+tableModel.getValueAt(row, 0).toString()+"';";
             stt.executeUpdate(SQL);
-            data[0] = nama;                
-            data[1] = alamat;
-            data[2] = umur;  
-            data[3] = noTelp;
-            data[4] = username;
+            data[0] = id;                
+            data[1] = nama;                
+            data[2] = alamat;
+            data[3] = umur;  
+            data[4] = noTelp;
+            data[5] = username;
             tableModel.removeRow(row);
             tableModel.insertRow(row, data);
             stt.close();
@@ -685,6 +689,10 @@ public class panel_users extends javax.swing.JPanel {
 
     private void btn_batal_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_batal_editActionPerformed
         // TODO add your handling code here:
+        mainPanel.removeAll();
+        mainPanel.add(dataUser);
+        mainPanel.repaint();
+        mainPanel.revalidate();
     }//GEN-LAST:event_btn_batal_editActionPerformed
 
     private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
@@ -694,7 +702,7 @@ public class panel_users extends javax.swing.JPanel {
             Connection kon = DriverManager.getConnection(database,user,pass);
             Statement stt = kon.createStatement();
             String SQL = "UPDATE `users` SET"
-            +"`status`= 0 WHERE USERNAME='"+tableModel.getValueAt(row, 4).toString()+"';";
+            +"`status`= 0 WHERE ID='"+tableModel.getValueAt(row, 0).toString()+"';";
             stt.executeUpdate(SQL);
             tableModel.removeRow(row);
             stt.close();
@@ -785,7 +793,7 @@ public class panel_users extends javax.swing.JPanel {
                 data[2] = res.getString(3);              
                 data[3] = res.getString(4);
                 data[4] = res.getString(5);
-                data[4] = res.getString(6);
+                data[5] = res.getString(6);
                 tableModel.addRow(data);
             }
             res.close();
