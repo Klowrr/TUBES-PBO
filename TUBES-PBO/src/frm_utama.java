@@ -5,10 +5,15 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
+import java.util.Date;
+import java.util.Locale;
 /**
  *
  * @author Leily
@@ -29,8 +34,26 @@ public class frm_utama extends javax.swing.JFrame {
         user = dbsetting.SettingPanel("DBUsername");
         pass = dbsetting.SettingPanel("DBPassword");
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        // Membuat timer dengan delay 1000 ms atau 1 detik
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ShowDate();
+            }
+        });
+        // Memulai timer
+        timer.start();
     }
 
+    private void ShowDate() {
+        Calendar calendar = Calendar.getInstance();
+        Date TanggalSekarang = new Date();
+        SimpleDateFormat formatHari = new SimpleDateFormat("EEEE",new  Locale("in","ID"));
+        SimpleDateFormat TanggalWaktu = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String hari = formatHari.format(calendar.getTime());
+        String tanggal = TanggalWaktu.format(TanggalSekarang);
+        lb_tanggal.setText(hari+", "+tanggal);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,6 +64,7 @@ public class frm_utama extends javax.swing.JFrame {
     private void initComponents() {
 
         pn_navbar = new javax.swing.JPanel();
+        lb_tanggal = new javax.swing.JLabel();
         pn_sidebar = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pn_menu = new javax.swing.JPanel();
@@ -65,15 +89,25 @@ public class frm_utama extends javax.swing.JFrame {
         pn_navbar.setToolTipText("");
         pn_navbar.setPreferredSize(new java.awt.Dimension(750, 70));
 
+        lb_tanggal.setBackground(new java.awt.Color(255, 255, 255));
+        lb_tanggal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lb_tanggal.setText("Tanggal dan Waktu");
+
         javax.swing.GroupLayout pn_navbarLayout = new javax.swing.GroupLayout(pn_navbar);
         pn_navbar.setLayout(pn_navbarLayout);
         pn_navbarLayout.setHorizontalGroup(
             pn_navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_navbarLayout.createSequentialGroup()
+                .addContainerGap(774, Short.MAX_VALUE)
+                .addComponent(lb_tanggal)
+                .addGap(72, 72, 72))
         );
         pn_navbarLayout.setVerticalGroup(
             pn_navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_navbarLayout.createSequentialGroup()
+                .addContainerGap(39, Short.MAX_VALUE)
+                .addComponent(lb_tanggal)
+                .addContainerGap())
         );
 
         getContentPane().add(pn_navbar, java.awt.BorderLayout.PAGE_START);
@@ -137,7 +171,7 @@ public class frm_utama extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE))
         );
 
         getContentPane().add(pn_sidebar, java.awt.BorderLayout.LINE_START);
@@ -225,6 +259,7 @@ public class frm_utama extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lb_tanggal;
     private javax.swing.JPanel pn_content;
     private javax.swing.JPanel pn_menu;
     private javax.swing.JPanel pn_navbar;
@@ -251,12 +286,16 @@ public class frm_utama extends javax.swing.JFrame {
                 pn_utama.revalidate();
             }
         });
-        menu_item client = new menu_item(null,true,iconClient,"Client",null);
         menu_item mekanik = new menu_item(null,true,iconMekanik,"Mekanik",new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 pn_utama.removeAll();
                 pn_utama.add(new panel_mekanik());
+        menu_item client = new menu_item(null,true,iconClient,"Client",new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pn_utama.removeAll();
+                pn_utama.add(new panel_client());
                 pn_utama.repaint();
                 pn_utama.revalidate();
             }
