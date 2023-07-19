@@ -13,7 +13,7 @@ import javax.swing.table.TableRowSorter;
  */
 public class panel_client extends javax.swing.JPanel {
     koneksi dbsetting;
-    String driver,database,user,pass;
+    String driver,database,user,pass,role;
     Object tabel;
     /**
      * Creates new form pn_client
@@ -28,8 +28,6 @@ public class panel_client extends javax.swing.JPanel {
         tabel_client.setModel(tableModel);
         btn_hapus.setVisible(false);
         btn_edit.setVisible(false);
-        
-            
         settableload();
     }
     private javax.swing.table.DefaultTableModel tableModel = getDefaultTableModel();
@@ -67,6 +65,7 @@ public class panel_client extends javax.swing.JPanel {
         btn_edit = new rojerusan.RSMaterialButtonRectangle();
         txt_cari_client = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+        test = new javax.swing.JLabel();
         addClient = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         btn_tambah_client = new rojerusan.RSMaterialButtonRectangle();
@@ -158,6 +157,9 @@ public class panel_client extends javax.swing.JPanel {
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_search_1.png"))); // NOI18N
 
+        test.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        test.setText("Test");
+
         javax.swing.GroupLayout dataClientLayout = new javax.swing.GroupLayout(dataClient);
         dataClient.setLayout(dataClientLayout);
         dataClientLayout.setHorizontalGroup(
@@ -178,7 +180,9 @@ public class panel_client extends javax.swing.JPanel {
                         .addGap(30, 30, 30))
                     .addGroup(dataClientLayout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(test)
+                        .addGap(73, 73, 73))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataClientLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txt_cari_client, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -190,7 +194,9 @@ public class panel_client extends javax.swing.JPanel {
             dataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataClientLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel1)
+                .addGroup(dataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(test))
                 .addGap(20, 20, 20)
                 .addGroup(dataClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,7 +208,7 @@ public class panel_client extends javax.swing.JPanel {
                     .addComponent(jLabel12))
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         mainPanel.add(dataClient, "card2");
@@ -506,7 +512,8 @@ public class panel_client extends javax.swing.JPanel {
                         data[1] = txt_nama_client.getText();
                         data[2] = txt_notelpon_client.getText();
                         data[3] = txt_alamat_client.getText();
-                        tableModel.insertRow(rowCount, data);
+                        int tableRowLast = tableModel.getRowCount();
+                        tableModel.insertRow(tableRowLast, data);
                         JOptionPane.showMessageDialog(null, "Data Client Berhasil dimasukan");
                         stt.close();
                         kon.close();
@@ -644,6 +651,7 @@ public class panel_client extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTable tabel_client;
+    private javax.swing.JLabel test;
     private javax.swing.JTextArea txt_alamat_client;
     private javax.swing.JTextArea txt_alamat_client_edit;
     private javax.swing.JTextField txt_cari_client;

@@ -594,7 +594,8 @@ public class panel_users extends javax.swing.JPanel {
                         data[3] = txt_umur.getText();
                         data[4] = txt_notelp.getText();  
                         data[5] = txt_username.getText();
-                        tableModel.insertRow(rowCount, data);
+                        int tableRowLast = tableModel.getRowCount();
+                        tableModel.insertRow(tableRowLast, data);
                         stt.close();
                         kon.close();
                         JOptionPane.showMessageDialog(null, "User baru berhasil ditambah");

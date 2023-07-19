@@ -476,7 +476,8 @@ public class panel_barang extends javax.swing.JPanel {
                     data[2] = String.valueOf(0); 
                     data[3] = txt_lokasi.getText();
                     data[4] = txt_harga.getText();
-                    tableModel.insertRow(rowCount, data);
+                    int tableRowLast = tableModel.getRowCount();
+                    tableModel.insertRow(tableRowLast, data);
                     stt.close();
                     kon.close();
                     JOptionPane.showMessageDialog(null, "Data berhasil ditambah");

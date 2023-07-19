@@ -201,6 +201,7 @@ public class frm_utama extends javax.swing.JFrame {
         // TODO add your handling code here:
         txt_user_nama.setText(nama);
         txt_user_role.setText(role);
+        
         pn_utama.add(new home());
         pn_utama.repaint();
         pn_utama.revalidate();
@@ -270,11 +271,20 @@ public class frm_utama extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void execute() {
+        ImageIcon iconMaster = new ImageIcon(getClass().getResource("./img/icon_Stack.png"));
         ImageIcon iconBarang = new ImageIcon(getClass().getResource("./img/icon_product.png"));
         ImageIcon iconClient = new ImageIcon(getClass().getResource("./img/icon_client.png"));
         ImageIcon iconMekanik = new ImageIcon(getClass().getResource("./img/icon_tools_mekanik.png"));
+        ImageIcon iconService = new ImageIcon(getClass().getResource("./img/icon_service.png"));
 
-//        ImageIcon iconhsTransaksi = new ImageIcon(getClass().getResource("./img/icon_history_transaction.png"));
+        ImageIcon iconTransaksi = new ImageIcon(getClass().getResource("./img/icon_transaction.png"));
+        ImageIcon iconBarangMasuk = new ImageIcon(getClass().getResource("./img/icon_barang_masuk.png"));
+       
+        ImageIcon iconHistory = new ImageIcon(getClass().getResource("./img/icon_history.png"));
+        
+        ImageIcon iconIncome = new ImageIcon(getClass().getResource("./img/icon_income.png"));
+        ImageIcon iconOutcome = new ImageIcon(getClass().getResource("./img/icon_outcome.png"));
+
         ImageIcon iconUsers = new ImageIcon(getClass().getResource("./img/icon_user3.png"));
             
         menu_item barang = new menu_item(null,true,iconBarang,"Barang",new ActionListener() {
@@ -303,7 +313,6 @@ public class frm_utama extends javax.swing.JFrame {
             }
         });
         
-//        menu_item hstransaksi = new menu_item(null,true,iconhsTransaksi,"History Transaksi1",null);
 
         menu_item users = new menu_item(iconUsers,false,null,"Users",new ActionListener() {
             @Override
@@ -314,13 +323,63 @@ public class frm_utama extends javax.swing.JFrame {
                 pn_utama.revalidate();
             }
         });
-        menu_item menuMaster = new menu_item(iconBarang,false,null,"Master",null,barang,client,mekanik);
-//        menu_item menuTransaksi = new menu_item(iconhsTransaksi,false,null,"Transaksi",null,hstransaksi);
+        menu_item service = new menu_item(null,true,iconService,"Service",new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                pn_utama.removeAll();
+                pn_utama.add(new panel_service());
+                pn_utama.repaint();
+                pn_utama.revalidate();
+            }
+        });
         
+        
+        menu_item transaksi = new menu_item(null,true,iconTransaksi,"Transaksi",new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                pn_utama.removeAll();
+                pn_utama.add(new panel_transaksi());
+                pn_utama.repaint();
+                pn_utama.revalidate();
+            }
+        });
+        menu_item barangMasuk = new menu_item(null,true,iconBarangMasuk,"Barang Masuk",new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                pn_utama.removeAll();
+                pn_utama.add(new panel_barangMasuk());
+                pn_utama.repaint();
+                pn_utama.revalidate();
+            }
+        });
+
+        menu_item income = new menu_item(null,true,iconIncome,"Income",new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                pn_utama.removeAll();
+                pn_utama.add(new panel_income());
+                pn_utama.repaint();
+                pn_utama.revalidate();
+            }
+        });
+        menu_item outcome = new menu_item(null,true,iconOutcome,"Outcome",new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                pn_utama.removeAll();
+                pn_utama.add(new panel_outcome());
+                pn_utama.repaint();
+                pn_utama.revalidate();
+            }
+        });
+
+        menu_item menuMaster = new menu_item(iconMaster,false,null,"Master",null,barang,client,mekanik,service);
+        menu_item menuTransaksi = new menu_item(iconTransaksi,false,null,"Transaksi",null,transaksi,barangMasuk);
+        menu_item menuHistory = new menu_item(iconHistory,false,null,"History",null,income,outcome);
+
         if ("ADMIN".equals(role)){
-            addMenu(users,menuMaster);
+            addMenu(users,menuMaster,menuTransaksi,menuHistory);
         }else{
-            addMenu(menuMaster);
+            addMenu(menuMaster,menuTransaksi);
         }
     }
     

@@ -171,7 +171,7 @@ public class panel_mekanik extends javax.swing.JPanel {
                         .addGroup(dataMekanikLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(dataMekanikLayout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 787, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataMekanikLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
@@ -196,7 +196,7 @@ public class panel_mekanik extends javax.swing.JPanel {
                     .addComponent(jLabel3))
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         mainPanel.add(dataMekanik, "card2");
@@ -491,7 +491,8 @@ public class panel_mekanik extends javax.swing.JPanel {
                     data[1] = txt_nama.getText(); 
                     data[2] = txt_notelp.getText();  
                     data[3] = txt_alamat.getText();
-                    tableModel.insertRow(rowCount, data);
+                    int tableRowLast = tableModel.getRowCount();
+                    tableModel.insertRow(tableRowLast,data);
                     stt.close();
                     kon.close();
                     JOptionPane.showMessageDialog(null, "Data Mechanic baru berhasil ditambah");
