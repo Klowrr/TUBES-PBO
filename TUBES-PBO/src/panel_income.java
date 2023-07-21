@@ -3,20 +3,63 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+import javax.swing.*;
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 /**
  *
  * @author Leily
  */
 public class panel_income extends javax.swing.JPanel {
-
+    koneksi dbsetting;
+    String driver,database,user,pass;
+    Object tabel;
     /**
      * Creates new form panel_income
      */
     public panel_income() {
         initComponents();
+        dbsetting = new koneksi();
+        driver = dbsetting.SettingPanel("DBDriver");
+        database = dbsetting.SettingPanel("DBDatabase");
+        user = dbsetting.SettingPanel("DBUsername");
+        pass = dbsetting.SettingPanel("DBPassword");
+        tabel_income.setModel(tableModel);
+        tabel_detail.setModel(tableModelDetail);
+        pn_detail.setVisible(false);
+        settableload();
     }
-
+    private javax.swing.table.DefaultTableModel tableModel = getDefaultTableModel();
+    private javax.swing.table.DefaultTableModel getDefaultTableModel(){
+        return new javax.swing.table.DefaultTableModel(
+            new Object[][]{},
+            new String[]{"ID","CLIENT ID","TOTAL HARGA", "TANGGAL", "TIPE"}
+        )
+        {
+            boolean[] canEdit = new boolean[]{
+                false,false,false,false
+            };
+            public boolean isCellEditable(int rowIndex, int columnIndex){
+                return canEdit[columnIndex];
+            }
+        };
+    }
+    private javax.swing.table.DefaultTableModel tableModelDetail = getDefaultTableModelDetail();
+    private javax.swing.table.DefaultTableModel getDefaultTableModelDetail(){
+        return new javax.swing.table.DefaultTableModel(
+            new Object[][]{},
+            new String[]{"TRANSAKS ID","KENDARAAN","SERVICE ID", "MEKANIK ID", "BARANG ID","HARGA","JUMLAH","SUBTOTAL"}
+        )
+        {
+            boolean[] canEdit = new boolean[]{
+                false,false,false,false,false,false,false,false
+            };
+            public boolean isCellEditable(int rowIndex, int columnIndex){
+                return canEdit[columnIndex];
+            }
+        };
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,19 +69,232 @@ public class panel_income extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabel_income = new javax.swing.JTable();
+        pn_detail = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabel_detail = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txt_search = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+
+        setLayout(new java.awt.CardLayout());
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setText("DATA INCOME");
+
+        tabel_income.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tabel_income.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabel_incomeMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabel_income);
+
+        tabel_detail.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tabel_detail);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel4.setText("Detail Income");
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_close.png"))); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pn_detailLayout = new javax.swing.GroupLayout(pn_detail);
+        pn_detail.setLayout(pn_detailLayout);
+        pn_detailLayout.setHorizontalGroup(
+            pn_detailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 705, Short.MAX_VALUE)
+            .addGroup(pn_detailLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(10, 10, 10))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        pn_detailLayout.setVerticalGroup(
+            pn_detailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_detailLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addGroup(pn_detailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel2))
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        txt_search.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_searchKeyReleased(evt);
+            }
+        });
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_search_1.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(pn_detail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))))
+                .addGap(30, 30, 30))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel1)
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                .addGap(10, 10, 10)
+                .addComponent(pn_detail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
+        );
+
+        add(jPanel1, "card3");
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void tabel_incomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_incomeMouseClicked
+        // TODO add your handling code here:
+        pn_detail.setVisible(true);
+        int row = tabel_income.getSelectedRow();
+        if (tabel_income.getRowSorter() != null) {
+            row = tabel_income.convertRowIndexToModel(row);
+        }
+
+        String id = tableModel.getValueAt(row, 0).toString();
+        settableloaddetail(id);
+    }//GEN-LAST:event_tabel_incomeMouseClicked
+
+    private void txt_searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_searchKeyReleased
+        // TODO add your handling code here:
+        DefaultTableModel table = (DefaultTableModel)tabel_income.getModel();
+        String search = txt_search.getText().toLowerCase();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(table);
+        tabel_income.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter("(?i)" + search));
+        if(txt_search.getText().length()>=0){
+            pn_detail.setVisible(false);
+        }
+    }//GEN-LAST:event_txt_searchKeyReleased
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
+        pn_detail.setVisible(false);
+        tabel_income.clearSelection();
+    }//GEN-LAST:event_jLabel2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel pn_detail;
+    private javax.swing.JTable tabel_detail;
+    private javax.swing.JTable tabel_income;
+    private javax.swing.JTextField txt_search;
     // End of variables declaration//GEN-END:variables
+    String data[] = new String[5];
+    private void settableload() {
+        try {
+            Class.forName(driver);
+            Connection kon = DriverManager.getConnection(database,user,pass);
+            Statement stt = kon.createStatement();
+            String SQL = "SELECT * from transaksi_income WHERE STATUS=1";
+            ResultSet res = stt.executeQuery(SQL);  
+            while(res.next()){
+                data[0] = res.getString(1);                
+                data[1] = res.getString(2);                
+                data[2] = res.getString(3);
+                data[3] = res.getString(4);
+                data[4] = res.getString(5);
+                tableModel.addRow(data);
+            }
+            res.close();
+            stt.close();
+            kon.close();
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
+        }
+    }
+    String data2[] = new String[8];
+    private void settableloaddetail(String id) {
+        try {
+            Class.forName(driver);
+            Connection kon = DriverManager.getConnection(database,user,pass);
+            Statement stt = kon.createStatement();
+            String SQL = "SELECT * from detail_transaksi WHERE STATUS=1 AND TRANSAKSI_ID='"+id+"'";
+            ResultSet res = stt.executeQuery(SQL); 
+            tableModelDetail.setRowCount(0);
+            while(res.next()){
+                data2[0] = res.getString(2);                
+                data2[1] = res.getString(3);                
+                data2[2] = res.getString(4);
+                data2[3] = res.getString(5);
+                data2[4] = res.getString(6);
+                data2[5] = res.getString(7);
+                data2[6] = res.getString(8);
+                data2[7] = res.getString(9);
+                tableModelDetail.addRow(data2);
+            }
+            res.close();
+            stt.close();
+            kon.close();
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
+        }
+    }
 }

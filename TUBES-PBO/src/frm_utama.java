@@ -205,6 +205,7 @@ public class frm_utama extends javax.swing.JFrame {
         pn_utama.add(new home());
         pn_utama.repaint();
         pn_utama.revalidate();
+        
         execute();
     }//GEN-LAST:event_formWindowOpened
 
@@ -341,6 +342,8 @@ public class frm_utama extends javax.swing.JFrame {
                 pn_utama.add(new panel_transaksi());
                 pn_utama.repaint();
                 pn_utama.revalidate();
+              
+
             }
         });
         menu_item barangMasuk = new menu_item(null,true,iconBarangMasuk,"Barang Masuk",new ActionListener() {
