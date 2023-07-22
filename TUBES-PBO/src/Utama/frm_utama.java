@@ -4,16 +4,16 @@ package Utama;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-import Koneksi.koneksi;
+import Panel.panel_users;
+import Panel.panel_transaksi;
+import Panel.panel_service;
+import Panel.panel_outcome;
+import Panel.panel_mekanik;
 import Panel.panel_income;
 import Panel.panel_client;
 import Panel.panel_barang;
-import Panel.panel_service;
-import Panel.panel_mekanik;
+import Koneksi.koneksi;
 import Panel.panel_barangMasuk;
-import Panel.panel_transaksi;
-import Panel.panel_users;
-import Panel.panel_outcome;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
@@ -32,9 +32,10 @@ import java.util.Locale;
  */
 public class frm_utama extends javax.swing.JFrame {
     koneksi dbsetting;
-    String driver,database,user,pass;
-    public String nama,alamat,notelp,role;
+    String driver,database,user,pass,role;
+    public String nama,alamat,notelp;
     public Integer umur;
+    public static String ID;
     /**
      * Creates new form frm_utama
      */
@@ -217,7 +218,6 @@ public class frm_utama extends javax.swing.JFrame {
         pn_utama.add(new home());
         pn_utama.repaint();
         pn_utama.revalidate();
-        
         execute();
     }//GEN-LAST:event_formWindowOpened
 
@@ -354,15 +354,13 @@ public class frm_utama extends javax.swing.JFrame {
                 pn_utama.add(new panel_transaksi());
                 pn_utama.repaint();
                 pn_utama.revalidate();
-              
-
             }
         });
         menu_item barangMasuk = new menu_item(null,true,iconBarangMasuk,"Barang Masuk",new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 pn_utama.removeAll();
-                pn_utama.add(new panel_barangMasuk());
+                pn_utama.add(new panel_barangMasuk(role));
                 pn_utama.repaint();
                 pn_utama.revalidate();
             }
