@@ -42,9 +42,14 @@ public class panel_barangMasuk extends javax.swing.JPanel {
         txt_kodeMasuk.setText(generateCode());
         txt_tanggalPesan.setText(tanggal.format(now));
         tabel_sementara.setModel(tableModel);
-        btn_hapusData.setEnabled(false);
-        btn_simpanBarang.setEnabled(false);
-        btn_tambahBarang.setEnabled(false);
+        btn_hapusdata.setEnabled(false);
+        btn_cleardata.setEnabled(false);
+        btn_tambahbarang.setEnabled(false);
+        btn_simpanbarang.setEnabled(false);
+        settableload();
+        if (tableModel.getRowCount() > 0) {
+            btn_simpanbarang.setEnabled(true);
+        }
     }
 
     private javax.swing.table.DefaultTableModel tableModel = getDefaultTableModel();
@@ -65,24 +70,26 @@ public class panel_barangMasuk extends javax.swing.JPanel {
     
     String data[] = new String[6];
     private void settableload() {
-        String stat = "";
+        long totharga = 0;
         try {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database,user,pass);
             Statement stt = kon.createStatement();
-            String SQL = "SELECT * FROM detail_transaksi WHERE `STATUS` = '1'";
+            String SQL = "SELECT * FROM detail_transaksi WHERE `TRANSAKSI_ID` = '"+txt_kodeMasuk.getText()+"' AND `STATUS` = '1'";
             ResultSet res = stt.executeQuery(SQL);
             while(res.next()){
-                data[0] = res.getString(1);                
-                data[1] = res.getString(5);
-                data[2] = res.getString(6);              
-                data[3] = res.getString(7);
-                data[4] = res.getString(8);
+                data[0] = res.getString(2);                
+                data[1] = res.getString(6);
+                data[2] = res.getString(7);              
+                data[3] = res.getString(8);
+                data[4] = res.getString(9);
                 tableModel.addRow(data);
+                totharga = totharga + Long.parseLong(data[4]);
             }
             res.close();
             stt.close();
             kon.close();
+            lb_totharga.setText(String.valueOf(totharga));
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
             JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",JOptionPane.INFORMATION_MESSAGE);
@@ -119,19 +126,31 @@ public class panel_barangMasuk extends javax.swing.JPanel {
         return newID;
     }
     
-    public String kode_pesan() {
-        String kode = null;
-        PreparedStatement st = null;
-        ResultSet rs = null;
-        
-        Date now = new Date();
-        SimpleDateFormat noformat = new SimpleDateFormat("yyMMdd");
-        String no = noformat.format(now);
-        
-        kode = "PB" + no;
-        
-        return kode;
+    private void Barang_Masuk() {
+        int rowCount = tabel_sementara.getRowCount();
+        String kode;
+        int tot_jumlah = 0;
+        for (int i = 0; i < rowCount; i++){
+            try {
+                Class.forName(driver);
+                Connection kon = DriverManager.getConnection(database,user,pass);
+                Statement stt = kon.createStatement();
+                kode = tabel_sementara.getValueAt(i, 1).toString();
+                int jumlah = Integer.parseInt(tabel_sementara.getValueAt(i, 3).toString());
+                String SQL = "SELECT `JUMLAH` FROM `barang` WHERE `ID` = '"+kode+"'";
+                ResultSet rs = stt.executeQuery(SQL);
+                while (rs.next()){
+                    int tersedia = rs.getInt("JUMLAH");
+                    tot_jumlah = jumlah + tersedia;
+                }
+                String SQL1 = "UPDATE `barang` SET `JUMLAH` = '"+tot_jumlah+"' WHERE `ID` = '"+kode+"'";
+                stt.executeUpdate(SQL1);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(),"Error",JOptionPane.WARNING_MESSAGE);
+            }
+        }
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -161,14 +180,15 @@ public class panel_barangMasuk extends javax.swing.JPanel {
         txt_jumlahBarang = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txt_subtotalBarang = new javax.swing.JTextField();
-        btn_tambahBarang = new javax.swing.JButton();
+        btn_tambahbarang = new rojerusan.RSMaterialButtonRectangle();
+        btn_cleardata = new rojerusan.RSMaterialButtonRectangle();
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        lb_totharga = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabel_sementara = new javax.swing.JTable();
-        btn_hapusData = new javax.swing.JButton();
-        btn_simpanBarang = new javax.swing.JButton();
+        btn_simpanbarang = new rojerusan.RSMaterialButtonRectangle();
+        btn_hapusdata = new rojerusan.RSMaterialButtonRectangle();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -266,10 +286,18 @@ public class panel_barangMasuk extends javax.swing.JPanel {
 
         txt_subtotalBarang.setEditable(false);
 
-        btn_tambahBarang.setText("Tambah Barang");
-        btn_tambahBarang.addActionListener(new java.awt.event.ActionListener() {
+        btn_tambahbarang.setText("Tambah Barang");
+        btn_tambahbarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_tambahBarangActionPerformed(evt);
+                btn_tambahbarangActionPerformed(evt);
+            }
+        });
+
+        btn_cleardata.setBackground(new java.awt.Color(255, 0, 51));
+        btn_cleardata.setText("Hapus Data");
+        btn_cleardata.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cleardataActionPerformed(evt);
             }
         });
 
@@ -298,8 +326,9 @@ public class panel_barangMasuk extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(txt_subtotalBarang)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btn_tambahBarang)))
+                        .addComponent(btn_cleardata, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_tambahbarang, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -328,14 +357,17 @@ public class panel_barangMasuk extends javax.swing.JPanel {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_subtotalBarang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_tambahBarang)
-                .addGap(0, 34, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_tambahbarang, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_cleardata, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 31, Short.MAX_VALUE))
         );
 
         jLabel10.setText("Total Pesan");
 
-        jLabel11.setText("Total Pesan");
+        lb_totharga.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lb_totharga.setText("Total Pesan");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -344,8 +376,8 @@ public class panel_barangMasuk extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                .addComponent(lb_totharga, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -354,7 +386,7 @@ public class panel_barangMasuk extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel11))
+                    .addComponent(lb_totharga))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -376,17 +408,18 @@ public class panel_barangMasuk extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tabel_sementara);
 
-        btn_hapusData.setText("Hapus");
-        btn_hapusData.addActionListener(new java.awt.event.ActionListener() {
+        btn_simpanbarang.setText("Simpan");
+        btn_simpanbarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_hapusDataActionPerformed(evt);
+                btn_simpanbarangActionPerformed(evt);
             }
         });
 
-        btn_simpanBarang.setText("Simpan");
-        btn_simpanBarang.addActionListener(new java.awt.event.ActionListener() {
+        btn_hapusdata.setBackground(new java.awt.Color(255, 0, 51));
+        btn_hapusdata.setText("Hapus");
+        btn_hapusdata.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_simpanBarangActionPerformed(evt);
+                btn_hapusdataActionPerformed(evt);
             }
         });
 
@@ -401,17 +434,16 @@ public class panel_barangMasuk extends javax.swing.JPanel {
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jLabel1))
-                .addGap(18, 18, 18)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btn_hapusData)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_simpanBarang)))))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btn_hapusdata, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_simpanbarang, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -431,9 +463,9 @@ public class panel_barangMasuk extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_hapusData)
-                            .addComponent(btn_simpanBarang))))
-                .addContainerGap(133, Short.MAX_VALUE))
+                            .addComponent(btn_hapusdata, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_simpanbarang, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(229, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -453,11 +485,20 @@ public class panel_barangMasuk extends javax.swing.JPanel {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Only input numbers","Error",JOptionPane.WARNING_MESSAGE);
             txt_jumlahBarang.setText("");
+            txt_hargaBarang.setText("");
         }
     }//GEN-LAST:event_txt_jumlahBarangKeyReleased
 
     String dataSementara[] = new String[6];
-    private void btn_tambahBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambahBarangActionPerformed
+    int selectedRow = 0;
+    private void tabel_sementaraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_sementaraMouseClicked
+        // TODO add your handling code here:
+        selectedRow = tabel_sementara.getSelectedRow();
+        btn_hapusdata.setEnabled(true);
+    }//GEN-LAST:event_tabel_sementaraMouseClicked
+
+    
+    private void btn_tambahbarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambahbarangActionPerformed
         // TODO add your handling code here:
         if (txt_jumlahBarang.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Mohon diisi jumlah barang yang ingin dipesan","Please input the number",JOptionPane.WARNING_MESSAGE);
@@ -471,15 +512,23 @@ public class panel_barangMasuk extends javax.swing.JPanel {
             taro_barang();
             tableModel.setRowCount(0);
             settableload();
-            btn_simpanBarang.setEnabled(true);
-            btn_tambahBarang.setEnabled(false);
+            btn_simpanbarang.setEnabled(true);
+            btn_tambahbarang.setEnabled(false);
+            btn_cleardata.setEnabled(false);
             clearForm();
         }
-    }//GEN-LAST:event_btn_tambahBarangActionPerformed
+    }//GEN-LAST:event_btn_tambahbarangActionPerformed
 
-    private void btn_simpanBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpanBarangActionPerformed
+    private void btn_cleardataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cleardataActionPerformed
         // TODO add your handling code here:
-        try {
+        clearForm();
+        btn_tambahbarang.setEnabled(false);
+        btn_cleardata.setEnabled(false);
+    }//GEN-LAST:event_btn_cleardataActionPerformed
+
+    private void btn_simpanbarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpanbarangActionPerformed
+        // TODO add your handling code here:
+         try {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database,user,pass);
             Statement stt = kon.createStatement();
@@ -499,51 +548,50 @@ public class panel_barangMasuk extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Berhasil disimpan","Message",JOptionPane.INFORMATION_MESSAGE);
             kon.close();
             stt.close();
+            Barang_Masuk();
             tableModel.setRowCount(0);
-            btn_simpanBarang.setEnabled(false);
+            btn_simpanbarang.setEnabled(false);
+            btn_hapusdata.setEnabled(false);
+            txt_kodeMasuk.setText(generateCode());
+            lb_totharga.setText("0");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),"Error",JOptionPane.WARNING_MESSAGE);
         }
-    }//GEN-LAST:event_btn_simpanBarangActionPerformed
-
-    int selectedRow = 0;
-    private void tabel_sementaraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_sementaraMouseClicked
-        // TODO add your handling code here:
-        selectedRow = tabel_sementara.getSelectedRow();
-        btn_hapusData.setEnabled(true);
-    }//GEN-LAST:event_tabel_sementaraMouseClicked
+    }//GEN-LAST:event_btn_simpanbarangActionPerformed
 
     String kode;
-    private void btn_hapusDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusDataActionPerformed
+    private void btn_hapusdataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusdataActionPerformed
         // TODO add your handling code here:
         kode = tabel_sementara.getValueAt(selectedRow, 1).toString();
         tableModel.removeRow(selectedRow);
-        btn_hapusData.setEnabled(false);
+        btn_hapusdata.setEnabled(false);
         try {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database,user,pass);
             Statement stt = kon.createStatement();
-            String SQL = "UPDATE `detail_transaksi` SET `STATUS` = '0' WHERE `BARANG_ID` = '"+txt_kodeBarang.getText()+"'";
+            String SQL = "UPDATE `detail_transaksi` SET `STATUS` = '0' WHERE `BARANG_ID` = '"+kode+"'";
             stt.executeUpdate(SQL);
             JOptionPane.showMessageDialog(null, "Berhasil Dihapus","Information",JOptionPane.INFORMATION_MESSAGE);
-            btn_hapusData.setEnabled(false);
+            btn_hapusdata.setEnabled(false);
+            tableModel.setRowCount(0);
+            settableload();
             if (tableModel.getRowCount() == 0) {
-                btn_simpanBarang.setEnabled(false);
+                btn_simpanbarang.setEnabled(false);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),"Error",JOptionPane.WARNING_MESSAGE);
         }
-    }//GEN-LAST:event_btn_hapusDataActionPerformed
+    }//GEN-LAST:event_btn_hapusdataActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_ambilBarang;
-    private javax.swing.JButton btn_hapusData;
-    private javax.swing.JButton btn_simpanBarang;
-    public static javax.swing.JButton btn_tambahBarang;
+    public static javax.swing.JButton btn_ambilBarang;
+    public static rojerusan.RSMaterialButtonRectangle btn_cleardata;
+    private rojerusan.RSMaterialButtonRectangle btn_hapusdata;
+    private rojerusan.RSMaterialButtonRectangle btn_simpanbarang;
+    public static rojerusan.RSMaterialButtonRectangle btn_tambahbarang;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -557,6 +605,7 @@ public class panel_barangMasuk extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lb_totharga;
     private javax.swing.JTable tabel_sementara;
     public static javax.swing.JTextField txt_hargaBarang;
     public static javax.swing.JTextField txt_jumlahBarang;
