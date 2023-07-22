@@ -1,6 +1,6 @@
 package Panel;
 
-import Data.frm_barang;
+import Data.data_barang;
 import Koneksi.koneksi;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,7 +11,6 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
-import Data.model_barang;
 import Utama.frm_utama;
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -471,8 +470,12 @@ public class panel_barangMasuk extends javax.swing.JPanel {
 
     private void btn_ambilBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ambilBarangActionPerformed
         // TODO add your handling code here:
-        frm_barang barang = new frm_barang();
-        barang.setVisible(true);
+        data_barang dataBarang = new data_barang(null,true);
+        dataBarang.setVisible(true);
+        txt_kodeBarang.setText(dataBarang.getKodeBarang());
+        txt_namaBarang.setText(dataBarang.getNamaBarang());
+        btn_tambahbarang.setEnabled(true);
+        btn_cleardata.setEnabled(true);
     }//GEN-LAST:event_btn_ambilBarangActionPerformed
 
     private void txt_jumlahBarangKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_jumlahBarangKeyReleased
