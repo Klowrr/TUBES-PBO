@@ -7,6 +7,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -35,6 +38,7 @@ public class panel_outcome extends javax.swing.JPanel {
         pass = dbsetting.SettingPanel("DBPassword");
         tabel_historiPemesanan.setModel(tableModel);
         tabel_DetailPemesanan.setModel(tableModel2);
+        secondPanel.setVisible(false);
         settableload();
     }
     
@@ -71,15 +75,14 @@ public class panel_outcome extends javax.swing.JPanel {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database,user,pass);
             Statement stt = kon.createStatement();
-            String SQL = "SELECT * from detail_transaksi_outcome WHERE kode_pemesanan = '"+kode_pesan+"'";
+            String SQL = "SELECT * FROM `detail_transaksi` WHERE `TRANSAKSI_ID` = '"+kode_pesan+"' AND `STATUS` = '1'";
             ResultSet res = stt.executeQuery(SQL);
             while(res.next()){
-                detail[0] = res.getString(2);                
-                detail[1] = res.getString(3);
-                detail[2] = res.getString(4);              
-                detail[3] = res.getString(5);
-                detail[4] = res.getString(6);
-                detail[5] = res.getString(7);
+                detail[0] = res.getString(2);
+                detail[1] = res.getString(6);
+                detail[2] = res.getString(7);
+                detail[3] = res.getString(8);
+                detail[4] = res.getString(9);
                 tableModel2.addRow(detail);
             }
             res.close();
@@ -111,7 +114,7 @@ public class panel_outcome extends javax.swing.JPanel {
     private javax.swing.table.DefaultTableModel getDefaultTableModel2(){
         return new javax.swing.table.DefaultTableModel(
             new Object[][]{},
-            new String[]{"Kode Pemesanan","Barang ID","Nama Barang", "Harga Barang","Jumlah Pesan","Subtotal"}
+            new String[]{"Transaksi ID","Barang ID","Harga Barang", "Jumlah Masuk","Subtotal"}
         )
         {
             boolean[] canEdit = new boolean[]{
@@ -135,6 +138,8 @@ public class panel_outcome extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabel_historiPemesanan = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        txt_searchbar = new javax.swing.JTextField();
         secondPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -165,6 +170,14 @@ public class panel_outcome extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tabel_historiPemesanan);
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_search_1.png"))); // NOI18N
+
+        txt_searchbar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_searchbarKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -175,15 +188,25 @@ public class panel_outcome extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 861, Short.MAX_VALUE)
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txt_searchbar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)))
                 .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txt_searchbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(4, 4, 4)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -262,19 +285,36 @@ public class panel_outcome extends javax.swing.JPanel {
                 row = tabel_historiPemesanan.getSelectedRow();
             }
         }
-        kode_pesan = tabel_historiPemesanan.getValueAt(row, 0).toString();
-        tampil_detail();
+        secondPanel.setVisible(true);
+        kode_pesan = tabel_historiPemesanan.getModel().getValueAt(row, 0).toString();
+        System.out.println(kode_pesan);
+        try {
+            tampil_detail();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(),"Error",JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_tabel_historiPemesananMouseClicked
+
+    private void txt_searchbarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_searchbarKeyPressed
+        // TODO add your handling code here:
+        DefaultTableModel table = (DefaultTableModel)tabel_historiPemesanan.getModel();
+        String search = txt_searchbar.getText().toLowerCase();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(table);
+        tabel_historiPemesanan.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter("(?i)" + search));
+    }//GEN-LAST:event_txt_searchbarKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel secondPanel;
     private javax.swing.JTable tabel_DetailPemesanan;
     private javax.swing.JTable tabel_historiPemesanan;
+    private javax.swing.JTextField txt_searchbar;
     // End of variables declaration//GEN-END:variables
 }
