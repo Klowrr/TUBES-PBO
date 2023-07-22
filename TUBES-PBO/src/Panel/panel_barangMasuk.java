@@ -1,4 +1,4 @@
-package namaBarang;
+package Panel;
 
 import Data.frm_barang;
 import Koneksi.koneksi;
@@ -11,7 +11,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
-import namaBarang.model_barang;
+import Data.model_barang;
 import Utama.frm_utama;
 /*
  * To change this license header, choose License Headers in Project Properties.

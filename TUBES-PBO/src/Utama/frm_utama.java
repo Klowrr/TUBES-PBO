@@ -13,7 +13,7 @@ import Panel.panel_income;
 import Panel.panel_client;
 import Panel.panel_barang;
 import Koneksi.koneksi;
-import namaBarang.panel_barangMasuk;
+import Panel.panel_barangMasuk;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
