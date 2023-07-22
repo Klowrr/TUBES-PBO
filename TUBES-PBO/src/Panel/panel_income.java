@@ -1,8 +1,11 @@
+package Panel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import Koneksi.koneksi;
 import javax.swing.*;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
@@ -26,7 +29,8 @@ public class panel_income extends javax.swing.JPanel {
         user = dbsetting.SettingPanel("DBUsername");
         pass = dbsetting.SettingPanel("DBPassword");
         tabel_income.setModel(tableModel);
-        tabel_detail.setModel(tableModelDetail);
+        tabel_detailBarang.setModel(tableModelDetailBarang);
+        tabel_detailService.setModel(tableModelDetailService);
         pn_detail.setVisible(false);
         settableload();
     }
@@ -45,11 +49,26 @@ public class panel_income extends javax.swing.JPanel {
             }
         };
     }
-    private javax.swing.table.DefaultTableModel tableModelDetail = getDefaultTableModelDetail();
-    private javax.swing.table.DefaultTableModel getDefaultTableModelDetail(){
+    private javax.swing.table.DefaultTableModel tableModelDetailBarang = getDefaultTableModelDetailBarang();
+    private javax.swing.table.DefaultTableModel getDefaultTableModelDetailBarang(){
         return new javax.swing.table.DefaultTableModel(
             new Object[][]{},
-            new String[]{"TRANSAKS ID","KENDARAAN","SERVICE ID", "MEKANIK ID", "BARANG ID","HARGA","JUMLAH","SUBTOTAL"}
+            new String[]{"TRANSAKS ID","BARANG ID","HARGA","JUMLAH","SUBTOTAL"}
+        )
+        {
+            boolean[] canEdit = new boolean[]{
+                false,false,false,false,false,false,false,false
+            };
+            public boolean isCellEditable(int rowIndex, int columnIndex){
+                return canEdit[columnIndex];
+            }
+        };
+    }
+    private javax.swing.table.DefaultTableModel tableModelDetailService = getDefaultTableModelDetailService();
+    private javax.swing.table.DefaultTableModel getDefaultTableModelDetailService(){
+        return new javax.swing.table.DefaultTableModel(
+            new Object[][]{},
+            new String[]{"TRANSAKS ID","KENDARAAN","SERVICE ID", "MEKANIK ID","HARGA"}
         )
         {
             boolean[] canEdit = new boolean[]{
@@ -75,9 +94,11 @@ public class panel_income extends javax.swing.JPanel {
         tabel_income = new javax.swing.JTable();
         pn_detail = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tabel_detail = new javax.swing.JTable();
+        tabel_detailBarang = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tabel_detailService = new javax.swing.JTable();
         txt_search = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
@@ -106,7 +127,7 @@ public class panel_income extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tabel_income);
 
-        tabel_detail.setModel(new javax.swing.table.DefaultTableModel(
+        tabel_detailBarang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -117,7 +138,7 @@ public class panel_income extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(tabel_detail);
+        jScrollPane2.setViewportView(tabel_detailBarang);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel4.setText("Detail Income");
@@ -129,28 +150,46 @@ public class panel_income extends javax.swing.JPanel {
             }
         });
 
+        tabel_detailService.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(tabel_detailService);
+
         javax.swing.GroupLayout pn_detailLayout = new javax.swing.GroupLayout(pn_detail);
         pn_detail.setLayout(pn_detailLayout);
         pn_detailLayout.setHorizontalGroup(
             pn_detailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 705, Short.MAX_VALUE)
             .addGroup(pn_detailLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(10, 10, 10))
+            .addGroup(pn_detailLayout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         pn_detailLayout.setVerticalGroup(
             pn_detailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_detailLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addGroup(pn_detailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel2))
+                .addGroup(pn_detailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4))
                 .addGap(10, 10, 10)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pn_detailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         txt_search.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -172,12 +211,14 @@ public class panel_income extends javax.swing.JPanel {
                         .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(pn_detail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pn_detail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 821, Short.MAX_VALUE))))
                 .addGap(30, 30, 30))
         );
         jPanel1Layout.setVerticalGroup(
@@ -190,10 +231,10 @@ public class panel_income extends javax.swing.JPanel {
                     .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(10, 10, 10)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
-                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                .addGap(23, 23, 23)
                 .addComponent(pn_detail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addGap(17, 17, 17))
         );
 
         add(jPanel1, "card3");
@@ -238,8 +279,10 @@ public class panel_income extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPanel pn_detail;
-    private javax.swing.JTable tabel_detail;
+    private javax.swing.JTable tabel_detailBarang;
+    private javax.swing.JTable tabel_detailService;
     private javax.swing.JTable tabel_income;
     private javax.swing.JTextField txt_search;
     // End of variables declaration//GEN-END:variables
@@ -276,17 +319,24 @@ public class panel_income extends javax.swing.JPanel {
             Statement stt = kon.createStatement();
             String SQL = "SELECT * from detail_transaksi WHERE STATUS=1 AND TRANSAKSI_ID='"+id+"'";
             ResultSet res = stt.executeQuery(SQL); 
-            tableModelDetail.setRowCount(0);
+            tableModelDetailBarang.setRowCount(0);
+            tableModelDetailService.setRowCount(0);
             while(res.next()){
-                data2[0] = res.getString(2);                
-                data2[1] = res.getString(3);                
-                data2[2] = res.getString(4);
-                data2[3] = res.getString(5);
-                data2[4] = res.getString(6);
-                data2[5] = res.getString(7);
-                data2[6] = res.getString(8);
-                data2[7] = res.getString(9);
-                tableModelDetail.addRow(data2);
+                if(res.getString(5)==null){
+                    data2[0] = res.getString(2);                
+                    data2[1] = res.getString(6);
+                    data2[2] = res.getString(7);
+                    data2[3] = res.getString(8);
+                    data2[4] = res.getString(9);
+                    tableModelDetailBarang.addRow(data2);
+                }else{
+                    data2[0] = res.getString(2);                
+                    data2[1] = res.getString(3);
+                    data2[2] = res.getString(4);
+                    data2[3] = res.getString(5);
+                    data2[4] = res.getString(7);
+                    tableModelDetailService.addRow(data2);
+                }
             }
             res.close();
             stt.close();

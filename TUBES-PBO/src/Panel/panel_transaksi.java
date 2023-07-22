@@ -1,4 +1,11 @@
+package Panel;
 
+
+import Data.data_mekanik;
+import Data.data_client;
+import Data.data_service;
+import Data.data_barang;
+import Koneksi.koneksi;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -747,25 +754,30 @@ public class panel_transaksi extends javax.swing.JPanel {
     
     private void btn_simpan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpan1ActionPerformed
         // TODO add your handling code here:
-        try {
-            Class.forName(driver);
-            Connection kon = DriverManager.getConnection(database,user,pass);
-            Statement stt = kon.createStatement();
-            String SQL = "INSERT INTO transaksi_income(ID,CLIENT_ID,TOTAL_HARGA,TANGGAL,TIPE) VALUES('"+txt_transaksId.getText()+"','"+txt_kodeClient.getText()
-                                                                                +"','"+getTotal()
-                                                                                +"','"+txt_tanggal.getText()
-                                                                                +"','transaksi')";
-            stt.executeUpdate(SQL);
-            stt.close();
-            kon.close();
-            JOptionPane.showMessageDialog(null, "Transaksi berhasil disimpan");
-            membersihkan_text_barang();
-            membersihkan_text_client();
-            txt_transaksId.setText(getKodeTransaksi());
-            tableModelBarang.setRowCount(0);
-            tableModelService.setRowCount(0);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null,ex.getMessage() ,"ERROR",JOptionPane.INFORMATION_MESSAGE);
+        if(txt_kodeClient.getName().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Pilih Client Terlebih dahulu");
+            btn_kodeClient.requestFocus();
+        }else{
+           try {
+                Class.forName(driver);
+                Connection kon = DriverManager.getConnection(database,user,pass);
+                Statement stt = kon.createStatement();
+                String SQL = "INSERT INTO transaksi_income(ID,CLIENT_ID,TOTAL_HARGA,TANGGAL,TIPE) VALUES('"+txt_transaksId.getText()+"','"+txt_kodeClient.getText()
+                                                                                    +"','"+getTotal()
+                                                                                    +"','"+txt_tanggal.getText()
+                                                                                    +"','transaksi')";
+                stt.executeUpdate(SQL);
+                stt.close();
+                kon.close();
+                JOptionPane.showMessageDialog(null, "Transaksi berhasil disimpan");
+                membersihkan_text_barang();
+                membersihkan_text_client();
+                txt_transaksId.setText(getKodeTransaksi());
+                tableModelBarang.setRowCount(0);
+                tableModelService.setRowCount(0);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null,ex.getMessage() ,"ERROR",JOptionPane.INFORMATION_MESSAGE);
+            } 
         }
     }//GEN-LAST:event_btn_simpan1ActionPerformed
 
@@ -904,7 +916,6 @@ public class panel_transaksi extends javax.swing.JPanel {
                     data[4] = res.getString(9);
                     tableModelBarang.addRow(data);
                 }
-                
             }
             res.close();
             stt.close();

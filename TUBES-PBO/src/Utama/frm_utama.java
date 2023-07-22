@@ -1,7 +1,19 @@
+package Utama;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+import Koneksi.koneksi;
+import Panel.panel_income;
+import Panel.panel_client;
+import Panel.panel_barang;
+import Panel.panel_service;
+import Panel.panel_mekanik;
+import Panel.panel_barangMasuk;
+import Panel.panel_transaksi;
+import Panel.panel_users;
+import Panel.panel_outcome;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
@@ -272,21 +284,21 @@ public class frm_utama extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void execute() {
-        ImageIcon iconMaster = new ImageIcon(getClass().getResource("./img/icon_Stack.png"));
-        ImageIcon iconBarang = new ImageIcon(getClass().getResource("./img/icon_product.png"));
-        ImageIcon iconClient = new ImageIcon(getClass().getResource("./img/icon_client.png"));
-        ImageIcon iconMekanik = new ImageIcon(getClass().getResource("./img/icon_tools_mekanik.png"));
-        ImageIcon iconService = new ImageIcon(getClass().getResource("./img/icon_service.png"));
+        ImageIcon iconMaster = new ImageIcon(getClass().getResource("../img/icon_Stack.png"));
+        ImageIcon iconBarang = new ImageIcon(getClass().getResource("../img/icon_product.png"));
+        ImageIcon iconClient = new ImageIcon(getClass().getResource("../img/icon_client.png"));
+        ImageIcon iconMekanik = new ImageIcon(getClass().getResource("../img/icon_tools_mekanik.png"));
+        ImageIcon iconService = new ImageIcon(getClass().getResource("../img/icon_service.png"));
 
-        ImageIcon iconTransaksi = new ImageIcon(getClass().getResource("./img/icon_transaction.png"));
-        ImageIcon iconBarangMasuk = new ImageIcon(getClass().getResource("./img/icon_barang_masuk.png"));
+        ImageIcon iconTransaksi = new ImageIcon(getClass().getResource("../img/icon_transaction.png"));
+        ImageIcon iconBarangMasuk = new ImageIcon(getClass().getResource("../img/icon_barang_masuk.png"));
        
-        ImageIcon iconHistory = new ImageIcon(getClass().getResource("./img/icon_history.png"));
+        ImageIcon iconHistory = new ImageIcon(getClass().getResource("../img/icon_history.png"));
         
-        ImageIcon iconIncome = new ImageIcon(getClass().getResource("./img/icon_income.png"));
-        ImageIcon iconOutcome = new ImageIcon(getClass().getResource("./img/icon_outcome.png"));
+        ImageIcon iconIncome = new ImageIcon(getClass().getResource("../img/icon_income.png"));
+        ImageIcon iconOutcome = new ImageIcon(getClass().getResource("../img/icon_outcome.png"));
 
-        ImageIcon iconUsers = new ImageIcon(getClass().getResource("./img/icon_user3.png"));
+        ImageIcon iconUsers = new ImageIcon(getClass().getResource("../img/icon_user3.png"));
             
         menu_item barang = new menu_item(null,true,iconBarang,"Barang",new ActionListener() {
             @Override

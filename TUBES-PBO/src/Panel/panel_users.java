@@ -1,8 +1,11 @@
+package Panel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import Koneksi.koneksi;
 import javax.swing.*;
 import java.sql.*;
 import java.text.DecimalFormat;

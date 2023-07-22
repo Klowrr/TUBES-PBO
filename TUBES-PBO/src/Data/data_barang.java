@@ -1,8 +1,11 @@
+package Data;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import Koneksi.koneksi;
 import javax.swing.*;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
@@ -11,43 +14,41 @@ import javax.swing.table.TableRowSorter;
  *
  * @author Leily
  */
-public class data_service extends javax.swing.JDialog{
+public class data_barang extends javax.swing.JDialog{
     koneksi dbsetting;
     String driver,database,user,pass;
     Object tabel;
     int xx,xy;
-    private String kodeService,service,hargaService;
+    private String kodeBarang,namaBarang,HargaBarang;
 
-    public String getKodeService() {
-        return kodeService;
+    public String getKodeBarang() {
+        return kodeBarang;
     }
 
-    public void setKodeService(String kodeService) {
-        this.kodeService = kodeService;
+    public void setKodeBarang(String kodeBarang) {
+        this.kodeBarang = kodeBarang;
     }
-
-    public String getService() {
-        return service;
-    }
-
-    public void setService(String service) {
-        this.service = service;
-    }
-
-    public String getHargaService() {
-        return hargaService;
-    }
-
-    public void setHargaService(String hargaService) {
-        this.hargaService = hargaService;
-    }
-
     
+    public String getNamaBarang() {
+        return namaBarang;
+    }
+
+    public void setNamaBarang(String namaBarang) {
+        this.namaBarang = namaBarang;
+    }
+
+    public String getHargaBarang() {
+        return HargaBarang;
+    }
+
+    public void setHargaBarang(String HargaBarang) {
+        this.HargaBarang = HargaBarang;
+    }
     
     /**
      * Creates new form data_barang
      */
-    public data_service(java.awt.Frame parent,boolean modal) {
+    public data_barang(java.awt.Frame parent,boolean modal) {
         super(parent,modal);
         initComponents();
         dbsetting = new koneksi();
@@ -55,18 +56,18 @@ public class data_service extends javax.swing.JDialog{
         database = dbsetting.SettingPanel("DBDatabase");
         user = dbsetting.SettingPanel("DBUsername");
         pass = dbsetting.SettingPanel("DBPassword");
-        tabel_service.setModel(tableModel);
+        tabel_barang.setModel(tableModel);
         settableload();
     }
     private javax.swing.table.DefaultTableModel tableModel = getDefaultTableModel();
     private javax.swing.table.DefaultTableModel getDefaultTableModel(){
         return new javax.swing.table.DefaultTableModel(
             new Object[][]{},
-            new String[]{"ID","NAMA","HARGA"}
+            new String[]{"ID","NAMA","JUMLAH", "LOKASI", "HARGA"}
         )
         {
             boolean[] canEdit = new boolean[]{
-                false,false,false
+                false,false,false,false
             };
             public boolean isCellEditable(int rowIndex, int columnIndex){
                 return canEdit[columnIndex];
@@ -88,7 +89,7 @@ public class data_service extends javax.swing.JDialog{
         jLabel3 = new javax.swing.JLabel();
         txt_search = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabel_service = new javax.swing.JTable();
+        tabel_barang = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -130,7 +131,7 @@ public class data_service extends javax.swing.JDialog{
             }
         });
 
-        tabel_service.setModel(new javax.swing.table.DefaultTableModel(
+        tabel_barang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -141,18 +142,18 @@ public class data_service extends javax.swing.JDialog{
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tabel_service.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabel_barang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabel_serviceMouseClicked(evt);
+                tabel_barangMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tabel_service);
+        jScrollPane1.setViewportView(tabel_barang);
 
         jPanel2.setBackground(new java.awt.Color(0, 51, 153));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("DATA SERVICE");
+        jLabel1.setText("DATA BARANG");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -230,23 +231,23 @@ public class data_service extends javax.swing.JDialog{
 
     private void txt_searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_searchKeyReleased
         // TODO add your handling code here:
-        DefaultTableModel table = (DefaultTableModel)tabel_service.getModel();
+        DefaultTableModel table = (DefaultTableModel)tabel_barang.getModel();
         String search = txt_search.getText().toLowerCase();
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(table);
-        tabel_service.setRowSorter(tr);
+        tabel_barang.setRowSorter(tr);
         tr.setRowFilter(RowFilter.regexFilter("(?i)" + search));
     }//GEN-LAST:event_txt_searchKeyReleased
-    private void tabel_serviceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_serviceMouseClicked
+    private void tabel_barangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_barangMouseClicked
         // TODO add your handling code here:
-        int row = tabel_service.getSelectedRow();
-        if (tabel_service.getRowSorter() != null) {
-            row = tabel_service.convertRowIndexToModel(row);
+        int row = tabel_barang.getSelectedRow();
+        if (tabel_barang.getRowSorter() != null) {
+            row = tabel_barang.convertRowIndexToModel(row);
         }
-        setKodeService(tableModel.getValueAt(row,0).toString());
-        setService(tableModel.getValueAt(row,1).toString());
-        setHargaService(tableModel.getValueAt(row,2).toString());
+        setKodeBarang(tableModel.getValueAt(row,0).toString());
+        setNamaBarang(tableModel.getValueAt(row,1).toString());
+        setHargaBarang(tableModel.getValueAt(row,4).toString());
         dispose();
-    }//GEN-LAST:event_tabel_serviceMouseClicked
+    }//GEN-LAST:event_tabel_barangMouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
@@ -300,7 +301,7 @@ public class data_service extends javax.swing.JDialog{
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabel_service;
+    private javax.swing.JTable tabel_barang;
     private javax.swing.JTextField txt_search;
     // End of variables declaration//GEN-END:variables
     
@@ -310,12 +311,14 @@ public class data_service extends javax.swing.JDialog{
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database,user,pass);
             Statement stt = kon.createStatement();
-            String SQL = "SELECT * from service WHERE STATUS=1";
+            String SQL = "SELECT * from barang WHERE STATUS=1";
             ResultSet res = stt.executeQuery(SQL);  
             while(res.next()){
                 data[0] = res.getString(1);                
                 data[1] = res.getString(2);                
                 data[2] = res.getString(3);
+                data[3] = res.getString(4);
+                data[4] = res.getString(5);
                 tableModel.addRow(data);
             }
             res.close();

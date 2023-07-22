@@ -1,8 +1,11 @@
+package Data;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import Koneksi.koneksi;
 import javax.swing.*;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
@@ -11,36 +14,33 @@ import javax.swing.table.TableRowSorter;
  *
  * @author Leily
  */
-public class data_mekanik extends javax.swing.JDialog{
+public class data_client extends javax.swing.JDialog{
     koneksi dbsetting;
     String driver,database,user,pass;
     Object tabel;
     int xx,xy;
-    private String kodeMekanik,namaMekanik;
+    private String kodeClient,namaClient;
 
-    public String getKodeMekanik() {
-        return kodeMekanik;
+    public String getKodeClient() {
+        return kodeClient;
     }
 
-    public void setKodeMekanik(String kodeMekanik) {
-        this.kodeMekanik = kodeMekanik;
+    public void setKodeClient(String kodeClient) {
+        this.kodeClient = kodeClient;
     }
 
-    public String getNamaMekanik() {
-        return namaMekanik;
+    public String getNamaClient() {
+        return namaClient;
     }
 
-    public void setNamaMekanik(String namaMekanik) {
-        this.namaMekanik = namaMekanik;
+    public void setNamaClient(String namaClient) {
+        this.namaClient = namaClient;
     }
-
-
-    
     
     /**
      * Creates new form data_barang
      */
-    public data_mekanik(java.awt.Frame parent,boolean modal) {
+    public data_client(java.awt.Frame parent,boolean modal) {
         super(parent,modal);
         initComponents();
         dbsetting = new koneksi();
@@ -49,7 +49,6 @@ public class data_mekanik extends javax.swing.JDialog{
         user = dbsetting.SettingPanel("DBUsername");
         pass = dbsetting.SettingPanel("DBPassword");
         tabel_service.setModel(tableModel);
-        panel_transaksi transaksi = new panel_transaksi();
         settableload();
     }
     private javax.swing.table.DefaultTableModel tableModel = getDefaultTableModel();
@@ -146,7 +145,7 @@ public class data_mekanik extends javax.swing.JDialog{
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("DATA MEKANIK");
+        jLabel1.setText("DATA SERVICE");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -236,8 +235,8 @@ public class data_mekanik extends javax.swing.JDialog{
         if (tabel_service.getRowSorter() != null) {
             row = tabel_service.convertRowIndexToModel(row);
         }
-        setKodeMekanik(tableModel.getValueAt(row,0).toString());
-        setNamaMekanik(tableModel.getValueAt(row,1).toString());
+        setKodeClient(tableModel.getValueAt(row,0).toString());
+        setNamaClient(tableModel.getValueAt(row,1).toString());
         dispose();
     }//GEN-LAST:event_tabel_serviceMouseClicked
 
@@ -303,7 +302,7 @@ public class data_mekanik extends javax.swing.JDialog{
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database,user,pass);
             Statement stt = kon.createStatement();
-            String SQL = "SELECT * from mekanik WHERE STATUS=1";
+            String SQL = "SELECT * from client WHERE STATUS=1";
             ResultSet res = stt.executeQuery(SQL);  
             while(res.next()){
                 data[0] = res.getString(1);                
