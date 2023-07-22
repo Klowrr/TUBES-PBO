@@ -4,9 +4,11 @@ package Utama;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+import Utama.frm_utama;
 import Koneksi.koneksi;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import Utama.frm_utama;
 /**
  *
  * @author Leily
@@ -212,7 +214,7 @@ public class frm_login extends javax.swing.JFrame
                     utama.alamat = alamat;
                     utama.notelp = notelp;
                     utama.role = role;
-                    utama.ID = id;
+                    frm_utama.ID = id;
                     utama.setVisible(true);
                     rs.close();
                     stt.close();
@@ -224,7 +226,7 @@ public class frm_login extends javax.swing.JFrame
                 }
             }
         } catch (Exception ex){
-            System.err.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex.getMessage(),"Error",JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btn_loginActionPerformed
     /**
