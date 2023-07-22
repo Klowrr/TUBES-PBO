@@ -5,8 +5,8 @@ import Data.data_mekanik;
 import Data.data_client;
 import Data.data_service;
 import Data.data_barang;
-import Utama.frm_utama;
 import Koneksi.koneksi;
+import Utama.frm_utama;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -60,7 +60,6 @@ public class panel_transaksi extends javax.swing.JPanel {
         // Memulai timer
         frm_utama utama = new frm_utama();
         timer.start();
-        System.out.println(utama.ID);
         settableload();
     }
     private javax.swing.table.DefaultTableModel tableModelBarang = getDefaultTableModelBarang();
@@ -756,7 +755,7 @@ public class panel_transaksi extends javax.swing.JPanel {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database,user,pass);
             Statement stt = kon.createStatement();
-            String SQL = "INSERT INTO transaksi_income(ID,CLIENT_ID,TOTAL_HARGA,TANGGAL,TIPE) VALUES('"+txt_transaksId.getText()+"','"+txt_kodeClient.getText()
+            String SQL = "INSERT INTO transaksi_income(ID,USER_ID,CLIENT_ID,TOTAL_HARGA,TANGGAL,TIPE) VALUES('"+txt_transaksId.getText()+"','"+frm_utama.ID+"','"+txt_kodeClient.getText()
                                                                                 +"','"+getTotal()
                                                                                 +"','"+txt_tanggal.getText()
                                                                                 +"','"+getType()+"')";
@@ -931,10 +930,6 @@ public class panel_transaksi extends javax.swing.JPanel {
                     ResultSet res2 = stt2.executeQuery(SQLBarang);  
                     if (res2.next()) { // Move the cursor to the first row of res2
                         total = res2.getInt(3)-res.getInt(8);
-                        System.out.print(res.getString(6)+" ");
-                        System.out.print(res2.getInt(3)+" ");
-                        System.out.print(res.getInt(8)+" ");
-                        System.out.println(total);
                         try {
                             String SQLUpdate = "UPDATE `barang` SET `JUMLAH`= '"+total+"' WHERE STATUS=1 AND ID='"+res.getString(6)+"';";
                             Statement stt3 = kon.createStatement();

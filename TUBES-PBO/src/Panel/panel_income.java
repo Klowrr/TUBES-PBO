@@ -286,7 +286,7 @@ public class panel_income extends javax.swing.JPanel {
     private javax.swing.JTable tabel_income;
     private javax.swing.JTextField txt_search;
     // End of variables declaration//GEN-END:variables
-    String data[] = new String[5];
+    String data[] = new String[6];
     private void settableload() {
         try {
             Class.forName(driver);
@@ -300,6 +300,7 @@ public class panel_income extends javax.swing.JPanel {
                 data[2] = res.getString(3);
                 data[3] = res.getString(4);
                 data[4] = res.getString(5);
+                data[5] = res.getString(6);
                 tableModel.addRow(data);
             }
             res.close();
