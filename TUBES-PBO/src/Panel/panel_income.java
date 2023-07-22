@@ -1,3 +1,5 @@
+package Panel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,12 +10,12 @@
  *
  * @author Leily
  */
-public class panel_outcome extends javax.swing.JPanel {
+public class panel_income extends javax.swing.JPanel {
 
     /**
-     * Creates new form panel_outcome
+     * Creates new form panel_income
      */
-    public panel_outcome() {
+    public panel_income() {
         initComponents();
     }
 

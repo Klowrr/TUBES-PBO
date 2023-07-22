@@ -1,7 +1,10 @@
+package Panel;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
+import Koneksi.koneksi;
 import javax.swing.*;
 import java.sql.*;
 import java.text.DecimalFormat;

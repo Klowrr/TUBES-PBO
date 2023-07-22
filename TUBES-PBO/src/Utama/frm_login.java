@@ -1,9 +1,14 @@
+package Utama;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+import Utama.frm_utama;
+import Koneksi.koneksi;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import Utama.frm_utama;
 /**
  *
  * @author Leily
@@ -184,7 +189,7 @@ public class frm_login extends javax.swing.JFrame
             
             String username = txt_username.getText();
             String password = txt_password.getText();
-            String nama,alamat,notelp,role;
+            String nama,alamat,notelp,role,id;
             Integer umur;
             String SQL1 = "SELECT * FROM users WHERE  USERNAME = '"+username+"' AND STATUS=1";
             ResultSet rs1 = stt.executeQuery(SQL1);
@@ -203,11 +208,13 @@ public class frm_login extends javax.swing.JFrame
                     role = rs.getString("ROLE");
                     alamat = rs.getString("ALAMAT");
                     notelp = rs.getString("NO_TELP");
+                    id = rs.getString("ID");
                     utama.nama = nama;
                     utama.umur = umur;
                     utama.alamat = alamat;
                     utama.notelp = notelp;
                     utama.role = role;
+                    frm_utama.ID = id;
                     utama.setVisible(true);
                     rs.close();
                     stt.close();
@@ -219,7 +226,7 @@ public class frm_login extends javax.swing.JFrame
                 }
             }
         } catch (Exception ex){
-            System.err.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex.getMessage(),"Error",JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btn_loginActionPerformed
     /**
