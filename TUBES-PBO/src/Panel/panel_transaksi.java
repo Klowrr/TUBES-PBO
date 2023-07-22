@@ -754,10 +754,6 @@ public class panel_transaksi extends javax.swing.JPanel {
     
     private void btn_simpan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpan1ActionPerformed
         // TODO add your handling code here:
-        if(txt_kodeClient.getName().isEmpty()){
-            JOptionPane.showMessageDialog(null,"Pilih Client Terlebih dahulu");
-            btn_kodeClient.requestFocus();
-        }else{
            try {
                 Class.forName(driver);
                 Connection kon = DriverManager.getConnection(database,user,pass);
@@ -778,7 +774,6 @@ public class panel_transaksi extends javax.swing.JPanel {
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null,ex.getMessage() ,"ERROR",JOptionPane.INFORMATION_MESSAGE);
             } 
-        }
     }//GEN-LAST:event_btn_simpan1ActionPerformed
 
     private void btn_kodeClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_kodeClientActionPerformed
