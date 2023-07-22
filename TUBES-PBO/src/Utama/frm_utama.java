@@ -33,7 +33,7 @@ import java.util.Locale;
 public class frm_utama extends javax.swing.JFrame {
     koneksi dbsetting;
     String driver,database,user,pass;
-    public String nama,alamat,notelp,role;
+    public String nama,alamat,notelp,role,ID;
     public Integer umur;
     /**
      * Creates new form frm_utama

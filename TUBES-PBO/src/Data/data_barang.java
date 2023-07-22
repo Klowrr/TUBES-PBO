@@ -19,7 +19,7 @@ public class data_barang extends javax.swing.JDialog{
     String driver,database,user,pass;
     Object tabel;
     int xx,xy;
-    private String kodeBarang,namaBarang,HargaBarang;
+    private String kodeBarang,namaBarang,HargaBarang,jumlahBarang;
 
     public String getKodeBarang() {
         return kodeBarang;
@@ -43,6 +43,14 @@ public class data_barang extends javax.swing.JDialog{
 
     public void setHargaBarang(String HargaBarang) {
         this.HargaBarang = HargaBarang;
+    }
+
+    public String getJumlahBarang() {
+        return jumlahBarang;
+    }
+
+    public void setJumlahBarang(String jumlahBarang) {
+        this.jumlahBarang = jumlahBarang;
     }
     
     /**
@@ -246,6 +254,7 @@ public class data_barang extends javax.swing.JDialog{
         setKodeBarang(tableModel.getValueAt(row,0).toString());
         setNamaBarang(tableModel.getValueAt(row,1).toString());
         setHargaBarang(tableModel.getValueAt(row,4).toString());
+        setJumlahBarang(tableModel.getValueAt(row,2).toString());
         dispose();
     }//GEN-LAST:event_tabel_barangMouseClicked
 

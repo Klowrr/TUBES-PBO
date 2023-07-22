@@ -38,7 +38,7 @@ public class panel_income extends javax.swing.JPanel {
     private javax.swing.table.DefaultTableModel getDefaultTableModel(){
         return new javax.swing.table.DefaultTableModel(
             new Object[][]{},
-            new String[]{"ID","CLIENT ID","TOTAL HARGA", "TANGGAL", "TIPE"}
+            new String[]{"ID","USER_ID","CLIENT ID","TOTAL HARGA", "TANGGAL", "TIPE"}
         )
         {
             boolean[] canEdit = new boolean[]{
@@ -231,9 +231,9 @@ public class panel_income extends javax.swing.JPanel {
                     .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(10, 10, 10)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-                .addGap(23, 23, 23)
-                .addComponent(pn_detail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pn_detail, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
         );
 

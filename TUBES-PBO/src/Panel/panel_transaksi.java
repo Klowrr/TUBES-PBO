@@ -5,6 +5,7 @@ import Data.data_mekanik;
 import Data.data_client;
 import Data.data_service;
 import Data.data_barang;
+import Utama.frm_utama;
 import Koneksi.koneksi;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,6 +27,7 @@ public class panel_transaksi extends javax.swing.JPanel {
     koneksi dbsetting;
     String driver,database,user,pass;
     Object tabel;
+    int jumlahBarang;
     /**
      * Creates new form panel_transaksi
      */
@@ -56,7 +58,9 @@ public class panel_transaksi extends javax.swing.JPanel {
             }
         });
         // Memulai timer
+        frm_utama utama = new frm_utama();
         timer.start();
+        System.out.println(utama.ID);
         settableload();
     }
     private javax.swing.table.DefaultTableModel tableModelBarang = getDefaultTableModelBarang();
@@ -232,7 +236,7 @@ public class panel_transaksi extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        cmx_pilihan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Transaksi", "Service" }));
+        cmx_pilihan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Barang", "Service" }));
         cmx_pilihan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmx_pilihanActionPerformed(evt);
@@ -257,9 +261,9 @@ public class panel_transaksi extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Harga");
 
-        txt_jumlah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_jumlahActionPerformed(evt);
+        txt_jumlah.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_jumlahKeyReleased(evt);
             }
         });
 
@@ -540,28 +544,30 @@ public class panel_transaksi extends javax.swing.JPanel {
             .addGroup(pilihanLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(pilihanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pilihanLayout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jLabel1))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmx_pilihan, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(pilihanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pilihanLayout.createSequentialGroup()
-                        .addGap(0, 74, Short.MAX_VALUE)
-                        .addComponent(btn_simpan1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(30, 30, 30))
+                        .addGroup(pilihanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmx_pilihan, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(pilihanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pilihanLayout.createSequentialGroup()
+                                .addGap(0, 214, Short.MAX_VALUE)
+                                .addComponent(btn_simpan1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(30, 30, 30))))
         );
         pilihanLayout.setVerticalGroup(
             pilihanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pilihanLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel1)
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pilihanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pilihanLayout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -572,10 +578,10 @@ public class panel_transaksi extends javax.swing.JPanel {
                     .addGroup(pilihanLayout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmx_pilihan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmx_pilihan, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         jScrollPane4.setViewportView(pilihan);
@@ -590,6 +596,7 @@ public class panel_transaksi extends javax.swing.JPanel {
         txt_kodeBarang.setText(data.getKodeBarang());
         txt_namaBarang.setText(data.getNamaBarang());
         txt_hargaBarang.setText(data.getHargaBarang());
+        jumlahBarang = Integer.parseInt(data.getJumlahBarang());
     }//GEN-LAST:event_btn_kodeBarangActionPerformed
     private void membersihkan_text_barang(){
         txt_kodeBarang.setText("");
@@ -628,15 +635,6 @@ public class panel_transaksi extends javax.swing.JPanel {
                 break;
         }
     }//GEN-LAST:event_cmx_pilihanActionPerformed
-
-    private void txt_jumlahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_jumlahActionPerformed
-        // TODO add your handling code here:
-        long harga,jumlah,subTotal;
-        harga = Long.parseLong(txt_hargaBarang.getText());
-        jumlah = Long.parseLong(txt_jumlah.getText());
-        subTotal = harga*jumlah;
-        txt_subtotal.setText(Long.toString(subTotal));
-    }//GEN-LAST:event_txt_jumlahActionPerformed
 
     private void btn_kodeServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_kodeServiceActionPerformed
         // TODO add your handling code here:
@@ -754,18 +752,19 @@ public class panel_transaksi extends javax.swing.JPanel {
     
     private void btn_simpan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpan1ActionPerformed
         // TODO add your handling code here:
-        if(txt_kodeClient.getName().isEmpty()){
-            JOptionPane.showMessageDialog(null,"Pilih Client Terlebih dahulu");
-            btn_kodeClient.requestFocus();
-        }else{
-           try {
-                Class.forName(driver);
-                Connection kon = DriverManager.getConnection(database,user,pass);
-                Statement stt = kon.createStatement();
-                String SQL = "INSERT INTO transaksi_income(ID,CLIENT_ID,TOTAL_HARGA,TANGGAL,TIPE) VALUES('"+txt_transaksId.getText()+"','"+txt_kodeClient.getText()
-                                                                                    +"','"+getTotal()
-                                                                                    +"','"+txt_tanggal.getText()
-                                                                                    +"','transaksi')";
+        try {
+            Class.forName(driver);
+            Connection kon = DriverManager.getConnection(database,user,pass);
+            Statement stt = kon.createStatement();
+            String SQL = "INSERT INTO transaksi_income(ID,CLIENT_ID,TOTAL_HARGA,TANGGAL,TIPE) VALUES('"+txt_transaksId.getText()+"','"+txt_kodeClient.getText()
+                                                                                +"','"+getTotal()
+                                                                                +"','"+txt_tanggal.getText()
+                                                                                +"','"+getType()+"')";
+            if(txt_kodeClient.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null,"Pilih Client Terlebih Dahulu");
+                btn_kodeClient.requestFocus();
+            }else{
+                updateJumlahBarang();
                 stt.executeUpdate(SQL);
                 stt.close();
                 kon.close();
@@ -775,10 +774,10 @@ public class panel_transaksi extends javax.swing.JPanel {
                 txt_transaksId.setText(getKodeTransaksi());
                 tableModelBarang.setRowCount(0);
                 tableModelService.setRowCount(0);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null,ex.getMessage() ,"ERROR",JOptionPane.INFORMATION_MESSAGE);
-            } 
-        }
+            }
+         } catch (Exception ex) {
+             JOptionPane.showMessageDialog(null,ex.getMessage() ,"ERROR",JOptionPane.INFORMATION_MESSAGE);
+         } 
     }//GEN-LAST:event_btn_simpan1ActionPerformed
 
     private void btn_kodeClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_kodeClientActionPerformed
@@ -788,6 +787,22 @@ public class panel_transaksi extends javax.swing.JPanel {
         txt_kodeClient.setText(data.getKodeClient());
         txt_namaClient.setText(data.getNamaClient());
     }//GEN-LAST:event_btn_kodeClientActionPerformed
+
+    private void txt_jumlahKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_jumlahKeyReleased
+        // TODO add your handling code here:
+        int jumlahDiminta;
+        long harga,subTotal;
+        data_barang data = new data_barang(null,false);
+        harga = Integer.parseInt(txt_hargaBarang.getText());
+        jumlahDiminta = Integer.parseInt(txt_jumlah.getText());
+        if(jumlahBarang-jumlahDiminta<0){
+            JOptionPane.showMessageDialog(null,"Stok "+txt_namaBarang.getText().toLowerCase()+" tinggal "+jumlahBarang);
+            membersihkan_text_barang();
+        }else{
+            subTotal = harga*jumlahDiminta;
+            txt_subtotal.setText(Long.toString(subTotal));
+        }
+    }//GEN-LAST:event_txt_jumlahKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -871,6 +886,15 @@ public class panel_transaksi extends javax.swing.JPanel {
         }
         return newID;
     }
+    private String getType(){
+        if(tabel_barang.getRowCount()==0){
+            return "Service";
+        }else if(tabel_service.getRowCount()==0){
+            return "Transaksi";
+        }else{
+            return "Transaksi dan Service";
+        }
+    }
     private long getTotal(){
         long total = 0;
         try {
@@ -892,6 +916,46 @@ public class panel_transaksi extends javax.swing.JPanel {
         }
         return total;
     }
+    private void updateJumlahBarang(){
+        int total = 0;
+        try {
+            Class.forName(driver);
+            Connection kon = DriverManager.getConnection(database,user,pass);
+            Statement stt = kon.createStatement();
+            String SQL = "SELECT * from detail_transaksi WHERE STATUS=1 AND TRANSAKSI_ID='"+txt_transaksId.getText()+"'";
+            ResultSet res = stt.executeQuery(SQL);  
+            while(res.next()){
+                if(res.getString(6)!=null){
+                    String SQLBarang = "SELECT * from barang WHERE STATUS=1 AND ID='"+res.getString(6)+"'";
+                    Statement stt2 = kon.createStatement();
+                    ResultSet res2 = stt2.executeQuery(SQLBarang);  
+                    if (res2.next()) { // Move the cursor to the first row of res2
+                        total = res2.getInt(3)-res.getInt(8);
+                        System.out.print(res.getString(6)+" ");
+                        System.out.print(res2.getInt(3)+" ");
+                        System.out.print(res.getInt(8)+" ");
+                        System.out.println(total);
+                        try {
+                            String SQLUpdate = "UPDATE `barang` SET `JUMLAH`= '"+total+"' WHERE STATUS=1 AND ID='"+res.getString(6)+"';";
+                            Statement stt3 = kon.createStatement();
+                            stt3.executeUpdate(SQLUpdate);
+                            stt3.close();
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
+                }
+            }
+            res.close();
+            stt.close();
+            kon.close();
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
+        }
+    }
+    
     String data[] = new String[9];
     private void settableload() {
         try {
