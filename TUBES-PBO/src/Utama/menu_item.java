@@ -66,6 +66,7 @@ public class menu_item extends javax.swing.JPanel {
         });
 
         lb_menu_name.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lb_menu_name.setForeground(new java.awt.Color(37, 59, 80));
         lb_menu_name.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

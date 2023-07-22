@@ -98,7 +98,7 @@ public class frm_utama extends javax.swing.JFrame {
             }
         });
 
-        pn_navbar.setBackground(new java.awt.Color(255, 153, 51));
+        pn_navbar.setBackground(new java.awt.Color(37, 59, 80));
         pn_navbar.setToolTipText("");
         pn_navbar.setPreferredSize(new java.awt.Dimension(750, 70));
 
@@ -138,11 +138,14 @@ public class frm_utama extends javax.swing.JFrame {
         jScrollPane1.setViewportView(pn_menu);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setForeground(new java.awt.Color(231, 231, 234));
 
-        txt_user_role.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        txt_user_role.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        txt_user_role.setForeground(new java.awt.Color(37, 59, 80));
         txt_user_role.setText("Role");
 
         txt_user_nama.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txt_user_nama.setForeground(new java.awt.Color(37, 59, 80));
         txt_user_nama.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt_user_nama.setText("NAMA PENGGUNA");
 
@@ -156,11 +159,11 @@ public class frm_utama extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txt_user_nama)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txt_user_role)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -170,7 +173,7 @@ public class frm_utama extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txt_user_nama)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_user_role, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -190,7 +193,7 @@ public class frm_utama extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE))
         );
 
         getContentPane().add(pn_sidebar, java.awt.BorderLayout.LINE_START);
