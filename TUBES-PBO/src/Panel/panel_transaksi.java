@@ -60,8 +60,6 @@ public class panel_transaksi extends javax.swing.JPanel {
         // Memulai timer
         timer.start();
         settableload();
-        txt_total.setText(Long.toString(getTotal()));
-
     }
     private javax.swing.table.DefaultTableModel tableModelBarang = getDefaultTableModelBarang();
     private javax.swing.table.DefaultTableModel getDefaultTableModelBarang(){
@@ -150,7 +148,7 @@ public class panel_transaksi extends javax.swing.JPanel {
         btn_tambah = new rojerusan.RSMaterialButtonRectangle();
         btn_tambah1 = new rojerusan.RSMaterialButtonRectangle();
         btn_clear = new rojerusan.RSMaterialButtonRectangle();
-        btn_simpan1 = new rojerusan.RSMaterialButtonRectangle();
+        btn_selesai = new rojerusan.RSMaterialButtonRectangle();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -513,11 +511,11 @@ public class panel_transaksi extends javax.swing.JPanel {
             }
         });
 
-        btn_simpan1.setText("Selesai");
-        btn_simpan1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        btn_simpan1.addActionListener(new java.awt.event.ActionListener() {
+        btn_selesai.setText("Selesai");
+        btn_selesai.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        btn_selesai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_simpan1ActionPerformed(evt);
+                btn_selesaiActionPerformed(evt);
             }
         });
 
@@ -655,7 +653,7 @@ public class panel_transaksi extends javax.swing.JPanel {
                                 .addGap(12, 12, 12))))
                     .addGroup(pilihanLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_simpan1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_selesai, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(30, 30, 30))
@@ -674,7 +672,7 @@ public class panel_transaksi extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(pilihanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_simpan1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btn_selesai, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pilihanLayout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -810,6 +808,7 @@ public class panel_transaksi extends javax.swing.JPanel {
                         data2[4] = txt_hargaService.getText();
                         int tableRowLast = tableModelService.getRowCount();
                         tableModelService.insertRow(tableRowLast,data2);
+                        txt_total.setText(Long.toString(getTotal()));
                         stt.close();
                         kon.close();
                         JOptionPane.showMessageDialog(null, "Data berhasil ditambah");
@@ -849,7 +848,7 @@ public class panel_transaksi extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btn_clearActionPerformed
     
-    private void btn_simpan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpan1ActionPerformed
+    private void btn_selesaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selesaiActionPerformed
         // TODO add your handling code here:
         try {
             Class.forName(driver);
@@ -871,13 +870,14 @@ public class panel_transaksi extends javax.swing.JPanel {
                 membersihkan_text_barang();
                 membersihkan_text_client();
                 txt_transaksId.setText(getKodeTransaksi());
+                txt_total.setText("0");
                 tableModelBarang.setRowCount(0);
                 tableModelService.setRowCount(0);
             }
          } catch (Exception ex) {
              JOptionPane.showMessageDialog(null,ex.getMessage() ,"ERROR",JOptionPane.INFORMATION_MESSAGE);
          } 
-    }//GEN-LAST:event_btn_simpan1ActionPerformed
+    }//GEN-LAST:event_btn_selesaiActionPerformed
 
     private void btn_kodeClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_kodeClientActionPerformed
         // TODO add your handling code here:
@@ -924,7 +924,7 @@ public class panel_transaksi extends javax.swing.JPanel {
     private javax.swing.JButton btn_kodeClient;
     private javax.swing.JButton btn_kodeService;
     private javax.swing.JButton btn_mekanikId;
-    private rojerusan.RSMaterialButtonRectangle btn_simpan1;
+    private rojerusan.RSMaterialButtonRectangle btn_selesai;
     private rojerusan.RSMaterialButtonRectangle btn_tambah;
     private rojerusan.RSMaterialButtonRectangle btn_tambah1;
     private javax.swing.JComboBox<String> cmx_pilihan;
