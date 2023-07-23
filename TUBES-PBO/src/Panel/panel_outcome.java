@@ -289,7 +289,6 @@ public class panel_outcome extends javax.swing.JPanel {
         }
         secondPanel.setVisible(true);
         kode_pesan = tabel_historiPemesanan.getModel().getValueAt(row, 0).toString();
-        System.out.println(kode_pesan);
         try {
             tampil_detail();
         } catch (Exception e) {
