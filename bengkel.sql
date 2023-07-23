@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 19, 2023 at 10:50 AM
+-- Generation Time: Jul 23, 2023 at 04:17 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -28,7 +28,7 @@ USE `bengkel`;
 -- Table structure for table `barang`
 --
 
-CREATE TABLE IF NOT EXISTS `barang` (
+CREATE TABLE `barang` (
   `ID` varchar(100) NOT NULL,
   `NAMA` varchar(100) DEFAULT NULL,
   `JUMLAH` int(11) DEFAULT 0,
@@ -61,7 +61,17 @@ INSERT INTO `barang` (`ID`, `NAMA`, `JUMLAH`, `LOKASI`, `HARGA`, `STATUS`) VALUE
 ('BR017', 'LUPROMAX HYPERION 8000 5W-30 4L', 0, 'E1', 770000, 1),
 ('BR018', 'WIPER', 0, 'E2', 32500, 1),
 ('BR019', 'AKI MOBIL', 0, 'E3', 850000, 1),
-('BR020', 'FILTER AC', 0, 'E4', 95000, 1);
+('BR020', 'FILTER AC', 0, 'E4', 95000, 1),
+('BR021', 'PENGKILAP BODY MOBIL', 0, 'F1', 50000, 1),
+('BR022', 'STP BRAKE PARTS CLEANER 500ML', 0, 'F2', 48000, 1),
+('BR023', 'TONGKAT E-TOLL', 0, 'F3', 10000, 1),
+('BR024', 'KIT WIPER FLUID PUCH 400ML', 0, 'F4', 8000, 1),
+('BR025', 'KUMPON CAT MOBIL', 0, 'G1', 25000, 1),
+('BR026', 'KABEL BUSSI', 0, 'F1', 125000, 1),
+('BR027', 'FILTER UDARA', 0, 'F2', 100000, 1),
+('BR028', 'RING PISTON', 0, 'F3', 300000, 1),
+('BR029', 'STEMPET', 0, 'F4', 50000, 1),
+('BR030', 'KABEL KOPLING', 0, 'G1', 125000, 1);
 
 -- --------------------------------------------------------
 
@@ -69,7 +79,7 @@ INSERT INTO `barang` (`ID`, `NAMA`, `JUMLAH`, `LOKASI`, `HARGA`, `STATUS`) VALUE
 -- Table structure for table `client`
 --
 
-CREATE TABLE IF NOT EXISTS `client` (
+CREATE TABLE `client` (
   `ID` varchar(100) NOT NULL,
   `NAMA` varchar(100) DEFAULT NULL,
   `NO_TELP` varchar(12) DEFAULT NULL,
@@ -82,11 +92,11 @@ CREATE TABLE IF NOT EXISTS `client` (
 --
 
 INSERT INTO `client` (`ID`, `NAMA`, `NO_TELP`, `ALAMAT`, `STATUS`) VALUES
-('CL001', 'SUPRI', '080000000001', 'JALAN GATAU', 1),
-('CL002', 'JUNED', '080000000002', 'JALAN UDAH', 1),
-('CL003', 'AGUS', '080000000003', 'JALAN GA', 1),
-('CL004', 'BUDI', '080000000004', 'JALAN ADA', 1),
-('CL005', 'ILHAM', '080000000005', 'JALAN IDE', 1);
+('CL001', 'DYAH', '089249561644', 'JALAN KAMAYANGAN BLOK C-36', 1),
+('CL002', 'ALVARO', '088057542480', 'JALAN YOGJAKARTA', 1),
+('CL003', 'KEVIN', '084451979065', 'JALAN MALANGBONG', 1),
+('CL004', 'FERRY', '080353023527', 'JALAN KAMAYANGAN BLOK C-37', 1),
+('CL005', 'VALERIE', '089047564337', 'JALAN CIBODAS', 1);
 
 -- --------------------------------------------------------
 
@@ -94,7 +104,7 @@ INSERT INTO `client` (`ID`, `NAMA`, `NO_TELP`, `ALAMAT`, `STATUS`) VALUES
 -- Table structure for table `detail_transaksi`
 --
 
-CREATE TABLE IF NOT EXISTS `detail_transaksi` (
+CREATE TABLE `detail_transaksi` (
   `TRANSAKSI_ID` varchar(100) DEFAULT NULL,
   `KENDARAAN` varchar(100) DEFAULT NULL,
   `SERVICE_ID` varchar(100) DEFAULT NULL,
@@ -112,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `detail_transaksi` (
 -- Table structure for table `mekanik`
 --
 
-CREATE TABLE IF NOT EXISTS `mekanik` (
+CREATE TABLE `mekanik` (
   `ID` varchar(100) NOT NULL,
   `NAMA` varchar(100) DEFAULT NULL,
   `NO_TELP` varchar(12) DEFAULT NULL,
@@ -125,10 +135,11 @@ CREATE TABLE IF NOT EXISTS `mekanik` (
 --
 
 INSERT INTO `mekanik` (`ID`, `NAMA`, `NO_TELP`, `ALAMAT`, `STATUS`) VALUES
-('MK001', 'ASEP', '080010122104', 'JALAN ANGGREK', 1),
-('MK002', 'BAMBANG', '080010122106', 'JALAN BAKUNG', 1),
-('MK003', 'CECEP', '080010122110', 'JALAN CEMPAKA', 1),
-('MK004', 'DODI', '080010122114', 'JALAN DAHLIA', 1);
+('MK001', 'ASEP', '082732162391', 'JALAN PARAKAN SAAT BLOK A', 1),
+('MK002', 'UDIN', '085631457147', 'JALAN PANDU', 1),
+('MK003', 'JAJA', '088532475204', 'JALAN GATOT SUBROTO', 1),
+('MK004', 'UJANG', '088956398236', 'JALAN PARAKAN SAAT BLOK C', 1),
+('MK005', 'HENDRI', '086995138262', 'JALAN LAKSMUD NURTANIO', 1);
 
 -- --------------------------------------------------------
 
@@ -136,7 +147,7 @@ INSERT INTO `mekanik` (`ID`, `NAMA`, `NO_TELP`, `ALAMAT`, `STATUS`) VALUES
 -- Table structure for table `service`
 --
 
-CREATE TABLE IF NOT EXISTS `service` (
+CREATE TABLE `service` (
   `ID` varchar(100) NOT NULL,
   `NAMA` varchar(100) DEFAULT NULL,
   `HARGA` double DEFAULT NULL,
@@ -162,8 +173,9 @@ INSERT INTO `service` (`ID`, `NAMA`, `HARGA`, `STATUS`) VALUES
 -- Table structure for table `transaksi_income`
 --
 
-CREATE TABLE IF NOT EXISTS `transaksi_income` (
+CREATE TABLE `transaksi_income` (
   `ID` varchar(100) NOT NULL,
+  `USER_ID` varchar(100) DEFAULT NULL,
   `CLIENT_ID` varchar(100) DEFAULT NULL,
   `TOTAL_HARGA` double DEFAULT NULL,
   `TANGGAL` datetime DEFAULT current_timestamp(),
@@ -177,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `transaksi_income` (
 -- Table structure for table `transaksi_outcome`
 --
 
-CREATE TABLE IF NOT EXISTS `transaksi_outcome` (
+CREATE TABLE `transaksi_outcome` (
   `ID` varchar(100) NOT NULL,
   `USER_ID` varchar(100) DEFAULT NULL,
   `TOTAL_HARGA` double DEFAULT NULL,
@@ -191,7 +203,7 @@ CREATE TABLE IF NOT EXISTS `transaksi_outcome` (
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE `users` (
   `ID` varchar(100) NOT NULL,
   `NAMA` varchar(100) DEFAULT NULL,
   `ALAMAT` varchar(100) DEFAULT NULL,
@@ -208,8 +220,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`ID`, `NAMA`, `ALAMAT`, `UMUR`, `NO_TELP`, `USERNAME`, `PASSWORD`, `ROLE`, `STATUS`) VALUES
-('ADM001', 'ADMIN', 'JALAN-JALAN', 99, '080006942000', 'admin', 'admin', 'ADMIN', 1),
-('USR001', 'USER', 'JALAN KEHIDUPAN', 66, '080010122114', 'user', 'user', 'USER', 1);
+('ADM001', 'ADMIN', 'JALAN CIBATU 2', 62, '085103572997', 'admin', 'admin', 'ADMIN', 1),
+('USR001', 'USER', 'JALAN PONDOK MUTIARA', 55, '08122108054', 'user', 'user', 'USER', 1);
 
 --
 -- Indexes for dumped tables
@@ -255,7 +267,8 @@ ALTER TABLE `service`
 --
 ALTER TABLE `transaksi_income`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `transaksi_ibfk_1` (`CLIENT_ID`);
+  ADD KEY `transaksi_ibfk_1` (`CLIENT_ID`),
+  ADD KEY `USER_ID` (`USER_ID`);
 
 --
 -- Indexes for table `transaksi_outcome`
@@ -287,7 +300,8 @@ ALTER TABLE `detail_transaksi`
 -- Constraints for table `transaksi_income`
 --
 ALTER TABLE `transaksi_income`
-  ADD CONSTRAINT `transaksi_income_ibfk_1` FOREIGN KEY (`CLIENT_ID`) REFERENCES `client` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `transaksi_income_ibfk_1` FOREIGN KEY (`CLIENT_ID`) REFERENCES `client` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `transaksi_income_ibfk_2` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`ID`);
 
 --
 -- Constraints for table `transaksi_outcome`
