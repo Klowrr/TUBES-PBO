@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 23, 2023 at 04:17 AM
+-- Generation Time: Jul 23, 2023 at 04:45 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -67,11 +67,11 @@ INSERT INTO `barang` (`ID`, `NAMA`, `JUMLAH`, `LOKASI`, `HARGA`, `STATUS`) VALUE
 ('BR023', 'TONGKAT E-TOLL', 0, 'F3', 10000, 1),
 ('BR024', 'KIT WIPER FLUID PUCH 400ML', 0, 'F4', 8000, 1),
 ('BR025', 'KUMPON CAT MOBIL', 0, 'G1', 25000, 1),
-('BR026', 'KABEL BUSSI', 0, 'F1', 125000, 1),
-('BR027', 'FILTER UDARA', 0, 'F2', 100000, 1),
-('BR028', 'RING PISTON', 0, 'F3', 300000, 1),
-('BR029', 'STEMPET', 0, 'F4', 50000, 1),
-('BR030', 'KABEL KOPLING', 0, 'G1', 125000, 1);
+('BR026', 'KABEL BUSSI', 0, 'G2', 125000, 1),
+('BR027', 'FILTER UDARA', 0, 'G3', 100000, 1),
+('BR028', 'RING PISTON', 0, 'G4', 300000, 1),
+('BR029', 'STEMPET', 0, 'H1', 50000, 1),
+('BR030', 'KABEL KOPLING', 0, 'H2', 125000, 1);
 
 -- --------------------------------------------------------
 
@@ -105,6 +105,7 @@ INSERT INTO `client` (`ID`, `NAMA`, `NO_TELP`, `ALAMAT`, `STATUS`) VALUES
 --
 
 CREATE TABLE `detail_transaksi` (
+  `ID` int(11) NOT NULL,
   `TRANSAKSI_ID` varchar(100) DEFAULT NULL,
   `KENDARAAN` varchar(100) DEFAULT NULL,
   `SERVICE_ID` varchar(100) DEFAULT NULL,
@@ -244,6 +245,7 @@ ALTER TABLE `client`
 -- Indexes for table `detail_transaksi`
 --
 ALTER TABLE `detail_transaksi`
+  ADD PRIMARY KEY (`ID`),
   ADD KEY `detail_transaksi_ibfk_1` (`SERVICE_ID`),
   ADD KEY `detail_transaksi_ibfk_2` (`MEKANIK_ID`),
   ADD KEY `detail_transaksi_ibfk_3` (`BARANG_ID`);
@@ -283,6 +285,16 @@ ALTER TABLE `transaksi_outcome`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`ID`),
   ADD UNIQUE KEY `NAMA` (`NAMA`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `detail_transaksi`
+--
+ALTER TABLE `detail_transaksi`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
