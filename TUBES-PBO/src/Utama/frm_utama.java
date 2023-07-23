@@ -34,10 +34,10 @@ import java.util.Locale;
  */
 public class frm_utama extends javax.swing.JFrame {
     koneksi dbsetting;
-    String driver,database,user,pass,role;
+    String driver,database,user,pass;
     public String nama,alamat,notelp;
     public Integer umur;
-    public static String ID;
+    public static String ID,role;
     /**
      * Creates new form frm_utama
      */
@@ -79,6 +79,7 @@ public class frm_utama extends javax.swing.JFrame {
     private void initComponents() {
 
         pn_navbar = new javax.swing.JPanel();
+        kGradientPanel1 = new keeptoo.KGradientPanel();
         lb_tanggal = new javax.swing.JLabel();
         pn_sidebar = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -104,26 +105,41 @@ public class frm_utama extends javax.swing.JFrame {
         pn_navbar.setToolTipText("");
         pn_navbar.setPreferredSize(new java.awt.Dimension(750, 70));
 
+        kGradientPanel1.setkEndColor(new java.awt.Color(37, 59, 80));
+        kGradientPanel1.setkGradientFocus(1000);
+        kGradientPanel1.setkStartColor(new java.awt.Color(58, 135, 200));
+
         lb_tanggal.setBackground(new java.awt.Color(255, 255, 255));
         lb_tanggal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lb_tanggal.setForeground(new java.awt.Color(255, 255, 255));
         lb_tanggal.setText("Tanggal dan Waktu");
 
+        javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
+        kGradientPanel1.setLayout(kGradientPanel1Layout);
+        kGradientPanel1Layout.setHorizontalGroup(
+            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
+                .addContainerGap(737, Short.MAX_VALUE)
+                .addComponent(lb_tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        kGradientPanel1Layout.setVerticalGroup(
+            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addComponent(lb_tanggal)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout pn_navbarLayout = new javax.swing.GroupLayout(pn_navbar);
         pn_navbar.setLayout(pn_navbarLayout);
         pn_navbarLayout.setHorizontalGroup(
             pn_navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_navbarLayout.createSequentialGroup()
-                .addContainerGap(824, Short.MAX_VALUE)
-                .addComponent(lb_tanggal)
-                .addGap(22, 22, 22))
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pn_navbarLayout.setVerticalGroup(
             pn_navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_navbarLayout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
-                .addComponent(lb_tanggal)
-                .addContainerGap())
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         getContentPane().add(pn_navbar, java.awt.BorderLayout.PAGE_START);
@@ -159,15 +175,10 @@ public class frm_utama extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txt_user_nama)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txt_user_role)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(txt_user_nama)
+                    .addComponent(txt_user_role))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -284,6 +295,7 @@ public class frm_utama extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel lb_tanggal;
     private javax.swing.JPanel pn_content;
     private javax.swing.JPanel pn_menu;
@@ -325,6 +337,8 @@ public class frm_utama extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 pn_utama.removeAll();
                 pn_utama.add(new panel_mekanik());
+                pn_utama.repaint();
+                pn_utama.revalidate();
             }
         });
         menu_item client = new menu_item(null,true,iconClient,"Client",new ActionListener() {

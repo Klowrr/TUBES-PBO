@@ -6,6 +6,7 @@ package Panel;
  */
 
 import Koneksi.koneksi;
+import Utama.frm_utama;
 import javax.swing.*;
 import java.sql.*;
 import java.text.DecimalFormat;
@@ -35,7 +36,9 @@ public class panel_barang extends javax.swing.JPanel {
         tabel_barang.setModel(tableModel);
         btn_hapus.setVisible(false);
         btn_edit.setVisible(false);
-        
+        if("USER".equals(frm_utama.role)){
+            btn_tambah.setVisible(false);
+        }
         settableload();
     }
     private javax.swing.table.DefaultTableModel tableModel = getDefaultTableModel();
@@ -201,7 +204,7 @@ public class panel_barang extends javax.swing.JPanel {
                     .addComponent(jLabel2))
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane1)
-                .addGap(48, 48, 48))
+                .addGap(30, 30, 30))
         );
 
         mainPanel.add(dataBarang, "card9");
@@ -432,7 +435,7 @@ public class panel_barang extends javax.swing.JPanel {
     int row = 0;
     private void tabel_barangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_barangMouseClicked
         // TODO add your handling code here:
-        if(evt.getClickCount()==1) {
+        if(evt.getClickCount()==1 && "ADMIN".equals(frm_utama.role)) {
             btn_hapus.setVisible(true);
             btn_edit.setVisible(true);
             if (tabel_barang.getRowSorter() != null) {
@@ -601,7 +604,6 @@ public class panel_barang extends javax.swing.JPanel {
 
     String data[] = new String[5];
     private void settableload() {
-        String stat = "";
         try {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database,user,pass);

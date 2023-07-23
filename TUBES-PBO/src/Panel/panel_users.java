@@ -217,8 +217,8 @@ public class panel_users extends javax.swing.JPanel {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16))
                 .addGap(10, 10, 10)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
-                .addGap(83, 83, 83))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+                .addGap(30, 30, 30))
         );
 
         mainPanel.add(dataUser, "card2");
@@ -807,7 +807,6 @@ public class panel_users extends javax.swing.JPanel {
     
     String data[] = new String[7];
     private void settableload() {
-        String stat = "";
         try {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database,user,pass);

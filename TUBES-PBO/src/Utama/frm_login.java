@@ -215,7 +215,7 @@ public class frm_login extends javax.swing.JFrame
                     utama.umur = umur;
                     utama.alamat = alamat;
                     utama.notelp = notelp;
-                    utama.role = role;
+                    frm_utama.role = role;
                     frm_utama.ID = id;
                     utama.setVisible(true);
                     rs.close();

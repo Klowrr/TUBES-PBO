@@ -6,6 +6,7 @@ package Panel;
  * and open the template in the editor.
  */
 import Koneksi.koneksi;
+import Utama.frm_utama;
 import javax.swing.*;
 import java.sql.*;
 import java.text.DecimalFormat;
@@ -34,6 +35,9 @@ public class panel_mekanik extends javax.swing.JPanel {
         tabel_mekanik.setModel(tableModel);
         btn_hapus.setVisible(false);
         btn_edit.setVisible(false);
+        if("USER".equals(frm_utama.role)){
+            btn_tambah.setVisible(false);
+        }
         settableload();
     }
     private javax.swing.table.DefaultTableModel tableModel = getDefaultTableModel();
@@ -175,7 +179,7 @@ public class panel_mekanik extends javax.swing.JPanel {
                             .addGroup(dataMekanikLayout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 787, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataMekanikLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(txt_search_mekanik, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -198,8 +202,8 @@ public class panel_mekanik extends javax.swing.JPanel {
                     .addComponent(txt_search_mekanik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(10, 10, 10)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
-                .addGap(34, 34, 34))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
+                .addGap(30, 30, 30))
         );
 
         mainPanel.add(dataMekanik, "card2");
@@ -253,7 +257,7 @@ public class panel_mekanik extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel2))
-                        .addContainerGap(585, Short.MAX_VALUE))
+                        .addContainerGap(488, Short.MAX_VALUE))
                     .addGroup(addMekanikLayout.createSequentialGroup()
                         .addGroup(addMekanikLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel5)
@@ -285,7 +289,7 @@ public class panel_mekanik extends javax.swing.JPanel {
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(364, Short.MAX_VALUE))
         );
 
         mainPanel.add(addMekanik, "card2");
@@ -339,7 +343,7 @@ public class panel_mekanik extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_batal_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel4))
-                        .addContainerGap(585, Short.MAX_VALUE))
+                        .addContainerGap(488, Short.MAX_VALUE))
                     .addGroup(editMekanikLayout.createSequentialGroup()
                         .addGroup(editMekanikLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel8)
@@ -371,7 +375,7 @@ public class panel_mekanik extends javax.swing.JPanel {
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(364, Short.MAX_VALUE))
         );
 
         mainPanel.add(editMekanik, "card2");
@@ -444,7 +448,7 @@ public class panel_mekanik extends javax.swing.JPanel {
 
     private void tabel_mekanikMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_mekanikMouseClicked
         // TODO add your handling code here:
-        if(evt.getClickCount()==1) {
+        if(evt.getClickCount()==1 && "ADMIN".equals(frm_utama.role)) {
             btn_hapus.setVisible(true);
             btn_edit.setVisible(true);
             if (tabel_mekanik.getRowSorter() != null) {
@@ -606,7 +610,6 @@ public class panel_mekanik extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
     String data[] = new String[4];
     private void settableload() {
-        String stat = "";
         try {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database,user,pass);

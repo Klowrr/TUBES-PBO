@@ -42,7 +42,7 @@ public class panel_income extends javax.swing.JPanel {
         )
         {
             boolean[] canEdit = new boolean[]{
-                false,false,false,false
+                false,false,false,false,false,false
             };
             public boolean isCellEditable(int rowIndex, int columnIndex){
                 return canEdit[columnIndex];
@@ -53,11 +53,11 @@ public class panel_income extends javax.swing.JPanel {
     private javax.swing.table.DefaultTableModel getDefaultTableModelDetailBarang(){
         return new javax.swing.table.DefaultTableModel(
             new Object[][]{},
-            new String[]{"TRANSAKS ID","BARANG ID","HARGA","JUMLAH","SUBTOTAL"}
+            new String[]{"TRANSAKSI ID","BARANG ID","HARGA","JUMLAH","SUBTOTAL"}
         )
         {
             boolean[] canEdit = new boolean[]{
-                false,false,false,false,false,false,false,false
+                false,false,false,false,false
             };
             public boolean isCellEditable(int rowIndex, int columnIndex){
                 return canEdit[columnIndex];
@@ -68,7 +68,7 @@ public class panel_income extends javax.swing.JPanel {
     private javax.swing.table.DefaultTableModel getDefaultTableModelDetailService(){
         return new javax.swing.table.DefaultTableModel(
             new Object[][]{},
-            new String[]{"TRANSAKS ID","KENDARAAN","SERVICE ID", "MEKANIK ID","HARGA"}
+            new String[]{"TRANSAKSI ID","KENDARAAN","SERVICE ID", "MEKANIK ID","HARGA"}
         )
         {
             boolean[] canEdit = new boolean[]{
@@ -234,7 +234,7 @@ public class panel_income extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pn_detail, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                .addGap(30, 30, 30))
         );
 
         add(jPanel1, "card3");

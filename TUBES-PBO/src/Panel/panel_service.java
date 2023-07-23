@@ -5,6 +5,7 @@ package Panel;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 import Koneksi.koneksi;
+import Utama.frm_utama;
 import javax.swing.*;
 import java.sql.*;
 import java.text.DecimalFormat;
@@ -31,6 +32,9 @@ public class panel_service extends javax.swing.JPanel {
         tabel_service.setModel(tableModel);
         btn_hapus.setVisible(false);
         btn_edit.setVisible(false);
+        if("USER".equals(frm_utama.role)){
+            btn_tambah.setVisible(false);
+        }
         settableload();
     }
     private javax.swing.table.DefaultTableModel tableModel = getDefaultTableModel();
@@ -197,7 +201,7 @@ public class panel_service extends javax.swing.JPanel {
                     .addComponent(jLabel12))
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
-                .addGap(93, 93, 93))
+                .addGap(30, 30, 30))
         );
 
         mainPanel.add(dataService, "card2");
@@ -503,7 +507,7 @@ public class panel_service extends javax.swing.JPanel {
 
     private void tabel_serviceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_serviceMouseClicked
         // TODO add your handling code here:
-        if(evt.getClickCount()==1) {
+        if(evt.getClickCount()==1 && "ADMIN".equals(frm_utama.role)) {
             btn_hapus.setVisible(true);
             btn_edit.setVisible(true);
             if (tabel_service.getRowSorter() != null) {
