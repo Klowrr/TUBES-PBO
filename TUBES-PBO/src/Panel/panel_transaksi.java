@@ -46,6 +46,11 @@ public class panel_transaksi extends javax.swing.JPanel {
         txt_hargaBarang.setEditable(false);
         txt_kodeClient.setEditable(false);
         txt_namaClient.setEditable(false);
+        txt_namaMekanik.setEditable(false);
+        txt_kodeMekanik.setEditable(false);
+        txt_namaService.setEditable(false);
+        txt_kodeService.setEditable(false);
+        txt_hargaService.setEditable(false);
         tabel_barang.setModel(tableModelBarang);
         tabel_service.setModel(tableModelService);
         pn_service.setVisible(false);
