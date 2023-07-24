@@ -1100,6 +1100,7 @@ public class panel_transaksi extends javax.swing.JPanel {
     
     String data[] = new String[9];
     private void settableload() {
+        long totalharga = 0;
         try {
             Class.forName(driver);
             Connection kon = DriverManager.getConnection(database,user,pass);
@@ -1113,7 +1114,9 @@ public class panel_transaksi extends javax.swing.JPanel {
                     data[2] = res.getString(4);
                     data[3] = res.getString(5);
                     data[4] = res.getString(7);
+                    data[5] = res.getString(9);
                     tableModelService.addRow(data);
+                    totalharga = totalharga + Long.parseLong(data[5]);
                 }else{
                     data[0] = res.getString(2);                
                     data[1] = res.getString(6);                
@@ -1121,11 +1124,13 @@ public class panel_transaksi extends javax.swing.JPanel {
                     data[3] = res.getString(8);
                     data[4] = res.getString(9);
                     tableModelBarang.addRow(data);
+                    totalharga = totalharga + Long.parseLong(data[4]);
                 }
             }
             res.close();
             stt.close();
             kon.close();
+            txt_total.setText(String.valueOf(totalharga));
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
             JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",JOptionPane.INFORMATION_MESSAGE);
