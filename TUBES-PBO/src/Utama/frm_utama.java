@@ -417,7 +417,7 @@ public class frm_utama extends javax.swing.JFrame {
         if ("ADMIN".equals(role)){
             addMenu(users,menuMaster,menuTransaksi,menuHistory);
         }else{
-            addMenu(menuMaster,menuTransaksi);
+            addMenu(menuMaster,menuTransaksi,menuHistory);
         }
     }
     
